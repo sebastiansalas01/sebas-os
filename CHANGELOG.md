@@ -1,5 +1,15 @@
 # Cambios
 
+## 0.8.0 — 2026-11-09
+
+- Prioridades tipo stories basadas en llamadas confirmadas y tiempo registrado durante siete días.
+- Barras de progreso verde/naranja/rojo. Aviso 15 minutos antes del fin en llamadas y cinco en hábitos; opt-in local y soporte privado push, sin prometer segundo plano sin servidor.
+- Calendario monocromo de 7/14 días, engranaje de Google, fichas de leads y acceso contextual a ChatGPT.
+- Cena tras última llamada y 15 minutos de descanso; alternativas de 3–7 minutos sin borrar registros.
+- Preparación nocturna de mañana a las 23:00 Kyiv, recaps explícitos de mañana y ventana de 14 fechas. Backend todavía sin desplegar/autorizar.
+- 70 pruebas aprobadas. Ver docs/release-0.8.md.
+
+
 ## 0.7.0 — 2026-11-09
 
 - Hábitos sin Descanso, ordenados por hora propuesta. Cronómetros visibles en cada tarjeta y desplegables que conservan su estado al iniciar, pausar, terminar, cambiar de pantalla y recargar.

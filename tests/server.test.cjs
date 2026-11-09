@@ -23,7 +23,7 @@ test('provider failure preserves last successful snapshot and does not report su
  const e=await engine();e.calendar=async()=>[event('old')];e.research=async()=>({matched:false});await e.sync();e.calendar=async()=>{throw Error('Google unavailable')};await assert.rejects(e.sync(),/Google unavailable/);assert.equal(e.today().events.length,1);assert.match(e.today().status,/unavailable/);
 });
 test('quiet hours suppress all provider calls and notifications',async()=>{
- const e=await engine({clock:()=>Date.parse('2026-11-09T23:00:00+02:00')});e.calendar=async()=>{throw Error('must not run')};await e.sync();assert.match(e.status,/Fuera/);
+ const e=await engine({clock:()=>Date.parse('2026-11-09T22:00:00+02:00')});e.calendar=async()=>{throw Error('must not run')};await e.sync();assert.match(e.status,/Fuera/);
 });
 test('push subscription rejects SSRF and invalid key material',async()=>{
  const {validateSubscription}=await modules();const sub={endpoint:'https://web.push.apple.com/test',keys:{p256dh:'A'.repeat(87),auth:'B'.repeat(22)}};assert.equal(validateSubscription(sub),true);assert.equal(validateSubscription({...sub,endpoint:'https://127.0.0.1/'}),false);assert.equal(validateSubscription({...sub,endpoint:'https://web.push.apple.com.evil.example/'}),false);assert.equal(validateSubscription({...sub,keys:{}}),false);
@@ -40,6 +40,6 @@ test('research falls back from absent email to the full attendee name, never a f
 test('private snapshots serialize concurrent writes with owner-only file permissions',async()=>{
  const {FileStore}=await modules();const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');const dir=await fs.mkdtemp(path.join(os.tmpdir(),'sebas-test-'));const file=path.join(dir,'private','state.json');try{const store=new FileStore(file);await Promise.all([store.save({sequence:1}),store.save({sequence:2}),store.save({sequence:3})]);assert.equal((await store.load()).sequence,3);assert.equal((await fs.stat(file)).mode&0o777,0o600);assert.equal((await fs.stat(path.dirname(file))).mode&0o777,0o700)}finally{await fs.rm(dir,{recursive:true,force:true})}
 });
-test('morning synchronization starts at six Kyiv time and sends one brief per day',async()=>{
- let messages=0;const e=await engine({clock:()=>Date.parse('2026-11-09T06:00:10+02:00'),config:{ownerEmail:'owner@example.com',slackChannel:'test',slackUserToken:'mock',dayStart:'06:00',dayEnd:'21:00'},push:async()=>{messages++}});e.calendar=async()=>[];e.state.subscriptions=[{endpoint:'https://web.push.apple.com/test'}];await e.sync();await e.sync();assert.equal(messages,1);assert.equal(e.state.morningDay,'2026-11-09');
+test('night preparation starts at 23 Kyiv time and sends one brief for tomorrow',async()=>{
+ let messages=0;const e=await engine({clock:()=>Date.parse('2026-11-09T23:00:10+02:00'),config:{ownerEmail:'owner@example.com',slackChannel:'test',slackUserToken:'mock',dayStart:'06:00',dayEnd:'21:00'},push:async()=>{messages++}});e.calendar=async()=>[];e.state.subscriptions=[{endpoint:'https://web.push.apple.com/test'}];await e.sync();await e.sync();assert.equal(messages,1);assert.equal(e.state.preparedDay,'2026-11-10');
 });

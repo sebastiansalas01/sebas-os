@@ -7,8 +7,9 @@ function boot(seed={}) {
  const storage=new Map(Object.entries(seed));
  const elements=new Map();
  const element=id=>{if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',value:'',append(){},setAttribute(){}});return elements.get(id)};
- const ctx=vm.createContext({URL,URLSearchParams,AbortSignal,Intl,Date,Math,JSON,Number,String,Map,Set,Error,Promise,structuredClone,console,setInterval(){},clearInterval(){},alert(){},navigator:{},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},document:{visibilityState:'visible',getElementById:element,querySelector:()=>element('header'),querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('new')},window:{}});
- for(const f of ['core.js','planner-core.js','life-core.js','life-ui.js','planner-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
+ class FixedDate extends Date{constructor(...args){super(...(args.length?args:['2026-11-09T12:00:00+02:00']))}static now(){return new Date('2026-11-09T12:00:00+02:00').getTime()}}
+ const ctx=vm.createContext({URL,URLSearchParams,AbortSignal,Intl,Date:FixedDate,Math,JSON,Number,String,Map,Set,Error,Promise,structuredClone,console,setInterval(){},clearInterval(){},alert(){},navigator:{},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},document:{visibilityState:'visible',getElementById:element,querySelector:()=>element('header'),querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('new')},window:{}});
+ for(const f of ['core.js','planner-core.js','life-core.js','ops-core.js','ops-ui.js','life-ui.js','planner-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
  return {ctx,storage,element,run:s=>vm.runInContext(s,ctx)};
 }
 test('all views render without runtime errors',()=>{
@@ -33,7 +34,7 @@ test('calendar sync handles IDs, reschedules and expired authorization',async()=
  app.ctx.fetch=async()=>({ok:false,status:401});await app.run('syncGoogle()');assert.equal(app.run('googleEvents.length'),1);assert.match(app.run('googleStatus'),/401/);
 });
 test('calendar selector safely escapes arbitrary calendar IDs',()=>{
- const app=boot();app.run(`calendarChoices=[{id:"a'b<test>",summary:'Personal',primary:true}];view('calendario')`);
+ const app=boot();app.run(`calendarSettingsOpen=true;calendarChoices=[{id:"a'b<test>",summary:'Personal',primary:true}];view('calendario')`);
  assert.ok(app.element('app').innerHTML.includes('&#39;'));
  assert.ok(!app.element('app').innerHTML.includes("a'b<test>"));
 });

@@ -3,7 +3,7 @@
 PWA personal existente, publicada en https://sebastiansalas01.github.io/sebas-os/.
 HTML, CSS y JavaScript estáticos; sin dependencias de ejecución ni módulo de finanzas.
 
-## Versión 0.7.0
+## Versión 0.8.0
 
 Selector Casa / Gimnasio con rutina del día y cambio de grupo muscular solo para hoy. En casa, vídeos y circuito; en gimnasio, ejercicios con series/repeticiones objetivo y registro manual de series realizadas.
 
@@ -52,3 +52,5 @@ Sin backend autorizado, solo hay avisos dentro de la app durante sincronización
 Pendientes de validación real: OAuth del usuario contra Google en esta versión, instalación/offline en Safari iPhone, VoiceOver y push. Fotos heredadas de Unsplash se etiquetan como ilustrativas; faltan imágenes propias exactas y paquete offline de fotografías.
 
 Ver `CHANGELOG.md` y `docs/notifications.md`.
+
+Ver [novedades, horarios y límites de 0.8.0](docs/release-0.8.md). La preparación de mañana se configura a las 23:00 Kyiv, sustituyendo el brief del backend a las 06:00. Backend aún sin desplegar/autorizar.

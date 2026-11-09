@@ -37,3 +37,7 @@ En la PWA, Ajustes → Investigación de llamadas: introducir URL HTTPS del serv
 Desplegar el backend, completar autorizaciones, consultar una sesión propia real, comprobar la coincidencia de identidad, pulsar leer resumen y escuchar el resultado en iPhone. Crear una sesión de prueba propia para el mismo día, esperar detección, cerrar/bloquear la PWA y verificar entrega. Probar revocación de permisos, reinicio del servidor, quiet hours, entrega tras fallos y eliminación de suscripciones. No usar citas ni calendarios de Impulso como entorno de pruebas de escritura.
 
 El socket HTTP local y los adaptadores simulados no acreditan acceso real a Google/Slack ni entrega APNs/Web Push.
+
+## Actualización 0.8
+
+La preparación de mañana sustituye el brief de las 06:00: ahora se realiza a las 23:00 Kyiv. Se conserva revisión diurna. Ventana de 14 fechas, confirmación explícita para recaps de mañana. El endpoint autenticado POST /api/timer registra o cancela un temporizador para avisar cinco minutos antes; los avisos de llamadas confirmadas salen 15 minutos antes. No hay servicio desplegado ni autorización real todavía. Ver release-0.8.md.
