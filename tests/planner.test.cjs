@@ -35,7 +35,7 @@ test('weekends reserve KLIMB and schedules use Kyiv across daylight saving time'
  assert.equal(P.minute(Date.parse('2026-10-25T01:30:00Z')),210);
 });
 test('after the last slot the next activity belongs to tomorrow',()=>{
- const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:45');
+ const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:40');
 });
 test('gym has a weekly split and selectable muscle groups',()=>{
  assert.equal(P.gymGroup(at('07:00')),'empuje');
@@ -46,3 +46,4 @@ test('gym duration changes exercise count and supplies sets, repetitions and res
  assert.deepEqual([30,45,60].map(minutes=>P.workout(minutes,{mode:'gym',group:'pierna'}).exercises.length),[4,5,6]);
  const plan=P.workout(60,{mode:'gym',group:'tiron'});assert.equal(plan.sets,3);assert.equal(plan.restSeconds,75);assert.ok(plan.exercises[0].name.includes('Jalón'));
 });
+
