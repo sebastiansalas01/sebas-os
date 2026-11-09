@@ -3,7 +3,9 @@
 PWA personal existente, publicada en https://sebastiansalas01.github.io/sebas-os/.
 HTML, CSS y JavaScript estáticos; sin dependencias de ejecución ni módulo de finanzas.
 
-## Versión 0.6.0
+## Versión 0.6.1
+
+Selector Casa / Gimnasio con rutina del día y cambio de grupo muscular solo para hoy. En casa, vídeos y circuito; en gimnasio, ejercicios con series/repeticiones objetivo y registro manual de series realizadas.
 
 Inicio con reloj de Kyiv, actividad actual/siguiente y navegación directa. Gimnasio de 30/45/60 min, fases guiadas y vídeos originales. Lectura de 30 min. El circuito es propio; no se afirma que sus ejercicios provengan de Jaeho. Dos vídeos probados bloquean su incrustación y se abren en YouTube.
 
@@ -41,7 +43,7 @@ Sin backend autorizado, solo hay avisos dentro de la app durante sincronización
 
 ## Validación de esta versión
 
-35 tests automatizados locales aprobados: vistas, persistencia, pausas, medianoche y DST, selección de calendarios, reprogramación por ID, errores 401 y escaping. Navegador Chromium: inicio, cronómetro con recarga/pausa, guardado de lectura y persistencia. Inicio comprobado en contenedores de 375, 390, 768 y 1280 px sin overflow horizontal del documento. Es comprobación responsive, no emulación de iPhone ni prueba en hardware.
+41 tests automatizados locales aprobados: vistas, persistencia, pausas, medianoche y DST, selección de calendarios, reprogramación por ID, errores 401 y escaping. Navegador Chromium: inicio, cronómetro con recarga/pausa, guardado de lectura y persistencia. Inicio comprobado en contenedores de 375, 390, 768 y 1280 px sin overflow horizontal del documento. Es comprobación responsive, no emulación de iPhone ni prueba en hardware.
 
 Pendientes de validación real: OAuth del usuario contra Google en esta versión, instalación/offline en Safari iPhone, VoiceOver y push. Fotos heredadas de Unsplash se etiquetan como ilustrativas; faltan imágenes propias exactas y paquete offline de fotografías.
 

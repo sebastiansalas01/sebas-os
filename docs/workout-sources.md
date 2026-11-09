@@ -19,3 +19,9 @@ En navegador, los dos primeros vídeos devolvieron “Playback on other websites
 El circuito de 5, 7 o 10 ejercicios es una propuesta propia de la app, no una extracción del vídeo. Los subtítulos del vídeo de 25 min contienen música, sin una secuencia fiable de ejercicios. La herramienta de análisis visual no pudo ejecutarse por créditos insuficientes y no cobró esa llamada. Por tanto, no se inventan timestamps ni se afirma que el circuito reproduce la rutina del creador.
 
 El circuito distribuye exactamente 30/45/60 minutos con 5 min de calentamiento, 4/5 rondas de intervalos 40/20 y 5 min de vuelta a la calma. Es editable en duración, no un programa clínico ni una valoración física individual. Los cambios de fase se muestran al abrir la app; no hay audio/alarma fiable de fase con el teléfono bloqueado. El vídeo y el cronómetro son independientes: pausar un vídeo no pausa el registro de actividad.
+
+## Casa / Gimnasio en 0.6.1
+
+En casa se mantiene el circuito y la biblioteca de vídeos. En gimnasio la rutina es una propuesta propia, con 4/5/6 ejercicios según 30/45/60 minutos reservados, 2/3 series, repeticiones objetivo y descansos adaptables. No se promete que cada sesión de máquinas dure exactamente lo elegido. Las repeticiones mostradas no se registran como realizadas; las series solo se guardan al pulsar Serie hecha.
+
+Distribución sugerida: lunes empuje, martes pierna, miércoles tirón, jueves movilidad, viernes torso, sábado core y domingo recuperación. Cambiar rutina aplica una excepción exclusivamente al día de Kyiv actual. Se bloquea el cambio de lugar/duración/grupo durante una sesión activa para no alterar el registro; se puede pausar primero.

@@ -45,3 +45,19 @@ test('lead summaries are read in Spanish and unsafe social links are excluded',(
  assert.equal(app.run("safeLink('javascript:alert(1)','instagram')"),'');assert.equal(app.run("safeLink('https://instagram.com.evil.example/a','instagram')"),'');assert.equal(app.run("safeLink('https://www.instagram.com/example/','instagram')"),'https://www.instagram.com/example/');
 });
 test('all reading goals stay fixed at 30 minutes',()=>{const app=boot();app.run("setGoal('lectura',15)");assert.equal(app.run("TRACKS.find(t=>t.id==='lectura').goal"),30)});
+test('home shows channel videos while gym shows the selected daily muscle group',()=>{
+ const app=boot();app.run("chooseTrainingPlace('gym');chooseGymRoutine('pierna')");assert.match(app.element('app').innerHTML,/Pierna/);assert.match(app.element('app').innerHTML,/Prensa de piernas/);assert.ok(!app.element('app').innerHTML.includes('Entrena con Jaeho'));
+ app.run("chooseTrainingPlace('home')");assert.match(app.element('app').innerHTML,/Entrena con Jaeho/);
+});
+test('muscle group override applies to today only',()=>{
+ const app=boot({sebasos:JSON.stringify({trainingPlace:'gym',gymRoutineOverride:{day:'2000-01-01',group:'core'}})});assert.equal(app.run('gymGroupToday()'),app.run('SebasPlanner.gymGroup()'));
+ app.run("chooseGymRoutine('pierna')");assert.equal(app.run('gymGroupToday()'),'pierna');
+});
+test('real gym sets persist without inventing workout time or repetitions',()=>{
+ const app=boot({sebasos:JSON.stringify({trainingPlace:'gym',gymMinutes:30})});app.run("startWorkout();gymWarmupDone();markGymSet()");
+ assert.equal(app.run('data.gymSession.completedSets[trainingPlan().exercises[0].id]'),1);assert.ok(app.run("currentSeconds('gym')")<10);assert.equal(app.run('currentGymPhase(trainingPlan()).kind'),'rest');app.run('pauseTrack();markGymSet()');assert.equal(app.run('data.gymSession.completedSets[trainingPlan().exercises[0].id]'),1);
+ const next=boot(Object.fromEntries(app.storage));next.run('startWorkout()');assert.equal(next.run('data.gymSession.completedSets[trainingPlan().exercises[0].id]'),1);
+});
+test('place and muscle group cannot change during an active workout',()=>{
+ const app=boot();app.run("startWorkout();chooseTrainingPlace('gym');chooseGymRoutine('pierna')");assert.equal(app.run('trainingPlace()'),'home');
+});
