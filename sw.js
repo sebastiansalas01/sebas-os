@@ -1,7 +1,13 @@
-const CACHE = 'sebas-os-v11';
+const CACHE = 'sebas-os-v12';
 const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './app.js', './styles.css', './manifest.webmanifest'];
 self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
+  event.waitUntil(caches.open(CACHE).then(cache => Promise.all(FILES.map(async path => {
+    const canonical = new URL(path, self.registration.scope);
+    const fresh = new URL(canonical); fresh.searchParams.set('sebas_version', CACHE);
+    const response = await fetch(fresh, {cache:'no-store'});
+    if (!response.ok) throw Error('Unable to refresh app shell');
+    await cache.put(canonical, response);
+  }))).then(() => self.skipWaiting()));
 });
 self.addEventListener('activate', event => {
   event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('sebas-os-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim()));
@@ -10,7 +16,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
   if (!FILES.some(path => new URL(path, self.registration.scope).pathname === url.pathname)) return;
-  event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
+  event.respondWith(caches.open(CACHE).then(cache => cache.match(event.request, {ignoreSearch:true})).then(cached => cached || fetch(event.request)));
 });
 
 self.addEventListener('push', event => {

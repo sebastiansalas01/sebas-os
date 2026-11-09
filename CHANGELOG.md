@@ -6,7 +6,8 @@
 - Rutina por día de la semana y botón Cambiar rutina: pierna, empuje, tirón, torso, core/abs, cuerpo completo y recuperación/movilidad. El override solo dura hoy.
 - En gimnasio, 30/45/60 min seleccionan 4/5/6 ejercicios; 2/3 series por ejercicio y descanso orientativo de 75 s. La duración es tiempo reservado, no una promesa de completar la rutina exacta en ese plazo.
 - Registro manual de series realizadas y progreso de la sesión/resto del descanso persistentes. El descanso no cuenta tiempo mientras el cronómetro está pausado. No se inventan repeticiones realizadas ni peso usado.
-- 41 pruebas automatizadas aprobadas; Casa/Gimnasio, cambio a pierna y persistencia de series/resto del descanso verificados en navegador. Ver docs/verification-0.6.md.
+- Actualización de caché: assets frescos por versión y aviso de recarga, evitando reinstalar ficheros antiguos de la caché HTTP.
+- 43 pruebas automatizadas aprobadas; Casa/Gimnasio, cambio a pierna y persistencia de series/resto del descanso verificados en navegador. Ver docs/verification-0.6.md.
 
 ## 0.6.0 — 2026-11-09
 

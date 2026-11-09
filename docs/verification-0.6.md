@@ -1,6 +1,8 @@
 # Verificación 0.6.1
 
-Ampliación de Casa / Gimnasio: 41 pruebas aprobadas. Selector de lugar, distribución semanal, override solo para hoy, ejercicios y series según duración. Navegador: cambiar de Casa a Gimnasio, abrir Cambiar rutina, elegir Pierna, iniciar sesión, indicar calentamiento realizado, registrar una serie, pausar, recargar y recuperar la serie y el descanso restante. Frame móvil de 390 px sin overflow.
+Actualización de PWA: dos pruebas verifican descarga sin caché HTTP con clave de versión, almacenamiento bajo URL canónica y rechazo de instalación incompleta.
+
+Ampliación de Casa / Gimnasio: 43 pruebas aprobadas. Selector de lugar, distribución semanal, override solo para hoy, ejercicios y series según duración. Navegador: cambiar de Casa a Gimnasio, abrir Cambiar rutina, elegir Pierna, iniciar sesión, indicar calentamiento realizado, registrar una serie, pausar, recargar y recuperar la serie y el descanso restante. Frame móvil de 390 px sin overflow.
 
 ![Inicio y selector de rutina](screenshots/home-gym-0.6.1.jpg)
 
