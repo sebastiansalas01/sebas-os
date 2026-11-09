@@ -1,5 +1,16 @@
 # Cambios
 
+## 0.6.0 — 2026-11-09
+
+- Inicio guiado por la hora actual de Kyiv: ahora, siguiente actividad con hora y acceso directo; reuniones reales tienen prioridad sobre bloques sugeridos.
+- Accesos rápidos a gimnasio, lectura, inglés y oración; horarios habituales editables; descanso nocturno y siguiente bloque de mañana.
+- Entrenamiento 30/45/60 min: 5/7/10 ejercicios, fases 40/20, calentamiento y vuelta a la calma, pausa y recuperación tras recarga.
+- Biblioteca de seis vídeos originales de Jaeho Fitness con enlaces y reproductor cuando el canal lo permite. Los dos vídeos probados con bloqueo de incrustación muestran enlace externo explícito.
+- Lectura fijada a 30 minutos y pantalla de cronómetro para cualquier actividad.
+- Pantalla Impulso con fichas privadas, fuente Slack, enlace Instagram y lectura en español. Sin fichas de ejemplo presentadas como leads reales.
+- Backend Node implementado: Google offline, consulta acotada de Slack, polling diurno, brief matinal, outbox/reintentos Web Push, API autenticada y sin caché pública. No desplegado ni autorizado: requiere host y credenciales propias.
+- 35 pruebas automatizadas locales aprobadas, incluyendo reloj, prioridad de citas, sesiones, API HTTP, aislamiento de origen, enlaces seguros y notificaciones simuladas. Ver docs/private-service.md y docs/workout-sources.md para límites.
+
 ## 0.5.0 — 2026-11-09
 
 Continuación sobre `5f1a79c`, sin reconstrucción.

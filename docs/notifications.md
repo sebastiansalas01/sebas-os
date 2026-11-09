@@ -1,3 +1,9 @@
+# Notificaciones · estado actual
+
+La versión 0.6.0 incorpora el código del backend de polling diurno, consulta Google/Slack y Web Push. No se ha desplegado ni autorizado contra proveedores. La guía vigente de ejecución, seguridad y validación es [private-service.md](private-service.md).
+
+La arquitectura webhook/OAuth interactivo descrita debajo sigue siendo una propuesta futura, no una implementación publicada.
+
 # Notificaciones: arquitectura pendiente de desplegar
 
 GitHub Pages no ejecuta procesos de servidor. Esta versión no promete alertas con la app cerrada ni instala un backend ficticio.
