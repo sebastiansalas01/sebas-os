@@ -5,7 +5,7 @@ test('command centre follows local time rather than returning a missed morning h
  assert.equal(P.command([],{},null,at('07:15')).current.id,'gym');
  assert.equal(P.command([],{},null,at('07:50')).current.id,'lectura');
  assert.equal(P.command([],{},null,at('19:00')).current.id,'trabajo');
- assert.equal(P.command([],{},null,at('23:30')).current.id,'descanso');
+ assert.equal(P.command([],{},null,at('23:30')).current.id,'dormir');
 });
 test('next activity has its exact planned time, duration and destination',()=>{
  const model=P.command([],{},null,at('06:50'));
@@ -47,3 +47,5 @@ test('gym duration changes exercise count and supplies sets, repetitions and res
  const plan=P.workout(60,{mode:'gym',group:'tiron'});assert.equal(plan.sets,3);assert.equal(plan.restSeconds,75);assert.ok(plan.exercises[0].name.includes('Jalón'));
 });
 
+
+test('bedtime begins at exactly 23:30 even with a running timer or a late call',()=>{assert.notEqual(P.command([],{},null,at('23:29')).current.id,'dormir');assert.equal(P.command([],{},null,at('23:30')).current.id,'dormir');const event={calendarId:'c',id:'late',name:'Call',start:'2026-11-09T23:00:00+02:00',end:'2026-11-10T00:00:00+02:00'};assert.equal(P.command([event],{}, {id:'klimb',start:at('23:00')},at('23:30')).current.id,'dormir');});

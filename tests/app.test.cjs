@@ -77,3 +77,6 @@ test('chosen breakfast and snacks are saved for today',()=>{
  const app=boot();app.run("selectFood('yogurt-oats');selectFood('peanut-toast')");const next=boot(Object.fromEntries(app.storage));assert.equal(next.run("chosenFood('breakfast').id"),'yogurt-oats');assert.equal(next.run("chosenFood('snackpm').id"),'peanut-toast');
 });
 
+
+test('meals show all five background assets without meal checklists or repeated scheduling rules',()=>{const app=boot();app.run("view('comidas')");const html=app.element('app').innerHTML;for(const type of ['breakfast','snackam','lunch','snackpm','dinner'])assert.ok(html.includes('assets/'+type+'.webp'));for(const text of ['meal-checks','Tu almuerzo','Cena de hoy','Guardar hora'])assert.ok(!html.includes(text));});
+test('command centre contains the day in one scroll region and rest has no action button',()=>{const app=boot();const html=app.run('commandDay(dashboardCommand())');assert.match(html,/command-scroll/);for(const type of ['breakfast','snackam','lunch','snackpm','dinner'])assert.ok(html.includes('assets/'+type+'.webp'));assert.ok(!html.includes('Tomar un descanso'));const rest=app.run("commandDay({minute:1380,current:{id:'descanso',name:'Descanso',start:1380,end:1440},items:[]})");assert.ok(!rest.includes('hero-cta'));});

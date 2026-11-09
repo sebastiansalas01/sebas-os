@@ -25,7 +25,7 @@
       const reserved=[...list.filter(x=>x.id!=='trabajo').map(x=>({start:x.start,end:x.start+x.duration})),...life.intervals(events,now),...Object.values(meals).filter(x=>x&&typeof x==='object'&&Number.isFinite(x.start))];
       const follow=life.slot(reserved,630,options.goals?.seguimientos||45,cutoff,0);if(follow&&!weekend)list.push({id:'seguimientos',name:'Seguimientos Closing',start:follow.start,duration:follow.end-follow.start,priority:1});
     }
-    list.push({id:'descanso',name:'Desconexión y descanso',start:Math.max(1320,...list.filter(x=>x.id==='ingles').map(x=>x.start+x.duration)),duration:60});
+    list.push({id:'descanso',name:'Desconexión',start:1320,duration:90},{id:'dormir',name:'Dormir',start:1410,duration:30,priority:20});
     return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
   }
   function agenda(events,now=Date.now(),options={}){
@@ -35,7 +35,7 @@
     return [...plan,...calendar].sort((a,b)=>a.start-b.start||Number(b.kind==='event')-Number(a.kind==='event'));
   }
   function command(events,done={},active=null,now=Date.now(),options={}){
-    const m=minute(now);const items=agenda(events,now,options);const eligible=items.filter(x=>!done[x.id]);
+    const m=minute(now);const items=agenda(events,now,options);if(m>=1410){const next=agenda(events,C.boundary(now),options)[0]||null;return {current:{id:'dormir',name:'Dormir',kind:'routine',start:1410,end:1440,duration:30},next:next?{...next,dayOffset:1}:null,items,minute:m}}const eligible=items.filter(x=>!done[x.id]);
     let current=eligible.filter(x=>x.start<=m&&x.end>m).sort((a,b)=>((b.kind==='event'?10:b.priority||0)-(a.kind==='event'?10:a.priority||0)))[0]||null;
     if(active)current={id:active.id,name:options.names?.[active.id]||active.id,kind:'active',start:minute(active.start),duration:options.goals?.[active.id]||30};
     let next=eligible.find(x=>x.start>m&&x.id!==current?.id)||null;if(!next){const tomorrow=C.boundary(now);next=agenda(events,tomorrow,options)[0]||null;if(next)next={...next,dayOffset:1}}
@@ -68,3 +68,4 @@
   function phase(plan,elapsed){elapsed=Math.max(0,Math.floor(elapsed));if(elapsed>=plan.total)return {kind:'done',name:'Sesión terminada',left:0,index:plan.exercises.length-1};if(elapsed<plan.warmup)return {kind:'warmup',name:'Calentamiento suave',left:plan.warmup-elapsed,index:0};const training=plan.exercises.length*plan.rounds*60;const workElapsed=elapsed-plan.warmup;if(workElapsed>=training)return {kind:'cooldown',name:'Vuelta a la calma',left:plan.total-elapsed,index:plan.exercises.length-1};const unit=Math.floor(workElapsed/60),index=unit%plan.exercises.length,round=Math.floor(unit/plan.exercises.length)+1,part=workElapsed%60;return {kind:part<plan.work?'work':'rest',name:part<plan.work?plan.exercises[index].name:'Pausa · siguiente ejercicio',left:part<plan.work?plan.work-part:60-part,index,round}}
   const api={minute,time,parseTime,routine,agenda,command,workout,phase,gymGroup,GYM_GROUPS};root.SebasPlanner=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
+

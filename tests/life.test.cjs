@@ -28,3 +28,6 @@ test('commercial sessions need explicit matching recap evidence; calendar update
 test('reported minutes retain the actual timer measurement and reject invalid values',()=>{
  const rec=L.reportedRecord({seconds:120,done:false},20,30,now);assert.equal(rec.seconds,1200);assert.equal(rec.measuredSeconds,120);assert.equal(rec.source,'reported');assert.throws(()=>L.reportedRecord({},0,30));assert.throws(()=>L.reportedRecord({},Infinity,30));
 });
+
+
+test('red meat includes whole beef steak and the rare preference at lunch and dinner',()=>{for(const type of ['lunch','dinner'])assert.ok(L.MEALS.some(m=>m.type===type&&m.name.includes('rare')&&m.ingredients.includes('Filete entero de ternera')));});
