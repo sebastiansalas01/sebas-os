@@ -9,6 +9,8 @@ Inicio con reloj de Kyiv, actividad actual/siguiente y navegación directa. Gimn
 
 La interfaz de investigación de llamadas y su backend Node están implementados. El backend NO está desplegado ni autorizado. La conexión Slack de ChatGPT no se puede reutilizar automáticamente desde la PWA. Ver [configuración y límites del servicio](docs/private-service.md) y [fuentes de entrenamiento](docs/workout-sources.md).
 
+Ver [evidencia y límites de verificación de 0.6.0](docs/verification-0.6.md).
+
 ## Desarrollo y validación
 
 Node 24: `npm run check` y `npm test`. GitHub Actions ejecuta ambas comprobaciones en cada push/PR. Servir la raíz por HTTP para desarrollo; no requiere compilación. GitHub Pages sirve la raíz de `main`.
