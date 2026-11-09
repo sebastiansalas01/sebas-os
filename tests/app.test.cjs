@@ -27,7 +27,7 @@ test('stored textarea and reading text are escaped',()=>{
  app.run("view('lectura')");assert.ok(!app.element('app').innerHTML.includes('<img onerror='));
 });
 test('English goals cannot drop below 60 minutes',()=>{const app=boot();app.run("setGoal('ingles',25)");assert.equal(app.run("TRACKS.find(t=>t.id==='ingles').goal"),60)});
-test('calendar sync handles pagination, IDs and reschedules',async()=>{
+test('calendar sync handles IDs, reschedules and expired authorization',async()=>{
  const app=boot();let moved=false;const calls=[];
  app.ctx.fetch=async url=>{calls.push(url);return {ok:true,json:async()=>url.includes('calendarList')?{items:[{id:'personal',primary:true,summary:'Personal'},{id:'old',summary:'JustSales'}]}:{items:[{id:'event-1',summary:'Test event',updated:moved?'2':'1',start:{dateTime:moved?'2026-11-09T12:00:00+02:00':'2026-11-09T11:00:00+02:00'},end:{dateTime:'2026-11-09T13:00:00+02:00'}}]}}};
  await app.run("googleToken='mock';syncGoogle()");assert.equal(app.run('googleEvents.length'),1);assert.ok(!calls.some(u=>u.includes('/old/')));

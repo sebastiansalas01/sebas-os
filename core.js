@@ -27,12 +27,18 @@
     const label=calendar.id+' '+calendar.summary;
     return !/b360\s*agencia|just[.\s]*sales/i.test(label) && (calendar.primary === true || /impulso/i.test(label));
   }
+  function onDay(event, key = day()) {
+    if (event.allDay) return event.start <= key && (event.end || shiftDay(event.start,1)) > key;
+    const start = Date.parse(event.start), end = Date.parse(event.end);
+    if (!Number.isFinite(start)) return false;
+    return day(start) <= key && day(Number.isFinite(end) && end > start ? end-1 : start) >= key;
+  }
   function eventKey(e) { return e.calendarId+'|'+e.id; }
   function changes(before, after) {
     const old=new Map(before.map(e=>[eventKey(e),e])), next=new Map(after.map(e=>[eventKey(e),e]));
     return {added:after.filter(e=>!old.has(eventKey(e))).length, removed:before.filter(e=>!next.has(eventKey(e))).length, changed:after.filter(e=>old.has(eventKey(e)) && ['start','end','name','updated'].some(k=>old.get(eventKey(e))[k]!==e[k])).length};
   }
-  const api={day,shiftDay,weekday,boundary,elapsed,seconds,settle,recentKeys,selected,eventKey,changes};
+  const api={day,shiftDay,weekday,boundary,elapsed,seconds,settle,recentKeys,selected,onDay,eventKey,changes};
   if(typeof module!=='undefined') module.exports=api;
   root.SebasCore=api;
 })(globalThis);

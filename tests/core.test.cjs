@@ -41,3 +41,9 @@ test('moved event is one change, not removal plus addition',()=>{
  assert.deepEqual(C.changes(before,[{...before[0],start:'b',updated:'2'}]),{added:0,removed:0,changed:1});
  assert.deepEqual(C.changes(before,[{...before[0],id:'two'}]),{added:1,removed:1,changed:0});
 });
+test('events crossing midnight and all-day ranges appear on every covered day',()=>{
+ assert.equal(C.onDay({allDay:true,start:'2026-11-08',end:'2026-11-11'},'2026-11-09'),true);
+ assert.equal(C.onDay({allDay:true,start:'2026-11-08',end:'2026-11-11'},'2026-11-11'),false);
+ assert.equal(C.onDay({start:'2026-11-08T23:30:00+02:00',end:'2026-11-09T01:00:00+02:00'},'2026-11-09'),true);
+ assert.equal(C.onDay({start:'2026-11-08T23:30:00+02:00',end:'2026-11-09T00:00:00+02:00'},'2026-11-09'),false);
+});

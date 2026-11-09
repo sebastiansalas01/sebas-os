@@ -1,4 +1,4 @@
-const CACHE = 'sebas-os-v5';
+const CACHE = 'sebas-os-v6';
 const FILES = ['./', './index.html', './core.js', './app.js', './styles.css', './manifest.webmanifest'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(FILES)).then(() => self.skipWaiting()));
