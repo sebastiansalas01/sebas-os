@@ -3,7 +3,7 @@ const C=require('../core.js'),P=require('../planner-core.js');
 const at=time=>Date.parse('2026-11-09T'+time+':00+02:00');
 test('command centre follows local time rather than returning a missed morning habit',()=>{
  assert.equal(P.command([],{},null,at('07:15')).current.id,'gym');
- assert.equal(P.command([],{},null,at('08:25')).current.id,'lectura');
+ assert.equal(P.command([],{},null,at('07:50')).current.id,'lectura');
  assert.equal(P.command([],{},null,at('19:00')).current.id,'trabajo');
  assert.equal(P.command([],{},null,at('23:30')).current.id,'descanso');
 });
@@ -35,7 +35,7 @@ test('weekends reserve KLIMB and schedules use Kyiv across daylight saving time'
  assert.equal(P.minute(Date.parse('2026-10-25T01:30:00Z')),210);
 });
 test('after the last slot the next activity belongs to tomorrow',()=>{
- const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'oracion');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'07:00');
+ const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:45');
 });
 test('gym has a weekly split and selectable muscle groups',()=>{
  assert.equal(P.gymGroup(at('07:00')),'empuje');

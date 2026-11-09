@@ -15,3 +15,7 @@ El backend cambia el brief de las 06:00 por preparación del día siguiente a la
 **Estado real:** backend sin desplegar/autorizado; la preparación nocturna y push en segundo plano no funcionan aún en producción. Solo están implementados y probados con proveedores simulados. No se han publicado datos de leads ni secretos. Falta validación real en iPhone con permisos y servicio privado.
 
 Validación: 70 pruebas y comprobación sintáctica. QA visual de inicio, calendario y cenas rápidas.
+
+## 0.8.1 · Ajuste de rutina
+
+Despertar 06:45, oración 07:00–07:10, entrenamiento, lectura 30 min y desayuno/preparación 30 min, sin huecos ni overrides antiguos que alteren el orden. Con entrenamiento de 30 min: lectura 07:40 y desayuno 08:10. Roleplay solo martes 20:00, duración inicial 30 min, provisional y sin sincronización real con mentor. Fines de semana conservan hábitos y KLIMB, sin daily, preparación, seguimientos ni roleplay laboral. No se escribe en Google. 72 pruebas.
