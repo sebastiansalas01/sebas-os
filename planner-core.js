@@ -5,16 +5,25 @@
   function parseTime(v,fallback){if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v||''))return fallback;const [h,m]=v.split(':').map(Number);return h*60+m}
   function routine(now=Date.now(),options={}){
     const weekend=[0,6].includes(C.weekday(now));const gym=[30,45,60].includes(options.gym)?options.gym:30;
-    const starts=options.starts||{};const prayer=420,exercise=430,reading=exercise+gym;
-    const list=[{id:'despertar',name:'Despertar y prepararte',start:405,duration:15},{id:'oracion',name:'Oración',start:prayer,duration:10},{id:'gym',name:'Entrenamiento',start:exercise,duration:gym},{id:'desayuno',name:'Desayuno y preparación',start:reading+30,duration:30,tab:'comidas'},{id:'lectura',name:'Lectura',start:reading,duration:30}];
-    if(weekend)list.push({id:'klimb',name:'KLIMB',start:parseTime(starts.klimb,600),duration:180},{id:'ingles',name:'Inglés de negocios',start:parseTime(starts.ingles,960),duration:60});
-    else list.push({id:'preparacion',name:'Preparación de llamadas',start:580,duration:20,tab:'impulso'},{id:'daily',name:'Daily Impulso',start:600,duration:30,tab:'impulso'},{id:'trabajo',name:'Impulso · llamadas y seguimiento',start:630,duration:630,tab:'impulso'},{id:'ingles',name:'Inglés de negocios',start:parseTime(starts.ingles,1260),duration:60});
-    if(C.weekday(now)===2)list.push({id:'ventas',name:'Roleplay con mentor · provisional',start:1200,duration:options.goals?.ventas||30,priority:3});
+
+    const starts=options.starts||{},weekday=C.weekday(now),early=weekday===(options.englishWeekday??3);
+    const readingMinutes=options.goals?.lectura||30,prayerMinutes=options.goals?.oracion||10;
+    const breakfastEnd=early&&!weekend?510:520,reading=breakfastEnd-30-readingMinutes,exercise=reading-gym,prayer=exercise-prayerMinutes;
+    const list=[{id:'despertar',name:'Despertar y prepararte',start:prayer-20,duration:20},{id:'oracion',name:'Oración',start:prayer,duration:prayerMinutes},{id:'gym',name:'Entrenamiento',start:exercise,duration:gym},{id:'lectura',name:'Lectura',start:reading,duration:readingMinutes},{id:'desayuno',name:'Desayuno, ducha y preparación',start:breakfastEnd-30,duration:30,tab:'comidas'}];
+    const cutoff=[2,5].includes(weekday)?1110:1260;
+    if(weekend)list.push({id:'ingles',name:'Clase de inglés · propuesta',start:540,duration:60},{id:'klimb',name:'KLIMB',start:parseTime(starts.klimb,630),duration:180});
+    else {
+      list.push({id:'preparacion',name:'Preparación de llamadas',start:580,duration:20,tab:'impulso'},{id:'daily',name:'Daily Closing',start:600,duration:30,tab:'impulso'},{id:'trabajo',name:'Closing · llamadas y seguimiento',start:630,duration:cutoff-630,tab:'impulso'});
+      if(early)list.push({id:'ingles',name:'Clase de inglés · propuesta',start:510,duration:60});
+      else list.push({id:weekday%2?'klimb':'ventas',name:weekday%2?'KLIMB · avanzar proyecto':'Práctica comercial',start:520,duration:60});
+      if([2,5].includes(weekday))list.push({id:'klimb',name:'KLIMB · bloque personal',start:1110,duration:90});
+    }
+    if(weekday===2)list.push({id:'ventas',name:'Mentoría de ventas',start:1200,duration:60,priority:3});
     const life=root.SebasLife;
     if(life){const events=options.busyEvents||[],meals=life.mealSchedule([...events,...list.filter(x=>x.id==='ventas').map(x=>{const stamp=Date.parse(C.day(now)+'T12:00:00Z'),start=stamp+(x.start-minute(stamp))*60000;return {name:x.name,start:new Date(start).toISOString(),end:new Date(start+x.duration*60000).toISOString()}})],now,options.mealDate===C.day(now)?options.mealTimes||{}:{});for(const [id,type,label] of [['almuerzo','lunch','Almuerzo'],['snackam','snackam','Snack de mañana'],['snackpm','snackpm','Snack de tarde'],['postcall','postcall','Descanso · 15 minutos'],['cena','dinner','Cena']]){const slot=meals[type];if(slot)list.push({id,name:label+(options.mealNames?.[type]?' · '+options.mealNames[type]:''),start:slot.start,duration:slot.end-slot.start,tab:'comidas',priority:2,adjusted:slot.adjusted||false})}
       const dinner=meals.dinner,english=list.find(x=>x.id==='ingles');if(dinner&&english&&dinner.start<english.start+english.duration&&dinner.end>english.start)english.start=dinner.end;
       const reserved=[...list.filter(x=>x.id!=='trabajo').map(x=>({start:x.start,end:x.start+x.duration})),...life.intervals(events,now),...Object.values(meals).filter(x=>x&&typeof x==='object'&&Number.isFinite(x.start))];
-      const follow=life.slot(reserved,630,options.goals?.seguimientos||45,1260,0);if(follow&&!weekend)list.push({id:'seguimientos',name:'Seguimientos Impulso',start:follow.start,duration:follow.end-follow.start,priority:1});
+      const follow=life.slot(reserved,630,options.goals?.seguimientos||45,cutoff,0);if(follow&&!weekend)list.push({id:'seguimientos',name:'Seguimientos Closing',start:follow.start,duration:follow.end-follow.start,priority:1});
     }
     list.push({id:'descanso',name:'Desconexión y descanso',start:Math.max(1320,...list.filter(x=>x.id==='ingles').map(x=>x.start+x.duration)),duration:60});
     return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
