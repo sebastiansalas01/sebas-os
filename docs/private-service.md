@@ -22,11 +22,11 @@ En la PWA, Ajustes → Investigación de llamadas: introducir URL HTTPS del serv
 
 ## Comportamiento implementado
 
-- Polling cada minuto, exclusivamente entre 06:30 y 21:00 Europe/Kyiv por defecto. Configuración en `DAY_START`/`DAY_END`. No es un webhook ni una garantía de latencia exacta.
-- Brief matinal de una sola entrega entre 06:30 y 09:00 cuando existen suscripciones; no se envía retroactivamente un supuesto mensaje matinal al arrancar por la tarde.
+- Polling cada minuto, exclusivamente entre 06:00 y 21:00 Europe/Kyiv por defecto. Configuración en `DAY_START`/`DAY_END`. No es un webhook ni una garantía de latencia exacta.
+- Brief matinal de una sola entrega entre 06:00 y 09:00 cuando existen suscripciones; no se envía retroactivamente un supuesto mensaje matinal al arrancar por la tarde.
 - Detecta sesiones nuevas por calendarId + eventId. Solo notifica sesiones futuras del mismo día. La primera carga crea una línea base sin anunciar todas las citas existentes como nuevas.
 - Google: solo lectura, paginación y tiempo de Kyiv. Sincronización fallida conserva la última instantánea y muestra el error.
-- Slack: busca primero email exacto; si no aparece, usa nombre completo de asistente/título. Consulta acotada al canal y 5 resultados. No usa coincidencias por un solo nombre. Un mensaje coincidente es evidencia de investigación, no confirmación de asistencia.
+- Slack: busca primero email exacto; si no aparece, usa nombre completo de asistente/título. Consulta acotada al canal y 5 resultados. No usa coincidencias por un solo nombre. Un nombre encontrado no confirma asistencia: desde 0.7.0 se exigen además día, hora de recap (SLACK_TIME_ZONE, Europe/Madrid por defecto) y confirmación explícita. Cancelaciones y datos ambiguos quedan pendientes.
 - Ficha: extracto real del mensaje Slack, enlace a fuente e Instagram cuando hay una URL/etiqueta explícita. No inventa dolor, facturación ni objetivos ausentes.
 - Push: outbox persistente, reintentos de fallos transitorios, deduplicación por sesión y endpoint, eliminación de suscripciones 404/410. Contenido genérico en pantalla bloqueada; el lead se consulta dentro de la app.
 - Acceso: bearer de alta entropía, comparación constante, CORS de origen exacto, resultados private/no-store, límites de payload, endpoints de push acotados a proveedores conocidos contra SSRF. No hay proxy arbitrario a Slack ni escritura en calendarios.

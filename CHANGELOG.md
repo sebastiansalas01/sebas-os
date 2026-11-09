@@ -1,5 +1,17 @@
 # Cambios
 
+## 0.7.0 — 2026-11-09
+
+- Hábitos sin Descanso, ordenados por hora propuesta. Cronómetros visibles en cada tarjeta y desplegables que conservan su estado al iniciar, pausar, terminar, cambiar de pantalla y recargar.
+- Terminar abre confirmación del objetivo o edición de minutos. No se completa antes de aceptar. Se conserva por separado el tiempo medido y el tiempo declarado por el usuario; cancelar no rellena la meta.
+- Lectura simplificada a libro actual Hábitos atómicos, portada de la editorial, página actual y guardado; sin campo de notas. Los datos antiguos se conservan, sin mostrarlos como notas nuevas.
+- 26 recetas fáciles: seis desayunos (incluidos los tres habituales), seis almuerzos, seis cenas y ocho meriendas. Selección diaria persistente, ingredientes, pasos y lista de compra.
+- Snacks de mañana/tarde en la rutina. Propuesta de almuerzo según las reservas reales, 30 minutos después de una llamada; edición de la hora solo para hoy y detección de conflictos. Sin calendario conectado, la propuesta se identifica como orientativa.
+- Horario de llamadas: solo incluye sesiones con confirmación explícita de recap, coincidencia de identidad, fecha y hora; cambios de Google invalidan confirmaciones anteriores. Las pendientes permanecen separadas y siguen visibles en Calendario.
+- Valoración orientativa de 1–3 estrellas con motivos comerciales del recap. Sin evidencia suficiente se muestra Sin valorar; no se equipara ausencia de datos a mala calidad.
+- Backend preparado para cruce a las 06:00 Kyiv y revisiones diurnas. Sigue sin desplegar/autorizar; no se anuncia sincronización automática real.
+- 62 pruebas locales aprobadas. Shell offline v14 con los nuevos módulos de hábitos/comidas.
+
 ## 0.6.1 — 2026-11-09
 
 - Selector persistente Casa / Gimnasio. Casa mantiene vídeos y circuito; Gimnasio usa rutinas de fuerza con series, repeticiones objetivo y descansos.

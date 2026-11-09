@@ -1,5 +1,5 @@
-const CACHE = 'sebas-os-v12';
-const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './app.js', './styles.css', './manifest.webmanifest'];
+const CACHE = 'sebas-os-v14';
+const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './life-core.js', './life-ui.js', './app.js', './styles.css', './manifest.webmanifest'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => Promise.all(FILES.map(async path => {
     const canonical = new URL(path, self.registration.scope);

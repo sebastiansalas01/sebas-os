@@ -9,18 +9,24 @@
     const list=[{id:'oracion',name:'Oración',start:prayer,duration:10},{id:'gym',name:'Entrenamiento',start:exercise,duration:gym},{id:'desayuno',name:'Desayuno y preparación',start:exercise+gym+10,duration:30,tab:'comidas'},{id:'lectura',name:'Lectura',start:reading,duration:30}];
     if(weekend)list.push({id:'klimb',name:'KLIMB',start:parseTime(starts.klimb,600),duration:180},{id:'ingles',name:'Inglés de negocios',start:parseTime(starts.ingles,960),duration:60});
     else list.push({id:'preparacion',name:'Preparación de llamadas',start:580,duration:20,tab:'impulso'},{id:'daily',name:'Daily Impulso',start:600,duration:30,tab:'impulso'},{id:'trabajo',name:'Impulso · llamadas y seguimiento',start:630,duration:630,tab:'impulso'},{id:'ingles',name:'Inglés de negocios',start:parseTime(starts.ingles,1260),duration:60});
-    list.push({id:'descanso',name:'Desconexión y descanso',start:weekend?1320:1320,duration:60});
+    const life=root.SebasLife;
+    if(life){const events=options.busyEvents||[],meals=life.mealSchedule(events,now,options.mealDate===C.day(now)?options.mealTimes||{}:{});for(const [id,type,label] of [['almuerzo','lunch','Almuerzo'],['snackam','snackam','Snack de mañana'],['snackpm','snackpm','Snack de tarde']]){const slot=meals[type];if(slot)list.push({id,name:label+(options.mealNames?.[type]?' · '+options.mealNames[type]:''),start:slot.start,duration:slot.end-slot.start,tab:'comidas',priority:2,adjusted:slot.adjusted||false})}
+      const reserved=[...life.intervals(events,now),...Object.values(meals).filter(x=>x&&typeof x==='object'&&Number.isFinite(x.start))];
+      const readingEnd=reading+30,roleDuration=options.goals?.ventas||30;const early=readingEnd+roleDuration<=580?life.slot(reserved,readingEnd,roleDuration,580,0):null;const role=early||life.slot(reserved,630,roleDuration,1260,0);if(role)list.push({id:'ventas',name:'Role play de ventas',start:role.start,duration:roleDuration,priority:1});
+      if(role)reserved.push(role);const follow=life.slot(reserved,630,options.goals?.seguimientos||45,1260,0);if(follow&&!weekend)list.push({id:'seguimientos',name:'Seguimientos Impulso',start:follow.start,duration:follow.end-follow.start,priority:1});
+    }
+    list.push({id:'descanso',name:'Desconexión y descanso',start:1320,duration:60});
     return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
   }
   function agenda(events,now=Date.now(),options={}){
-    const currentDay=C.day(now);const calendar=events.filter(e=>!e.allDay&&C.onDay(e,currentDay)).map(e=>({id:C.eventKey(e),event:e,name:e.name,start:C.day(Date.parse(e.start))<currentDay?0:minute(Date.parse(e.start)),end:C.day(Date.parse(e.end))>currentDay?1440:minute(Date.parse(e.end)),kind:'event',tab:'impulso'})).filter(e=>e.end>e.start);
+    const currentDay=C.day(now);const calendar=events.filter(e=>!e.allDay&&Number.isFinite(Date.parse(e.end))&&C.onDay(e,currentDay)).map(e=>({id:C.eventKey(e),event:e,name:e.name,start:C.day(Date.parse(e.start))<currentDay?0:minute(Date.parse(e.start)),end:C.day(Date.parse(e.end))>currentDay?1440:minute(Date.parse(e.end)),kind:'event',tab:'impulso'})).filter(e=>e.end>e.start);
     // A real event replaces overlapping suggested routine slots, but remains visible in the agenda.
-    const plan=routine(now,options).filter(s=>!calendar.some(e=>e.start<s.end&&e.end>s.start&&s.id!=='trabajo'));
+    const plan=routine(now,{...options,busyEvents:options.busyEvents||events}).filter(s=>!calendar.some(e=>e.start<s.end&&e.end>s.start&&s.id!=='trabajo'));
     return [...plan,...calendar].sort((a,b)=>a.start-b.start||Number(b.kind==='event')-Number(a.kind==='event'));
   }
   function command(events,done={},active=null,now=Date.now(),options={}){
     const m=minute(now);const items=agenda(events,now,options);const eligible=items.filter(x=>!done[x.id]);
-    let current=eligible.filter(x=>x.start<=m&&x.end>m).sort((a,b)=>Number(b.kind==='event')-Number(a.kind==='event'))[0]||null;
+    let current=eligible.filter(x=>x.start<=m&&x.end>m).sort((a,b)=>((b.kind==='event'?10:b.priority||0)-(a.kind==='event'?10:a.priority||0)))[0]||null;
     if(active)current={id:active.id,name:options.names?.[active.id]||active.id,kind:'active',start:minute(active.start),duration:options.goals?.[active.id]||30};
     let next=eligible.find(x=>x.start>m&&x.id!==current?.id)||null;if(!next){const tomorrow=C.boundary(now);next=agenda(events,tomorrow,options)[0]||null;if(next)next={...next,dayOffset:1}}
     if(!current)current={id:m<420||m>=1380?'descanso':'libre',name:m<420||m>=1380?'Descanso':'Tiempo disponible',kind:'free',start:m,duration:next?Math.max(0,next.start-m):30};

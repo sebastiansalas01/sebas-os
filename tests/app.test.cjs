@@ -8,7 +8,7 @@ function boot(seed={}) {
  const elements=new Map();
  const element=id=>{if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',value:'',append(){},setAttribute(){}});return elements.get(id)};
  const ctx=vm.createContext({URL,URLSearchParams,AbortSignal,Intl,Date,Math,JSON,Number,String,Map,Set,Error,Promise,structuredClone,console,setInterval(){},clearInterval(){},alert(){},navigator:{},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},document:{visibilityState:'visible',getElementById:element,querySelector:()=>element('header'),querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('new')},window:{}});
- for(const f of ['core.js','planner-core.js','planner-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
+ for(const f of ['core.js','planner-core.js','life-core.js','life-ui.js','planner-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
  return {ctx,storage,element,run:s=>vm.runInContext(s,ctx)};
 }
 test('all views render without runtime errors',()=>{
@@ -18,8 +18,7 @@ test('corrupted storage does not prevent launch',()=>{const app=boot({sebasos:'i
 test('pause and reload preserve elapsed time and completion never invents minutes',()=>{
  const app=boot();app.run("beginTrack('lectura');activeTrack.start-=60000;pauseTrack()");
  const next=boot(Object.fromEntries(app.storage));assert.ok(next.run("currentSeconds('lectura')")>=60);
- next.run("finishTrack('ingles')");assert.equal(next.run("trackData('ingles').seconds"),0);
- assert.equal(next.run("trackData('ingles').done"),true);
+ next.run("finishTrack('ingles')");assert.equal(next.run("trackData('ingles').seconds"),0);assert.equal(next.run("trackData('ingles').done"),false);next.run('confirmTrackTime(20)');assert.equal(next.run("trackData('ingles').seconds"),1200);assert.equal(next.run("trackData('ingles').measuredSeconds"),0);assert.equal(next.run("trackData('ingles').source"),'reported');
 });
 test('stored reading text is escaped',()=>{
  const app=boot({sebasos:JSON.stringify({routine:'</textarea><script>alert(1)</script>',reading:[{title:'<img onerror=evil()>',page:1,notes:'<script>evil()</script>',day:'2026-11-09'}]})});
@@ -60,4 +59,19 @@ test('real gym sets persist without inventing workout time or repetitions',()=>{
 });
 test('place and muscle group cannot change during an active workout',()=>{
  const app=boot();app.run("startWorkout();chooseTrainingPlace('gym');chooseGymRoutine('pierna')");assert.equal(app.run('trainingPlace()'),'home');
+});
+test('rest is removed from habits and the list follows planned times',()=>{
+ const app=boot();const ids=app.run('orderedHabitTracks().map(t=>t.id)');assert.ok(!ids.includes('descanso'));assert.ok(ids.indexOf('oracion')<ids.indexOf('gym'));assert.ok(ids.indexOf('gym')<ids.indexOf('lectura'));assert.ok(ids.indexOf('lectura')<ids.indexOf('ingles'));
+});
+test('the habits accordion stays open through start, finish confirmation and edited minutes',()=>{
+ const app=boot();app.run("setSectionOpen('habits',true);beginTrack('lectura');finishTrack('lectura')");assert.equal(app.run('pendingCompletion.goal'),30);assert.equal(app.run("trackData('lectura').done"),false);assert.match(app.element('app').innerHTML,/data-section="habits" open/);app.run('editCompletion();confirmTrackTime(22)');assert.equal(app.run("trackData('lectura').seconds"),1320);assert.match(app.element('app').innerHTML,/data-section="habits" open/);
+});
+test('cancelling completion does not mark an activity complete or fill its goal',()=>{
+ const app=boot();app.run("finishTrack('lectura');cancelCompletion()");assert.equal(app.run("trackData('lectura').done"),false);assert.equal(app.run("trackData('lectura').seconds"),0);
+});
+test('reading only asks for the current page and keeps it after reload',()=>{
+ const app=boot();app.run("view('lectura')");assert.match(app.element('app').innerHTML,/Hábitos atómicos/);assert.ok(!app.element('app').innerHTML.includes('book-notes'));app.element('book-page').value='123';app.run('saveReading()');const next=boot(Object.fromEntries(app.storage));assert.equal(next.run('currentBook().page'),123);
+});
+test('chosen breakfast and snacks are saved for today',()=>{
+ const app=boot();app.run("selectFood('yogurt-oats');selectFood('peanut-toast')");const next=boot(Object.fromEntries(app.storage));assert.equal(next.run("chosenFood('breakfast').id"),'yogurt-oats');assert.equal(next.run("chosenFood('snackpm').id"),'peanut-toast');
 });

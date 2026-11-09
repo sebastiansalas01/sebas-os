@@ -19,7 +19,10 @@
     if(!active) return;
     const key=day(active.start); records[key] ??= {};
     const rec=records[key][active.id] ??= {seconds:0,done:false};
-    rec.seconds += elapsed(active, now);
+    const added=elapsed(active, now);
+    rec.measuredSeconds=(rec.measuredSeconds??(rec.source==='reported'?0:rec.seconds))+added;
+    if(rec.source==='reported'&&added>0)rec.source='mixed';
+    rec.seconds += added;
   }
   function recentKeys(now=Date.now(), count=7) { return Array.from({length:count},(_,i)=>shiftDay(day(now),-i)); }
   function selected(calendar, ids) {

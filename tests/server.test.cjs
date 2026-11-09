@@ -16,7 +16,7 @@ test('Slack lookup uses bounded exact identity, channel scope and verified Insta
  const card=await e.research(event('x'));assert.equal(card.matched,true);assert.equal(card.instagram,'https://www.instagram.com/demo.coach/');assert.match(card.summary,/Objetivo/);
 });
 test('no baseline alert, transient push failures retry without duplicate successful deliveries',async()=>{
- let attempts=0;const e=await engine({push:async()=>{if(++attempts===1)throw Error('temporary')}});let events=[event('old')];e.calendar=async()=>structuredClone(events);e.research=async x=>({eventKey:'primary|'+x.id,matched:false});e.state.subscriptions=[{endpoint:'https://web.push.apple.com/test'}];
+ let attempts=0;const e=await engine({push:async()=>{if(++attempts===1)throw Error('temporary')}});let events=[event('old')];e.calendar=async()=>structuredClone(events);e.research=async x=>({eventKey:'primary|'+x.id,matched:true,confirmed:true});e.state.subscriptions=[{endpoint:'https://web.push.apple.com/test'}];
  await e.sync();assert.equal(attempts,0);events.push(event('new'));await e.sync();assert.equal(attempts,1);assert.equal(e.state.outbox.length,1);await e.sync();assert.equal(attempts,2);assert.equal(e.state.outbox.length,0);await e.sync();assert.equal(attempts,2);
 });
 test('provider failure preserves last successful snapshot and does not report success',async()=>{
@@ -39,4 +39,7 @@ test('research falls back from absent email to the full attendee name, never a f
 });
 test('private snapshots serialize concurrent writes with owner-only file permissions',async()=>{
  const {FileStore}=await modules();const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');const dir=await fs.mkdtemp(path.join(os.tmpdir(),'sebas-test-'));const file=path.join(dir,'private','state.json');try{const store=new FileStore(file);await Promise.all([store.save({sequence:1}),store.save({sequence:2}),store.save({sequence:3})]);assert.equal((await store.load()).sequence,3);assert.equal((await fs.stat(file)).mode&0o777,0o600);assert.equal((await fs.stat(path.dirname(file))).mode&0o777,0o700)}finally{await fs.rm(dir,{recursive:true,force:true})}
+});
+test('morning synchronization starts at six Kyiv time and sends one brief per day',async()=>{
+ let messages=0;const e=await engine({clock:()=>Date.parse('2026-11-09T06:00:10+02:00'),config:{ownerEmail:'owner@example.com',slackChannel:'test',slackUserToken:'mock',dayStart:'06:00',dayEnd:'21:00'},push:async()=>{messages++}});e.calendar=async()=>[];e.state.subscriptions=[{endpoint:'https://web.push.apple.com/test'}];await e.sync();await e.sync();assert.equal(messages,1);assert.equal(e.state.morningDay,'2026-11-09');
 });

@@ -3,7 +3,7 @@
 PWA personal existente, publicada en https://sebastiansalas01.github.io/sebas-os/.
 HTML, CSS y JavaScript estáticos; sin dependencias de ejecución ni módulo de finanzas.
 
-## Versión 0.6.1
+## Versión 0.7.0
 
 Selector Casa / Gimnasio con rutina del día y cambio de grupo muscular solo para hoy. En casa, vídeos y circuito; en gimnasio, ejercicios con series/repeticiones objetivo y registro manual de series realizadas.
 
@@ -12,6 +12,10 @@ Inicio con reloj de Kyiv, actividad actual/siguiente y navegación directa. Gimn
 La interfaz de investigación de llamadas y su backend Node están implementados. El backend NO está desplegado ni autorizado. La conexión Slack de ChatGPT no se puede reutilizar automáticamente desde la PWA. Ver [configuración y límites del servicio](docs/private-service.md) y [fuentes de entrenamiento](docs/workout-sources.md).
 
 Ver [evidencia y límites de verificación de 0.6.0](docs/verification-0.6.md).
+
+## Novedades de hábitos, lectura, comidas y agenda
+
+Ver [comportamiento y límites de 0.7.0](docs/release-0.7.md). Los minutos editados por el usuario se identifican como confirmados, separados de la medición. Las llamadas sin confirmación de recap quedan fuera del horario; no desaparecen de Google.
 
 ## Desarrollo y validación
 
@@ -43,7 +47,7 @@ Sin backend autorizado, solo hay avisos dentro de la app durante sincronización
 
 ## Validación de esta versión
 
-43 tests automatizados locales aprobados: vistas, persistencia, pausas, medianoche y DST, selección de calendarios, reprogramación por ID, errores 401 y escaping. Navegador Chromium: inicio, cronómetro con recarga/pausa, guardado de lectura y persistencia. Inicio comprobado en contenedores de 375, 390, 768 y 1280 px sin overflow horizontal del documento. Es comprobación responsive, no emulación de iPhone ni prueba en hardware.
+62 tests automatizados locales aprobados: vistas, persistencia, pausas, medianoche y DST, selección de calendarios, reprogramación por ID, errores 401 y escaping. Navegador Chromium: inicio, cronómetro con recarga/pausa, guardado de lectura y persistencia. Inicio comprobado en contenedores de 375, 390, 768 y 1280 px sin overflow horizontal del documento. Es comprobación responsive, no emulación de iPhone ni prueba en hardware.
 
 Pendientes de validación real: OAuth del usuario contra Google en esta versión, instalación/offline en Safari iPhone, VoiceOver y push. Fotos heredadas de Unsplash se etiquetan como ilustrativas; faltan imágenes propias exactas y paquete offline de fotografías.
 
