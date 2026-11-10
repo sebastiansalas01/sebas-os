@@ -92,3 +92,14 @@ nav button:before{content:none!important}.nav-symbol{display:inline-block;vertic
 .smart-activity-close{margin-top:16px;background:transparent;border:0;color:#536873;min-height:44px;padding:10px 0}
 
 .smart-custom-duration{display:grid;gap:8px;margin-top:18px;color:#354c52;font-size:14px}.smart-custom-duration input{width:100%;min-height:48px;border:1px solid #d6e0e3;border-radius:12px;padding:12px;font-size:18px}.smart-activity-confirm{width:100%;margin-top:12px;min-height:48px;background:#183f44;color:white;border:0;border-radius:12px;font-weight:700}
+
+
+/* KLIMB production studio */
+.klimb-studio-card{padding:18px 0;border-top:1px solid #e2e8ea;display:grid;gap:12px}
+.klimb-studio-card .sectiontop{gap:12px;align-items:center}
+.klimb-studio-card label,.klimb-offer-field label{display:block;font-size:13px;font-weight:700;color:#334e54}
+.klimb-studio-card textarea,.klimb-offer-field textarea{width:100%;box-sizing:border-box;border:1px solid #d7e2e5;border-radius:12px;padding:12px;background:#f8fafb;color:#172d34;font:inherit;resize:vertical;min-height:78px}
+.klimb-step-track{display:flex;gap:5px}.klimb-step-track span{height:6px;flex:1;background:#dbe3e5;border-radius:6px}.klimb-step-track span.is-active{background:#418e85}
+.klimb-offer-field{display:grid;gap:8px;margin:16px 0}
+.klimb-actions>button,.klimb-studio-card .deliverable-actions button{min-height:46px;border-radius:12px;border:0;background:#1d5556;color:white;padding:12px 18px;font-weight:700}
+.klimb-studio-card p{margin:0}
