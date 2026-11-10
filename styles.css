@@ -44,3 +44,25 @@ nav .nav-more{display:block}.command-day .command-scroll{height:360px}.command-d
 nav button:before{content:none!important}.nav-symbol{display:inline-block;vertical-align:middle;width:15px;height:15px;margin-right:7px;color:currentColor}nav button{display:inline-flex;align-items:center;justify-content:center;gap:0}nav .nav-more{display:inline-flex}.hero-actions button:focus-visible,.call-preview-actions button:focus-visible,.deliverable-actions button:focus-visible{outline:3px solid #7db5b4;outline-offset:3px}@media(max-width:700px){nav button,nav .nav-more{display:flex;flex-direction:column}.nav-symbol{display:block;width:20px;height:20px;margin:0 0 4px}nav button{font-size:10px;line-height:1.3}}
 
 .recap-update-controls{display:flex;align-items:center;gap:6px;position:relative;flex-wrap:wrap}.recap-review-link{display:inline-flex;align-items:center;gap:8px;background:#e7f0f0;color:#2f6061;text-decoration:none;min-height:42px;padding:10px 13px;font-size:11px;border-radius:11px;font-weight:550}.recap-reload{display:grid;place-items:center;width:40px;min-height:42px;padding:9px;background:transparent;color:#7a8e98;border:1px solid #e2e9ed;border-radius:11px}.recap-refresh-help>summary{list-style:none;cursor:pointer;display:grid;place-items:center;width:35px;min-height:42px;color:#7c8a95;font-size:15px}.recap-refresh-help p{position:absolute;right:0;top:44px;width:min(280px,75vw);padding:16px;background:#fff;box-shadow:0 8px 30px #1a2d4320;border:1px solid #e0e9ec;border-radius:13px;color:#657582;font-size:12px;line-height:1.7;z-index:5}.recap-review-link:focus-visible,.recap-reload:focus-visible{outline:3px solid #85b4ba;outline-offset:3px}.recap-settings .recap-update-controls{margin-top:18px}
+
+
+/* KLIMB command center v35 */
+.klimb-hero{background:linear-gradient(135deg,#10212c,#153c47 65%,#23707a)!important;color:#fff}
+.klimb-hero p{color:#d7e7e9;line-height:1.6;max-width:34rem}
+.klimb-meter{height:9px;border-radius:999px;background:#ffffff36;overflow:hidden;margin:16px 0 8px}
+.klimb-meter span{display:block;height:100%;background:#a4e7cb;border-radius:inherit;transition:width .3s ease}
+.klimb-hero small{color:#d7e7e9}
+.klimb-mentor{border-left:4px solid #57a6a6}
+.klimb-mentor p{line-height:1.65}
+.klimb-quick{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.klimb-quick button,.klimb-mentor button{border:1px solid #b7d6d7;border-radius:12px;padding:12px 14px;background:#e6f4f1;color:#1c5256;font-weight:650;min-height:44px}
+.klimb-quick button:disabled{opacity:.4}
+.klimb-roadmap{display:grid;gap:8px}
+.klimb-idea{display:grid;grid-template-columns:34px 1fr 20px;align-items:center;gap:10px;text-align:left;width:100%;background:#f4f8f9;border:1px solid #e2ebed;border-radius:14px;padding:14px 12px;color:#253e49;min-height:58px;font-weight:550}
+.klimb-idea-number{color:#68949a;font-size:12px;font-weight:700}
+.klimb-task{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf0f2;line-height:1.5}
+.klimb-task span{flex:1;min-width:0}
+.klimb-task-check{font-size:25px;background:transparent;border:0;color:#4c9190;min-width:44px;min-height:44px}
+.klimb-actions h2{line-height:1.3}
+.klimb-idea:focus-visible,.klimb-task-check:focus-visible,.klimb-quick button:focus-visible{outline:3px solid #4d9fa2;outline-offset:2px}
+@media(max-width:380px){.klimb-quick button{width:100%}.klimb-idea{font-size:13px}}
