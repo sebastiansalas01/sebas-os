@@ -66,3 +66,17 @@ nav button:before{content:none!important}.nav-symbol{display:inline-block;vertic
 .klimb-actions h2{line-height:1.3}
 .klimb-idea:focus-visible,.klimb-task-check:focus-visible,.klimb-quick button:focus-visible{outline:3px solid #4d9fa2;outline-offset:2px}
 @media(max-width:380px){.klimb-quick button{width:100%}.klimb-idea{font-size:13px}}
+
+
+/* KLIMB learning-first roadmap */
+.klimb-stages{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:0}
+.klimb-stages li{position:relative;padding:4px 8px 20px 26px;border-left:2px solid #d9e5e6;margin-left:8px;display:grid;gap:6px}
+.klimb-stages li:before{content:"";position:absolute;left:-7px;top:6px;width:12px;height:12px;border-radius:50%;background:#d9e5e6}
+.klimb-stages li.is-active{border-left-color:#4d9d94}
+.klimb-stages li.is-active:before{background:#4d9d94;box-shadow:0 0 0 4px #e4f3ee}
+.klimb-stages li strong{font-size:15px}
+.klimb-stages li small{color:#66767a;line-height:1.55}
+.klimb-cycle{display:grid;gap:8px;margin:14px 0}
+.klimb-cycle span{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#f1f6f6;font-size:14px}
+.klimb-cycle b{color:#327e7b;font-size:12px}
+.klimb-workflow button{min-height:44px;border:0;border-radius:12px;background:#1c5256;color:white;padding:12px 16px;font-weight:600}
