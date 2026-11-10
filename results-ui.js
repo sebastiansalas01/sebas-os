@@ -17,13 +17,13 @@ function klimbTodayEvent(){return effectiveEvents().find(e=>SebasCore.onDay(e,ky
 function klimbWork(){data.klimbWork??={videos:[],offer:{client:'',pain:'',outcome:'',deliverables:'',price:''}};data.klimbWork.videos??=[];data.klimbWork.offer??={};return data.klimbWork}
 function klimbVideoStages(){return ['Idea y referencia','Guion y gancho','Producción IA','Edición y revisión','Aprendizaje registrado']}
 function klimbNewVideo(){
- const w=klimbWork();w.videos.unshift({id:crypto.randomUUID(),created:kyivDay(),title:'Vídeo de práctica '+(w.videos.length+1),stage:0,reference:'',script:'',asset:'',learning:'',done:false});
+ const w=klimbWork();w.videos.unshift({id:crypto.randomUUID(),created:kyivDay(),title:'Vídeo de práctica '+(w.videos.length+1),stage:0,reference:'',script:'',asset:'',review:'',learning:'',done:false});
  save();view('proyectos',true)
 }
-function klimbUpdateVideo(id,field,value){const v=klimbWork().videos.find(x=>x.id===id);if(!v||!['title','reference','script','asset','learning'].includes(field))return;v[field]=String(value).slice(0,2000);save()}
+function klimbUpdateVideo(id,field,value){const v=klimbWork().videos.find(x=>x.id===id);if(!v||!['title','reference','script','asset','review','learning'].includes(field))return;v[field]=String(value).slice(0,2000);save()}
 function klimbAdvanceVideo(id){
  const v=klimbWork().videos.find(x=>x.id===id);if(!v||v.done)return;
- const required=['reference','script','asset','asset','learning'][v.stage];
+ const required=['reference','script','asset','review','learning'][v.stage];
  if(!String(v[required]||'').trim()){alert('Completa primero el campo de esta etapa.');return}
  if(v.stage<4)v.stage++;else{v.done=true;v.completed=kyivDay()}
  save();view('proyectos',true)
