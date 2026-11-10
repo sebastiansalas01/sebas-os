@@ -8,8 +8,8 @@ test('command centre follows local time rather than returning a missed morning h
  assert.equal(P.command([],{},null,at('23:30')).current.id,'dormir');
 });
 test('next activity has its exact planned time, duration and destination',()=>{
- const model=P.command([],{},null,at('06:50'));
- assert.equal(model.next.id,'oracion');assert.equal(P.time(model.next.start),'07:00');
+ const model=P.command([],{},null,at('06:40'));
+ assert.equal(model.next.id,'oracion');assert.equal(P.time(model.next.start),'06:50');
  assert.equal(model.next.duration,10);
 });
 test('real meetings override suggested work and other routines',()=>{
@@ -23,7 +23,7 @@ test('completed habits are not suggested and an active timer takes priority',()=
 });
 test('workout length adapts exercise count and rounds without inventing video provenance',()=>{
  assert.deepEqual([30,45,60].map(n=>P.workout(n).exercises.length),[5,7,10]);
- for(const n of [30,45,60]){const p=P.workout(n);assert.equal(p.warmup+p.cooldown+p.exercises.length*p.rounds*(p.work+p.rest),n*60)}
+ for(const n of [30,40,45,60]){const p=P.workout(n);assert.equal(p.warmup+p.cooldown+p.exercises.length*p.rounds*(p.work+p.rest),n*60)}
 });
 test('guided workout moves through warmup, work, rest, rounds and cooldown',()=>{
  const p=P.workout(30);
@@ -35,7 +35,7 @@ test('weekends reserve KLIMB and schedules use Kyiv across daylight saving time'
  assert.equal(P.minute(Date.parse('2026-10-25T01:30:00Z')),210);
 });
 test('after the last slot the next activity belongs to tomorrow',()=>{
- const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:40');
+ const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:30');
 });
 test('gym has a weekly split and selectable muscle groups',()=>{
  assert.equal(P.gymGroup(at('07:00')),'empuje');
@@ -49,3 +49,15 @@ test('gym duration changes exercise count and supplies sets, repetitions and res
 
 
 test('bedtime begins at exactly 23:30 even with a running timer or a late call',()=>{assert.notEqual(P.command([],{},null,at('23:29')).current.id,'dormir');assert.equal(P.command([],{},null,at('23:30')).current.id,'dormir');const event={calendarId:'c',id:'late',name:'Call',start:'2026-11-09T23:00:00+02:00',end:'2026-11-10T00:00:00+02:00'};assert.equal(P.command([event],{}, {id:'klimb',start:at('23:00')},at('23:30')).current.id,'dormir');});
+
+test('requested week has three hour-long English classes, Saturday practice and no morning sales practice',()=>{
+ const week=Array.from({length:7},(_,n)=>P.routine(at('12:00')+n*86400000));
+ assert.deepEqual(week.map((rows,n)=>rows.some(x=>x.id==='ingles')?n:null).filter(x=>x!==null),[2,5,6]);
+ for(const rows of week){assert.equal(rows.find(x=>x.id==='gym').duration,40);assert.equal(rows.find(x=>x.id==='desayuno').duration,25);assert.ok(!rows.some(x=>x.id==='ventas'&&x.start<720));for(const x of rows.filter(x=>x.id==='ingles'))assert.equal(x.duration,60)}
+ assert.equal(week[5].find(x=>x.id==='ventas').duration,60);
+ const wed=week[2],shower=wed.find(x=>x.id==='ducha'),english=wed.find(x=>x.id==='ingles'),prep=wed.find(x=>x.id==='preparacion');assert.equal(shower.end,english.start);assert.ok(english.end<=prep.start);assert.equal(wed.find(x=>x.id==='daily').start-english.end,30);
+});
+test('Tuesday calendar mentorship replaces practice without moving it to another slot',()=>{
+ const now=Date.parse('2026-11-10T12:00:00+02:00'),event={id:'mentor',calendarId:'personal',name:'Mentoría especial',start:'2026-11-10T20:00:00+02:00',end:'2026-11-10T21:00:00+02:00'};
+ const rows=P.agenda([event],now);assert.ok(rows.some(x=>x.kind==='event'&&x.event.id==='mentor'));assert.ok(!rows.some(x=>x.id==='ventas'));assert.equal(P.routine(now+7*86400000).find(x=>x.id==='ventas').start,1200);
+});
