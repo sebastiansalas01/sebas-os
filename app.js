@@ -64,4 +64,5 @@ function workoutLog(){return '<div class="card"><h2>Registrar entrenamiento</h2>
 function saveWorkout(){const name=document.getElementById('workout-name').value.trim();const sets=Number(document.getElementById('workout-sets').value),reps=Number(document.getElementById('workout-reps').value),weight=Number(document.getElementById('workout-weight').value);if(!name||!Number.isInteger(sets)||sets<1||sets>100||!Number.isInteger(reps)||reps<1||reps>200||!Number.isFinite(weight)||weight<0||weight>1000){document.getElementById('workout-status').textContent='Revisa ejercicio, series, repeticiones y peso.';return}data.workouts??=[];data.workouts.push({name,sets,reps,weight,day:kyivDay(),at:Date.now()});save();view('gym')}
 
 
+ensurePreplyMove();
 initRecapSync();
