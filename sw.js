@@ -1,5 +1,5 @@
-const CACHE = 'sebas-os-v23';
-const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './life-core.js', './life-ui.js', './ops-core.js', './ops-ui.js', './closing-core.js', './closing-ui.js', './app.js', './styles.css', './assets/breakfast.webp', './assets/snackam.webp', './assets/lunch.webp', './assets/snackpm.webp', './assets/dinner.webp', './assets/beef.webp', './manifest.webmanifest'];
+const CACHE = 'sebas-os-v24';
+const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './life-core.js', './life-ui.js', './ops-core.js', './ops-ui.js', './closing-core.js', './closing-ui.js', './results-core.js', './results-ui.js', './app.js', './styles.css', './assets/breakfast.webp', './assets/snackam.webp', './assets/lunch.webp', './assets/snackpm.webp', './assets/dinner.webp', './assets/beef.webp', './manifest.webmanifest'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => Promise.all(FILES.map(async path => {
     const canonical = new URL(path, self.registration.scope);
