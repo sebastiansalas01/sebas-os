@@ -1,4 +1,4 @@
-const CACHE = 'sebas-os-v29';
+const CACHE = 'sebas-os-v30';
 const FILES = ['./', './index.html', './core.js', './planner-core.js', './planner-ui.js', './recap-core.js', './recap-ui.js', './life-core.js', './life-ui.js', './ops-core.js', './ops-ui.js', './closing-core.js', './closing-ui.js', './results-core.js', './results-ui.js', './app.js', './styles.css', './assets/breakfast.webp', './assets/snackam.webp', './assets/lunch.webp', './assets/snackpm.webp', './assets/dinner.webp', './assets/beef.webp', './assets/scene-dawn.webp','./assets/scene-prayer.webp','./assets/scene-training.webp','./assets/scene-reading.webp','./assets/scene-prepare.webp','./assets/scene-focus.webp','./assets/scene-rest.webp', './manifest.webmanifest'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => Promise.all(FILES.map(async path => {
