@@ -1,7 +1,7 @@
 (function(root){
   const C=root.SebasCore || require('./core.js');
   function minute(ts=Date.now()){const p=new Intl.DateTimeFormat('en',{timeZone:'Europe/Kyiv',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(ts));return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value)}
-  function time(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0')}
+  function time(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(Math.floor(((n%60)+60)%60)).padStart(2,'0')}
   function parseTime(v,fallback){if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v||''))return fallback;const [h,m]=v.split(':').map(Number);return h*60+m}
   function routine(now=Date.now(),options={}){
     const weekend=[0,6].includes(C.weekday(now));const gym=[30,40,45,60].includes(options.gym)?options.gym:40;
