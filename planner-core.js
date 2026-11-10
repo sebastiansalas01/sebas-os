@@ -15,8 +15,8 @@
     else {
       list.push({id:'preparacion',name:'Preparación de llamadas',start:580,duration:20,tab:'impulso'},{id:'daily',name:'Daily Closing',start:600,duration:30,tab:'impulso'},{id:'trabajo',name:'Closing · llamadas y seguimiento',start:630,duration:cutoff-630,tab:'impulso'});
       if(early)list.push({id:'ingles',name:'Preply · clase de inglés (propuesta)',start:510,duration:60});
-      else list.push({id:'klimb',name:'KLIMB · avanzar proyecto',start:breakfastEnd+20,duration:580-(breakfastEnd+20)});
-      if([2,5].includes(weekday))list.push({id:'klimb',name:'KLIMB · bloque personal',start:1110,duration:90});
+      else if(![2,5].includes(weekday))list.push({id:'klimb',name:'KLIMB',start:breakfastEnd+20,duration:580-(breakfastEnd+20)});
+      if([2,5].includes(weekday))list.push({id:'klimb',name:'KLIMB',start:1110,duration:90});
     }
     if(weekday===6)list.push({id:'ventas',name:'Práctica comercial',start:900,duration:60,priority:3});
     if(weekday===2)list.push({id:'ventas',name:'Mentoría de ventas',start:1200,duration:60,priority:3});

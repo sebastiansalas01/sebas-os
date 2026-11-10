@@ -61,3 +61,4 @@ test('Tuesday calendar mentorship replaces practice without moving it to another
  const now=Date.parse('2026-11-10T12:00:00+02:00'),event={id:'mentor',calendarId:'personal',name:'Mentoría especial',start:'2026-11-10T20:00:00+02:00',end:'2026-11-10T21:00:00+02:00'};
  const rows=P.agenda([event],now);assert.ok(rows.some(x=>x.kind==='event'&&x.event.id==='mentor'));assert.ok(!rows.some(x=>x.id==='ventas'));assert.equal(P.routine(now+7*86400000).find(x=>x.id==='ventas').start,1200);
 });
+test('KLIMB has only one scheduled block per day and uses one project name',()=>{for(let n=0;n<7;n++){const rows=P.routine(at('12:00')+n*86400000).filter(x=>x.id==='klimb');assert.equal(rows.length,n===2?0:1);if(!rows.length)continue;assert.equal(rows[0].name,'KLIMB');if([1,4].includes(n))assert.equal(rows[0].start,1110)}});
