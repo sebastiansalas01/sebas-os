@@ -80,3 +80,13 @@ nav button:before{content:none!important}.nav-symbol{display:inline-block;vertic
 .klimb-cycle span{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;background:#f1f6f6;font-size:14px}
 .klimb-cycle b{color:#327e7b;font-size:12px}
 .klimb-workflow button{min-height:44px;border:0;border-radius:12px;background:#1c5256;color:white;padding:12px 16px;font-weight:600}
+
+
+.smart-activity-overlay{position:fixed;inset:0;z-index:9999;background:#0009;display:flex;align-items:flex-end;justify-content:center;padding:16px}
+.smart-activity-sheet{width:min(100%,480px);max-height:82vh;overflow-y:auto;background:#fff;color:#15232b;border-radius:24px;padding:24px;box-shadow:0 16px 55px #0004}
+.smart-activity-sheet h2{font-size:24px;line-height:1.2;margin:0 0 10px}
+.smart-activity-sheet p{font-size:14px;color:#63727b;margin:0 0 20px}
+.smart-activity-choices{display:grid;gap:10px}
+.smart-activity-choices button{min-height:54px;width:100%;padding:14px 16px;border:1px solid #dae4e7;border-radius:14px;background:#f4f8f8;color:#153d43;font-weight:650;text-align:left;font-size:16px}
+.smart-activity-choices button:disabled{opacity:.45}
+.smart-activity-close{margin-top:16px;background:transparent;border:0;color:#536873;min-height:44px;padding:10px 0}
