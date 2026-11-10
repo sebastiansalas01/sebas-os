@@ -2,7 +2,7 @@ function smartFreeBlock(model){
  if(model.current.id!=='libre')return model;
  const next=model.next,limit=next&&next.dayOffset!==1?next.start:Math.min(1440,model.minute+90);
  const available=Math.max(0,limit-model.minute);
- model.current={...model.current,name:'Pausa',kind:'free-choice',start:model.minute,end:limit,duration:available};
+ const a=data.smartActivity,valid=a&&a.day===kyivDay()&&Number.isFinite(a.startedAt)&&Number.isFinite(a.minutes)&&Date.now()<a.startedAt+a.minutes*60000&&Date.now()<Date.now()+available*60000;const names={seguimientos:'Seguimientos',ventas:'Entrenar ventas',klimb:'KLIMB · producción',ingles:'Inglés',descanso:'Descanso'};model.current={...model.current,name:valid?(names[a.id]||'Actividad en curso'):'Pausa',kind:'free-choice',start:model.minute,end:limit,duration:available};
  model.freeGapEnd=limit;return model;
 }
 function markRestCompletedSilently(){const model=dashboardCommand();const limit=model.freeGapEnd||model.current.end;writeStore('sebasSmartGapV2:'+kyivDay()+':'+limit,{start:Date.now()-20*60000,restDone:true})}
@@ -33,7 +33,7 @@ function startSmartActivity(id,minutes){
  data.smartActivity={id,minutes,startedAt:Date.now(),day:kyivDay()};save();closeSmartActivity();
  view('hoy',true);
 }
-function stopSmartActivity(){data.smartActivity=null;save();view('hoy',true)}
+function stopSmartActivity(){const a=data.smartActivity;if(a&&a.day===kyivDay()){const elapsed=Math.max(0,Math.min(a.minutes,Math.round((Date.now()-a.startedAt)/60000)));data.smartHistory=[...(data.smartHistory||[]).filter(x=>x.day===kyivDay()).slice(-49),{id:a.id,day:a.day,planned:a.minutes,actual:elapsed,endedAt:Date.now()}]}data.smartActivity=null;save();view('hoy',true)}
 function chooseSmartActivity(id){openSmartActivity();if(id)selectSmartActivity(id)}
 
 /* Time-aware dashboard and guided activities. Provider data stays in memory. */
