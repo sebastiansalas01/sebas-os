@@ -3,7 +3,35 @@
   function minute(ts=Date.now()){const p=new Intl.DateTimeFormat('en',{timeZone:'Europe/Kyiv',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(ts));return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value)}
   function time(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(Math.floor(((n%60)+60)%60)).padStart(2,'0')}
   function parseTime(v,fallback){if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v||''))return fallback;const [h,m]=v.split(':').map(Number);return h*60+m}
+  function founderRoutine(now,options){
+    const weekday=C.weekday(now),weekend=[0,6].includes(weekday),gym=45;
+    // Fixed 07:00 wake-up in Europe/Kyiv. Mentorship events are taken from the connected calendar, never invented.
+    const list=[
+      {id:'despertar',name:'Despertar y prepararte',start:420,duration:20},
+      {id:'oracion',name:'Oración',start:440,duration:10},
+      {id:'gym',name:'Entrenamiento · 45 min',start:455,duration:gym},
+      {id:'lectura',name:'Lectura · 30 min',start:510,duration:30},
+      {id:'desayuno',name:'Desayuno sin prisas',start:550,duration:40,tab:'comidas'},
+      {id:'ducha',name:'Ducha y preparación',start:600,duration:25},
+      {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:120,tab:'proyectos'},
+      {id:'klimb-build',name:'KLIMB · tienda, oferta y validación',start:780,duration:120,tab:'proyectos'},
+      {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos'},
+      {id:'descanso',name:'Desconexión',start:1320,duration:90},
+      {id:'dormir',name:'Dormir',start:1410,duration:30,priority:20}
+    ];
+    if([1,3,5].includes(weekday))list.push({id:'ingles',name:'Preply · sesión objetivo (confirmar reserva)',start:900,duration:60,tab:'learning'});
+    else list.push({id:'ingles',name:'Inglés · práctica y conversación',start:900,duration:60,tab:'learning'});
+    if(weekend){const build=list.find(x=>x.id==='klimb-build');build.duration=90;list.find(x=>x.id==='klimb-creative').duration=60}
+    const life=root.SebasLife;
+    if(life){const meals=life.mealSchedule(options.busyEvents||[],now,options.mealDate===C.day(now)?options.mealTimes||{}:{});
+      for(const [id,type,label] of [['almuerzo','lunch','Almuerzo'],['snackam','snackam','Snack de mañana'],['snackpm','snackpm','Snack de tarde'],['cena','dinner','Cena']]){
+        const slot=meals[type];if(slot)list.push({id,name:label,start:slot.start,duration:slot.end-slot.start,tab:'comidas',priority:2});
+      }
+    }
+    return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
+  }
   function routine(now=Date.now(),options={}){
+    if(C.day(now)>='2026-11-14')return founderRoutine(now,options);
     const weekend=[0,6].includes(C.weekday(now));const gym=[30,40,45,60].includes(options.gym)?options.gym:40;
 
     const starts=options.starts||{},weekday=C.weekday(now),early=weekday===(options.englishWeekday??3);
