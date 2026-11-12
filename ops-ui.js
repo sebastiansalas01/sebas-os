@@ -2,12 +2,12 @@ let unifiedSyncStatus='';
 async function syncFullAgenda(){
  if(syncing||recapBusy)return;
  if(!googleToken){unifiedSyncStatus='Autoriza Google para completar la actualización conjunta';connectGoogle();return;}
- unifiedSyncStatus='Actualizando Google Calendar y agenda Slack…';
+ unifiedSyncStatus='Actualizando Google Calendar…';
  view('calendario');
- const results=await Promise.allSettled([syncGoogle(),syncRecaps()]);
+ const results=await Promise.allSettled([syncGoogle()]);
  const googleOk=results[0].status==='fulfilled'&&!!googleToken&&googleStatus.startsWith('Conectado');
- const slackOk=results[1].status==='fulfilled'&&!!recapDevice?.token&&!recapState.error;
- unifiedSyncStatus='Google: '+(googleOk?'actualizado':googleStatus||'sin conexión')+' · Slack: '+(slackOk?'último snapshot cargado':'no actualizado');
+ 
+ unifiedSyncStatus='Google: '+(googleOk?'actualizado':googleStatus||'sin conexión');
  view('calendario');
 }
 let calendarSpan=7,calendarSettingsOpen=false,alertStatus='',previousTimerSignature='';
