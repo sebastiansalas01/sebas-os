@@ -22,6 +22,10 @@ No es asesoramiento legal ni fiscal: los puntos de IVA y sociedad deben confirma
 | **Residencia o sociedad en la UE/España** (si Sebastián la tiene) | Shopify Payments directo | Depende | **Pregunta abierta para Sebastián**. |
 | Pasarelas ucranianas (WayForPay, LiqPay) | Pago con tarjeta | Rápido | Pensadas para el mercado ucraniano; dudosas para clientes españoles. |
 
+### Actualización 13-nov · dos vías concretas para comparar
+- **Western Bid (merchant of record ucraniano):** permite poner PayPal y Stripe en Shopify sin sociedad extranjera. Cobra un **4 %** sobre lo recibido, después de las comisiones de PayPal o Stripe (PayPal: 2,9 % + 0,30 $ para compradores fuera de EE. UU.). Fuente: https://westernbid.com/en/westernbid-rates/ y https://westernbid.com/en/?p=23509. Pendiente: condiciones de alta, KYC, plazos de liquidación y reputación.
+- **Contra reembolso (COD) en España:** muy usado por tiendas de dropshipping españolas (lo vimos en Meta Ad Library: LumirShop, Wortekshop). Plataformas como **Dropea** (app de Shopify para España y Portugal) hacen dropshipping contra reembolso sin comprar stock; el transportista cobra al cliente y la plataforma liquida al vendedor. Referencias de un tercero: comisión de COD del 3–5 % (mínimo ~2 €) y liquidación en 5–15 días hábiles. Riesgos: pedidos rechazados en la entrega (pagas ida y vuelta), flujo de caja más lento y saber **si liquidan a un vendedor residente en Ucrania**, que es lo primero que hay que preguntar. Fuentes: https://apps.shopify.com/dropea?locale=es · https://www.andreybusiness.com/blog/seur-espana-dropshipping-contra-entrega-2026 · https://www.shopify.com/es/blog/envio-pago-contrareembolso
+
 **Recomendación:** tomar ahora la decisión de cobro, en paralelo con la validación. Con el plazo del 31-dic, una LLC que tarda 4–6 semanas deja muy poco margen. La opción más rápida para cobrar en diciembre es probablemente un intermediario, mientras se prepara la solución definitiva.
 
 ## 2. Logística: opciones comparadas
