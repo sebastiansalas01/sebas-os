@@ -87,3 +87,37 @@ Validation stages: `idea → research → supplier_screened → landing_ready �
 **Required follow-up in authenticated CJ/BigBuy:** for each exact variant, set ship-from `Spain/Poland/Germany/other EU`, ship-to Spanish postcode, quantity 1; capture SKU, real stock count, seller unit cost, postage, processing + delivery estimate, tax/VAT handling, returns address, supplier terms and screenshot/time. If no EU stock, ask CJ whether they can source or place the SKU in an EU warehouse *without pre-buying stock*. A product being **placeable** into an EU warehouse is a future 3PL option, not stockless fulfillment.
 
 **Provisional sourcing order:** K01 and K08 have the most concrete direct CJ SKUs to check first; K14 has a direct SKU but visible US-origin indication; K10 and K02 require exact-SKU sourcing. This order measures sourcing readiness only, not demand or likely profitability.
+
+## Strategic reprioritization — 2026-11-13 (ChatGPT review of Claude's Spain price check)
+Source: [Claude's price and ad reconnaissance](klimb-price-check.md) in PR #4. Its numbers are **point-in-time reconnaissance reported by Claude**, not independently audited SKU-level profitability or verified live ad counts. Counts depend on search term, country, category and query time. **No winner has been validated.**
+
+### Commercial thesis
+- Optimize for **bundled perceived value and contribution margin**, not a forced retail price. **EUR 45–60+ AOV is a test hypothesis**, not a minimum eligibility gate. At EUR 15,000 gross/month: EUR 25 AOV = 600 orders/month (~20/day); EUR 45 = 334/month (~11.1/day); EUR 60 = 250/month (~8.3/day). Revenue excludes refunds; contribution economics still need validation.
+- Prioritize offers that solve a complete problem (kit) over generic single items that compete with Action/Amazon/AliExpress on price. Price anchors reported in the check: K01 Amazon gel EUR 6.80, K08 Action EUR 4.99, K10 AliExpress ES EUR 8.84, K14 20-pack ManoMano EUR 26; compare like-for-like quantity and quality.
+- **K01 deprioritized**, not discarded: ~140 Meta ad search results reported, saturated low-price alternatives; only reconsider with differentiated material/demo, bundle and viable economics. **K08 deprioritized** for commoditization plus EU electrical compliance. Ad longevity is not proof of ROAS.
+- COD (contra reembolso) is a **payments/fulfillment research branch**, not a confirmed route: verify courier/3PL eligibility for seller entity, cash settlement bank/country, remittance timing, failed-delivery/returns fees, fraud, VAT and customer rights. Never enable COD without end-to-end confirmation and owner's approval.
+
+### New investigation order (business priority, not supplier listing readiness)
+1. **K10 — kit de limpieza con cepillos de taladro + extensión + accesorios** (hypothetical EUR 45–59). Verify complete kit, compatibility, safety and packaging. Low reported ad density is **not** proof of demand.
+2. **K14 — kit de renovación de salpicadero con azulejos adhesivos por superficie cubierta** (hypothetical EUR 49–79). Show exact coverage, substrate/adhesion, cost per square meter, returns and shipping.
+3. **K02 — kit de enriquecimiento canino: alfombra olfativa + juguete dispensador + guía** (hypothetical EUR 45–65). Safety, washable materials and value versus cheap alternatives.
+4. **K01 — quitapelos en kit premium**, conditional research only (hypothetical EUR 45–59; *low confidence*).
+5. **K08 — iluminación modular de armario (pack)**, conditional research only (hypothetical EUR 45–69; *low confidence*, compliance-heavy).
+
+### Five additional hypotheses (K21–K25, NOT validated or supplier-sourced)
+| ID | Concept / niche | Hypothetical bundled retail EUR | Demo angle | Main risks / source status |
+|---|---|---:|---|---|
+| K21 | Kit premium de limpieza de juntas y rincones (cepillos, extensión, accesorios) / hogar | 45–65 | Antes/después de juntas y superficies | Overlaps K10; confirm differentiation, surface damage, exact suppliers; **no evidence or EU stock verified** |
+| K22 | Kit de organización bajo fregadero (bandejas extraíbles + separadores) / hogar | 49–79 | Antes/después de armario caótico | Size fit, weight, shipping/returns; **no evidence or EU stock verified** |
+| K23 | Kit de limpieza interior de coche (cepillos + accesorios de detailing) / automóvil | 49–79 | Limpieza de asientos, ranuras y alfombrillas | Tool compatibility, safe materials, category competition; **no evidence or EU stock verified** |
+| K24 | Kit de jardinería vertical para balcón (bolsillos + fijación + riego manual) / hogar | 49–89 | Transformación de balcón pequeño | Seasonal, weather, mounting and bulky freight; **no evidence or EU stock verified** |
+| K25 | Kit de organización de maletero modular (organizador plegable + fijaciones) / automóvil | 45–75 | Maletero antes/después y uso práctico | Commodity competition, dimensions, shipping; **no evidence or EU stock verified** |
+
+**Do not import K21–K25 as validated, scored, sourced or ad-tested.** Import as `idea`, `evidence:[]`, `supplierVerified:false`, `economics:null`, `scores:null`. These are **offer concepts**; actual bundle compatibility, SKU-level availability, margins and claims remain to be checked.
+
+### Evidence and next steps
+1. For K10/K14/K02: compare 3 real independent Spanish sellers, actual bundle contents, price including delivery, returns and dated listings. Do not compare an individual brush with a full 22-piece kit as equivalent.
+2. Find at least 2 candidate suppliers and verify **EU dispatch for exact bundle components**, quantities, packaging, landed cost and Spain delivery SLA; a supplier product page alone is not proof of EU stock.
+3. Check Meta Ad Library Spain and TikTok Creative Center for the **bundle offer** and hooks, not just broad product category; record URLs/advertiser/date. Current counts are provisional notes from Claude.
+4. Calculate contribution after VAT, COGS, shipping, packaging, fees, refunds and estimated acquisition; determine allowable CPA and required conversion. Reject if contribution cannot support acquisition at plausible traffic costs.
+5. Build honest waitlist smoke test only after evidence and legal/privacy/measurement gates; no preorders, payments, paid ads or stock without Sebastián's approval.
