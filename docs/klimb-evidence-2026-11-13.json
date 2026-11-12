@@ -1,0 +1,170 @@
+{
+ "version": 1,
+ "market": {
+  "country": "ES",
+  "confirmed": false
+ },
+ "merchant": {
+  "paymentRoute": null,
+  "entity": null
+ },
+ "products": [
+  {
+   "id": "K01",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.chollometro.com/ofertas/rodillo-quitapelos-reutilizable-de-gel-para-mascotas-lavable-sin-recambios-adhesivos-elimina-pelos-de-perros-y-gatos-1944008",
+     "price": 6.8,
+     "note": "Rodillo de gel reutilizable en Amazon.es, oferta 6,80 € (antes 9,61 €). Visto vía Chollometro.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3224224/rodillo-quitapelusas-para-la-ropa/",
+     "price": 0.99,
+     "note": "Action ES: rodillo adhesivo (no reutilizable) a 0,99 €. Ancla de precio muy baja para la categoría.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.ebay.es/itm/298317103488",
+     "price": 32.37,
+     "note": "eBay.es: rodillo autolimpiante ~32 € (precio alto, marca no indicada).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "search_intent",
+     "url": "https://www.cronista.com/espana/actualidad-es/este-rodillo-quitapelos-de-mascotas-es-mejor-que-un-aspirador-y-lo-puedes-conseguir-en-amazon",
+     "price": null,
+     "note": "Prensa ES: un quitapelos de Amazon (Ace2Ace) tiene más de 80.000 valoraciones. Indica demanda de categoría y competencia fuerte; no es demanda del SKU.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  },
+  {
+   "id": "K02",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.mediamarkt.es/eu/product/_alfombra-olfativa-de-tela-thekingpet-tkp-ao-01-para-perro-amarillorojo-170278683.html",
+     "price": 26.99,
+     "note": "MediaMarkt ES (marketplace): alfombra olfativa TheKingPet 26,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3213935/alfombrilla-de-recompensa-beasty/",
+     "price": 1.99,
+     "note": "Action ES: alfombrilla de recompensa a 1,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  },
+  {
+   "id": "K08",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3221709/iluminacion-de-armario-con-sensor-de-movimiento/",
+     "price": 4.99,
+     "note": "Action ES: luz de armario con sensor, 30 cm, USB-C, 4,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/2-luces-led-con-sensor-de-movimiento-para-interiores-20-cm-3-modos-barra-de-luz-nocturna-inalambrica-para-armario-cocina-escalera-pasillo-armario-clase-energetica-g-88587369",
+     "price": 24.46,
+     "note": "ManoMano ES: pack de 2 luces con sensor 20 cm, 24,46 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  },
+  {
+   "id": "K10",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.chollometro.com/ofertas/kit-de-3-cepillos-electricos-para-taladro-cepillo-de-limpieza-potente-para-alfombras-bano-superficies-banera-muebles-ducha-azulejos-2022942",
+     "price": 8.84,
+     "note": "AliExpress con envío desde España: kit de 3 cepillos a 8,84 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/kit-de-accesorios-de-4-piezas-con-cepillo-para-taladro-para-la-limpieza-electrica-de-banos-azulejos-piscinas-cocinas-automoviles-y-alfombras-kzq-216084851",
+     "price": 20.11,
+     "note": "ManoMano ES: kit de 4 cepillos, 20,11 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/cepillo-de-taladro-electrico-para-taladro-kit-de-limpieza-de-cepillo-de-fregado-para-coche-para-alfombras-de-bano-de-coche-22-piezas-22-piezas-90921241",
+     "price": 36.84,
+     "note": "ManoMano ES: kit de 22 piezas con extensión, 36,84 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  },
+  {
+   "id": "K14",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/20-pegatinas-adhesivas-para-salpicadero-de-cocina-20-x-20-cm-de-marmol-dorado-para-pared-xu-para-azulejos-de-cocina-y-bano-de-pvc-20-unidades-kzq-91869651",
+     "price": 26.0,
+     "note": "ManoMano ES: 20 adhesivos 20×20 cm, 26,00 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.xatakahome.com/a-fondo/10-opciones-baratas-para-decoracion-tus-paredes-no-quieres-hacer-obra-virtud-azulejos-vinilicos",
+     "price": 13.99,
+     "note": "Xataka Home: 40 adhesivos 10×10 cm en Amazon a 13,99 € (otro lote a 23,99 €).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "search_intent",
+     "url": "https://www.diezminutos.es/hogar-decoracion/a70045895/reformar-cocina-sin-obras-azulejos-adhesivos/",
+     "price": null,
+     "note": "Prensa ES 2026: los azulejos adhesivos aparecen como tendencia de decoración sin obra. Señal de interés de categoría.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  }
+ ],
+ "experiments": []
+}
