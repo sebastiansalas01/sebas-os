@@ -4,20 +4,23 @@
   const TARGET_DAY='2026-12-31',START_DAY='2026-11-13',TARGET_EUR=15000,PAYMENT_LEAD_DAYS=42;
   const STATUSES=['idea','research','supplier_screened','landing_ready','organic_signal','paid_test_approved','validated','inconclusive','rejected'];
   const EVIDENCE_TYPES=['search_intent','competitor_listing','ad_library','supplier_listing','category_reference','retail_example','customer_feedback'];
-  // Research backlog v0.1 from docs/klimb-candidates.md (ChatGPT, 2026-11-13). Hypotheses only: no scores, supplier or economics.
+  // Research backlog from docs/klimb-candidates.md (ChatGPT, 2026-11-13, reprioritized toward 45–60+ EUR bundles in a71ae08).
+  // Hypotheses only: no scores, supplier or economics. Price ranges are hypothetical bundle prices, not observed prices.
   const CANDIDATES=[
-    ['K01','Rodillo reutilizable quitapelos','Mascotas/hogar',[24,39],1],['K02','Alfombra olfativa para perros','Mascotas',[25,45],4],
+    ['K01','Quitapelos en kit premium (baja confianza)','Mascotas/hogar',[45,59],4],['K02','Kit de enriquecimiento canino: alfombra olfativa + juguete dispensador + guía','Mascotas',[45,65],3],
     ['K03','Comedero lento para perros','Mascotas',[24,39]],['K04','Botella de agua portátil para perros','Mascotas/viajes',[24,39]],
     ['K05','Bolsas higiénicas para mascotas (packs)','Mascotas',[19,29]],['K06','Juguete de olfato interactivo','Mascotas',[25,49]],
-    ['K07','Arnés ajustable para perro','Mascotas',[29,49]],['K08','Luz LED con sensor para armarios','Organización hogar',[24,44],2],
-    ['K09','Organizador de zapatos modular','Organización hogar',[29,59]],['K10','Cepillo de taladro para limpieza','Limpieza hogar',[24,39],3],
+    ['K07','Arnés ajustable para perro','Mascotas',[29,49]],['K08','Iluminación modular de armario en pack (baja confianza)','Organización hogar',[45,69],5],
+    ['K09','Organizador de zapatos modular','Organización hogar',[29,59]],['K10','Kit de limpieza con cepillos de taladro + extensión + accesorios','Limpieza hogar',[45,59],1],
     ['K11','Protector de desagüe de silicona','Limpieza hogar',[19,29]],['K12','Mosquitera magnética para puerta','Hogar',[29,49]],
-    ['K13','Filtro de agua de línea','Hogar',[39,79]],['K14','Baldosas decorativas autoadhesivas','Decoración',[29,59],5],
+    ['K13','Filtro de agua de línea','Hogar',[39,79]],['K14','Kit de renovación de salpicadero con azulejos adhesivos (por superficie)','Decoración',[49,79],2],
     ['K15','Flores artificiales decorativas','Decoración',[24,49]],['K16','Juego de ropa de cama','Hogar',[49,89]],
     ['K17','Bandas de resistencia (set)','Fitness',[24,44]],['K18','Accesorios reflectantes de ciclismo','Ciclismo',[24,44]],
-    ['K19','Bolso satchel compacto','Moda/accesorios',[39,79]],['K20','Kit de manualidades con tela imprimible','DIY/manualidades',[29,59]]
+    ['K19','Bolso satchel compacto','Moda/accesorios',[39,79]],['K20','Kit de manualidades con tela imprimible','DIY/manualidades',[29,59]],
+    ['K21','Kit premium de limpieza de juntas y rincones','Hogar',[45,65]],['K22','Kit de organización bajo fregadero','Hogar',[49,79]],['K23','Kit de limpieza interior de coche','Automóvil',[49,79]],
+    ['K24','Kit de jardinería vertical para balcón','Hogar',[49,89]],['K25','Kit de organización de maletero modular','Automóvil',[45,75]]
   ].map(([id,name,niche,range,focus])=>({id,name,niche,status:'idea',focus:focus||null,hypotheticalRetailRangeEUR:range,supplierVerified:false,scores:null,economics:null,evidence:[],suppliers:[],offer:null,landing:null,notes:''}));
-  const SEARCH_TERMS={K01:['quitapelos mascotas','rodillo quitapelos reutilizable'],K02:['alfombra olfativa perro'],K08:['luz sensor armario','luz led movimiento armario'],K10:['cepillo taladro limpieza','kit cepillos limpieza taladro'],K14:['azulejos adhesivos cocina']};
+  const SEARCH_TERMS={K01:['quitapelos mascotas','kit quitapelos'],K02:['alfombra olfativa perro','juguete dispensador perro'],K08:['luz sensor armario','pack luces armario'],K10:['kit cepillos taladro limpieza','cepillo taladro extensión'],K14:['azulejos adhesivos cocina','salpicadero adhesivo'],K21:['limpiar juntas azulejos'],K22:['organizador bajo fregadero'],K23:['kit limpieza interior coche'],K24:['jardín vertical balcón'],K25:['organizador maletero']};
   function seed(){return {version:1,market:{country:'ES',confirmed:false},merchant:{paymentRoute:null,entity:null,eligibilityVerified:false,onboardingDone:false,gatewayActive:false,testChargeRefunded:false},products:CANDIDATES.map(p=>JSON.parse(JSON.stringify(p))),experiments:[]}}
   function normalize(state){const base=seed();if(!state||typeof state!=='object'||state.version!==1)return base;
     const known=new Map((Array.isArray(state.products)?state.products:[]).filter(p=>p&&typeof p.id==='string').map(p=>[p.id,p]));

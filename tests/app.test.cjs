@@ -110,7 +110,7 @@ app.ctx.document.addEventListener=(name,handler)=>events.push({name,handler});ap
 test('KLIMB command centre shows one next action, the payment decision and escapes stored evidence',()=>{
  const app=boot();app.run("view('proyectos')");let html=app.element('app').innerHTML;
  assert.match(html,/KLIMB · CENTRO DE MANDO/);assert.match(html,/¿Cómo vas a cobrar\?/);assert.match(html,/MERCADO PROVISIONAL: ESPAÑA/);assert.match(html,/Estudio de vídeo y sprint anterior/);
- app.run("klimbSetPayment('intermediario')");html=app.element('app').innerHTML;assert.match(html,/Vía elegida: <strong>intermediario/);assert.match(html,/K01 · Rodillo/);
+ app.run("klimbSetPayment('intermediario')");html=app.element('app').innerHTML;assert.match(html,/Vía elegida: <strong>intermediario/);assert.match(html,/K10 · Kit de limpieza/);
  const evil={version:1,products:[{id:'K01',status:'research',evidence:[{type:'competitor_listing',url:'https://x.es/"><script>alert(1)</script>',note:'<img src=x onerror=alert(1)>',observedAt:'2026-11-13'}]}],merchant:{paymentRoute:'x'}};
  const next=boot({sebasKlimb:JSON.stringify(evil)});next.run("klimbOpenProduct='K01';view('proyectos')");html=next.element('app').innerHTML;assert.ok(!html.includes('<script>alert'));assert.ok(!html.includes('<img src=x'));
 });
