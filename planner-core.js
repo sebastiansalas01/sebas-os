@@ -13,25 +13,40 @@
       {id:'lectura',name:'Lectura · 30 min',start:510,duration:30},
       {id:'desayuno',name:'Desayuno',start:550,duration:40,tab:'comidas'},
       {id:'ducha',name:'Ducha y preparación',start:600,duration:25},
-      {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:120,tab:'proyectos'},
-      {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:120,tab:'proyectos'},
-      {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos'},
+      {id:'klimb',name:'KLIMB · investigar productos y mercado',start:630,duration:120,tab:'proyectos',flexible:true},
+      {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:120,tab:'proyectos',flexible:true},
+      {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos',flexible:true},
       {id:'descanso',name:'Desconexión',start:1320,duration:90},
       {id:'dormir',name:'Dormir',start:1410,duration:30,priority:20}
     ];
     if([1,3,5].includes(weekday))list.push({id:'ingles',name:'Preply · sesión objetivo (confirmar reserva)',start:900,duration:60,tab:'learning'});
     else list.push({id:'ingles',name:'Inglés · práctica y conversación',start:900,duration:60,tab:'learning'});
     // Sábado y domingo conservan la misma intensidad de trabajo y aprendizaje.
-    const life=root.SebasLife;
-    if(life){const meals=life.mealSchedule(options.busyEvents||[],now,options.mealDate===C.day(now)?options.mealTimes||{}:{});
+    // Meals are planned around fixed habits, English and real calendar events; flexible KLIMB blocks are then
+    // split around meals so nothing overlaps (meals and events are never hidden or moved silently).
+    const life=root.SebasLife,events=options.busyEvents||[];
+    if(life){const override=options.mealDate===C.day(now)?options.mealTimes||{}:{},around=life.mealSchedule([...events,...asEvents(list,now)],now,override),carved=life.mealSchedule([...events,...asEvents(list.filter(x=>!x.flexible),now)],now,override);
+      // Prefer meal times that leave deep-work blocks intact; only main meals may split a KLIMB block when no gap exists.
+      const all=life.intervals([...events,...asEvents(list,now)],now),meals={snackam:around.snackam||life.slot(all,660,10,780,0)||carved.snackam,snackpm:around.snackpm||carved.snackpm,lunch:around.lunch||carved.lunch,dinner:around.dinner||carved.dinner};
       for(const [id,type,label] of [['almuerzo','lunch','Almuerzo'],['snackam','snackam','Snack de mañana'],['snackpm','snackpm','Snack de tarde'],['cena','dinner','Cena']]){
         const slot=meals[type];if(slot)list.push({id,name:label,start:slot.start,duration:slot.end-slot.start,tab:'comidas',priority:2});
       }
     }
-    return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
+    const blockers=[...list.filter(x=>!x.flexible).map(x=>({start:x.start,end:x.start+x.duration})),...(life?life.intervals(events,now):[])];
+    const out=[];for(const x of list){if(!x.flexible){out.push(x);continue}out.push(...carve(x,blockers))}
+    return out.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
   }
+  // Convert routine rows to ISO events on the same Kyiv day, so SebasLife can treat them as busy time.
+  function asEvents(rows,now){const stamp=Date.parse(C.day(now)+'T12:00:00Z');return rows.map(x=>{const start=stamp+(x.start-minute(stamp))*60000;return {name:'Rutina · '+x.id,start:new Date(start).toISOString(),end:new Date(start+x.duration*60000).toISOString()}})}
+  // Split a flexible block around busy intervals. Pieces shorter than 20 minutes are dropped; extra pieces get a stable suffix.
+  function carve(block,busy){let pieces=[{start:block.start,end:block.start+block.duration}];
+    for(const b of busy){pieces=pieces.flatMap(p=>b.end<=p.start||b.start>=p.end?[p]:[{start:p.start,end:Math.max(p.start,b.start)},{start:Math.min(p.end,b.end),end:p.end}])}
+    pieces=pieces.filter(p=>p.end-p.start>=20);const split=pieces.length!==1||pieces[0].start!==block.start||pieces[0].end!==block.start+block.duration;
+    return pieces.map((p,i)=>({...block,id:i?block.id+'-'+(i+1):block.id,start:p.start,duration:p.end-p.start,...(split?{split:true}:{})}))}
+  const FOUNDER_START='2026-11-14';
+  function founderDay(day){return day>=FOUNDER_START}
   function routine(now=Date.now(),options={}){
-    if(C.day(now)>='2026-11-14')return founderRoutine(now,options);
+    if(founderDay(C.day(now)))return founderRoutine(now,options);
     const weekend=[0,6].includes(C.weekday(now));const gym=[30,40,45,60].includes(options.gym)?options.gym:40;
 
     const starts=options.starts||{},weekday=C.weekday(now),early=weekday===(options.englishWeekday??3);
@@ -58,7 +73,7 @@
     return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
   }
   function agenda(events,now=Date.now(),options={}){
-    const currentDay=C.day(now);const calendar=events.filter(e=>!e.allDay&&Number.isFinite(Date.parse(e.end))&&C.onDay(e,currentDay)).map(e=>({id:C.eventKey(e),event:e,name:e.name,start:C.day(Date.parse(e.start))<currentDay?0:minute(Date.parse(e.start)),end:C.day(Date.parse(e.end))>currentDay?1440:minute(Date.parse(e.end)),kind:'event',tab:'impulso'})).filter(e=>e.end>e.start);
+    const currentDay=C.day(now);const calendar=events.filter(e=>!e.allDay&&Number.isFinite(Date.parse(e.end))&&C.onDay(e,currentDay)).map(e=>({id:C.eventKey(e),event:e,name:e.name,start:C.day(Date.parse(e.start))<currentDay?0:minute(Date.parse(e.start)),end:C.day(Date.parse(e.end))>currentDay?1440:minute(Date.parse(e.end)),kind:'event',tab:founderDay(currentDay)?'calendario':'impulso'})).filter(e=>e.end>e.start);
     // A real event replaces overlapping suggested routine slots, but remains visible in the agenda.
     const plan=routine(now,{...options,busyEvents:options.busyEvents||events}).filter(s=>!calendar.some(e=>e.start<s.end&&e.end>s.start&&true));
     return [...plan,...calendar].sort((a,b)=>a.start-b.start||Number(b.kind==='event')-Number(a.kind==='event'));
@@ -68,7 +83,7 @@
     let current=eligible.filter(x=>x.start<=m&&x.end>m).sort((a,b)=>((b.kind==='event'?10:b.priority||0)-(a.kind==='event'?10:a.priority||0)))[0]||null;
     if(active)current={id:active.id,name:options.names?.[active.id]||active.id,kind:'active',start:minute(active.start),duration:options.goals?.[active.id]||30};
     let next=eligible.find(x=>x.start>m&&x.id!==current?.id)||null;if(!next){const tomorrow=C.boundary(now);next=agenda(events,tomorrow,options)[0]||null;if(next)next={...next,dayOffset:1}}
-    if(!current){const gap=next?Math.max(0,next.start-m):30;const rest=m<420||m>=1380;const completedCalls=items.filter(x=>x.kind==='event'&&x.end<=m&&/venta|llamada|sesión|sesion|closing/i.test(x.name)).length;const followDone=!!done.seguimientos;const recommendation=rest?'Descanso':completedCalls>=2&&gap>=25?'Descansa 20 minutos':!followDone&&gap>=30?'Seguimientos prioritarios · 30 min':gap>=60?'KLIMB · avanzar proyecto':gap>=20?'Preparar siguiente compromiso':'Tiempo disponible';current={id:rest?'descanso':'libre',name:recommendation,kind:'free',start:m,end:m+gap,duration:gap};}
+    if(!current){const gap=next?Math.max(0,next.start-m):30;const rest=m<420||m>=1380;const completedCalls=items.filter(x=>x.kind==='event'&&x.end<=m&&/venta|llamada|sesión|sesion|closing/i.test(x.name)).length;const followDone=!!done.seguimientos;const founder=founderDay(C.day(now)),klimbNext=founder&&options.klimbNext?.title?'KLIMB · '+options.klimbNext.title:'KLIMB · siguiente paso del sprint';const recommendation=rest?'Descanso':founder?(gap>=20?klimbNext:'Tiempo disponible'):completedCalls>=2&&gap>=25?'Descansa 20 minutos':!followDone&&gap>=30?'Seguimientos prioritarios · 30 min':gap>=60?'KLIMB · avanzar proyecto':gap>=20?'Preparar siguiente compromiso':'Tiempo disponible';current={id:rest?'descanso':'libre',name:recommendation,kind:'free',start:m,end:m+gap,duration:gap};}
     return {current,next,items,minute:m};
   }
   const EXERCISES=[
