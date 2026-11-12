@@ -1,0 +1,34 @@
+# KLIMB — Mission Control (source of truth)
+Updated: 2026-11-12. Owner: Sebastián Salas.
+## North star
+Build a direct-to-consumer e-commerce business targeting **EUR 15,000 in monthly gross revenue run rate by 2026-12-27** (45-day sprint). This is an ambitious target, not a forecast or guarantee. Distinguish revenue, collected cash, contribution margin and net profit. No advertising spend, purchases, publication or destructive changes without owner approval.
+## Strategy from Richard Cichero mentoring, Nov 10 (157 min)
+Research niches, competitor ads, product demand, suppliers, landed costs, delivery, gross margins and product/market fit before overbuilding. Select 1–2 candidate products. Create a minimal Shopify/landing funnel with clear offer and tracking. Produce three AI video ads for e-commerce products, test hooks, storytelling, problem/solution, realism, and record production costs and revisions. Additionally produce three videos for online experts as learning/portfolio, subordinate to e-commerce validation. Validate with low-budget tests only after explicit approval; mentor discussed approximately USD 10/day as an example, not a commitment. Share creative work with Richard for feedback when appropriate. Do not overbuild a product-research app before validating a product.
+## 45-day phases
+- Days 1–7 (Nov 13–19): research 15–25 product candidates; compare 5 finalists on demand evidence, competitive differentiation, landed cost, fulfillment risk, gross margin, ad suitability; choose 1–2.
+- Days 8–14 (Nov 20–26): supplier due diligence; economics and pricing; landing/store MVP, analytics and consent-compliant tracking; 3 creative angles, checkout/payment readiness.
+- Days 15–21 (Nov 27–Dec 3): QA funnel; create 3 e-commerce AI ads; test organically or with owner-approved ad budget; log impressions, CTR, CPC, add-to-cart, checkout, conversion, CPA and contribution margin.
+- Days 22–30 (Dec 4–12): improve offer/landing/creative based on observed data; kill weak hypotheses; resolve fulfillment and support.
+- Days 31–45 (Dec 13–27): concentrate on validated winner, increase budget only if economics and cash risk permit; monitor returns/refunds and delivery.
+## Revenue math (illustrative, not projections)
+EUR 15,000/month = EUR 500/day. At EUR 50 AOV: 300 orders/month (~10/day). At EUR 75 AOV: 200 orders/month (~6.7/day). At EUR 100 AOV: 150 orders/month (~5/day). Monitor contribution margin per order after product, fulfillment, processing, returns and acquisition; revenue alone is insufficient.
+## SEBAS OS application priorities
+1. Founder command center: one next action, measurable daily output, 45-day progress, blockers, actual metrics and next decision.
+2. Product research pipeline: candidate scoring with evidence links and explicit go/no-go gates.
+3. Landing/store production: templates, copy, offer, assets, checkout, analytics, conversion experiments.
+4. Creative production: six video exercises, hooks, storyboard, variants, costs, feedback and outcomes.
+5. Funnel dashboard: traffic, add-to-cart, checkout, conversion, AOV, CAC/CPA, contribution margin, refunds; do not fabricate metrics.
+6. Habits and schedule: from Sat Nov 14, 07:00 wake, 10m prayer, 45m exercise, 30m reading, breakfast 40m, English 60m/day, deep-work KLIMB every day including Sat/Sun, mentorships from actual connected calendar. Preply 3x/week as goals, not fictitious bookings. Kyiv timezone.
+7. Google Calendar remains connected. Legacy Impulso Slack recap sync disabled; closing optional and reusable. Discord mentor events only when legitimately integrated.
+8. Minimal manual entry, premium mobile-first UI, safe data persistence and clear connected/disconnected states.
+## Working agreement: ChatGPT + Claude Code
+Shared source of truth is this GitHub repository, NOT the chat histories. Claude Code and ChatGPT are not directly connected. Claude should audit, design, implement and test on feature branches, open pull requests; ChatGPT reviews business logic, user requirements, data integrity, integrations, QA and may implement scoped changes. Avoid editing same files concurrently. Protect secrets, OAuth credentials, and private customer data; never copy Impulso leads or internal data into KLIMB. No claims of deployment or live integration without verification.
+## Immediate engineering backlog
+P0: QA current routine for overlap (meal slots vs KLIMB blocks), remove legacy Impulso from active daily planning, ensure 07:00 Kyiv consistent and weekend intensity maintained.
+P0: Simplify Projects screen, replace legacy clutter with product pipeline + next-action cards.
+P0: Add product scorecard and funnel economics with explicit source evidence and no fake numbers.
+P1: Landing builder/checklist and conversion tracking; exportable briefs for Shopify or landing tool.
+P1: Mentor events integration via Google Calendar/Discord authorized channel; three weekly Preply goals.
+P1: Persistent cloud sync for project goals; current browser local storage alone is not cross-device sync.
+## Decision rules
+Do not build an elaborate SaaS research tool until the first product is tested. Do not increase ad spend without verified positive contribution margin and explicit owner authorization. Flag assumptions and missing evidence. Preserve existing historical data.
