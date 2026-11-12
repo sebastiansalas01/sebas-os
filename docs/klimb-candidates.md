@@ -6,7 +6,7 @@ Created 2026-11-13. Target: EUR 15,000/month gross revenue run rate by **2026-12
 - Sources below establish that a **product type exists** or that Shopify reports activity in a **broad category**. They do **not** establish demand, profitability, market fit, supplier reliability, availability, or sales for a particular SKU in Sebastián's target country.
 - All EUR prices below are **hypothesized test retail-price ranges**, not observed prices or supplier quotations. Actual COGS, shipping, taxes, fees and contribution margin: **unknown**.
 - "Supplier" is explicitly unverified. An example retailer or manufacturer is **not** a dropshipping supplier. No manufacturer/supplier has been contacted.
-- Market/country, language, fulfillment jurisdiction and channel must be decided before any product gets a go/no-go verdict. Do not calculate scores from category-level evidence alone.
+- Initial market hypothesis: **Spain first** (Spanish-language DTC), with Germany and France as comparators; US deferred. Confirm SKU-specific unit economics, reliable Spain delivery, legal compliance and supplier quality before any go/no-go verdict. Do not calculate scores from category-level evidence alone.
 - Research references: Shopify 2026 dropshipping product taxonomy https://www.shopify.com/blog/best-dropshipping-products ; Shopify 2026 merchant category trends https://www.shopify.com/blog/trending-products . Sources may cover US merchants and may not generalize to Spain/EU.
 
 ## Candidate table
@@ -53,7 +53,7 @@ Created 2026-11-13. Target: EUR 15,000/month gross revenue run rate by **2026-12
 Each row is `status: idea`, `scores: null`, `economics: null`, `supplierVerified: false`, `evidence: [{type: 'category_reference'|'retail_example', url, observedAt: '2026-11-13', claimScope: 'category_or_example_only'}]`. **Never treat this initial source as independent evidence of product demand.** Price is `hypotheticalRetailRangeEUR`, not an observed price. Stable IDs K01–K20. Product-specific validation follows.
 
 ## Next business action
-Confirm initial selling market and fulfillment model with Sebastián, then research **K01, K08, K10, K02, K14** deeply before expanding. Source and price every competitor/supplier; only then score and shortlist 1–2. Prioritize launching a landing for the first viable product, not building more app infrastructure.
+Use Spain as the provisional selling market; verify Spain/EU fulfillment and consumer-rights compliance, then research **K01, K08, K10, K02, K14** deeply before expanding. Source and price every competitor/supplier; only then score and shortlist 1–2. Prioritize launching a landing for the first viable product, not building more app infrastructure.
 
 ## Spain-first research protocol (provisional, 2026-11-13)
 **Market hypothesis: Spain for initial validation, EU later.** This is ChatGPT's provisional recommendation, not owner-confirmed. Shopify merchant documentation lists pet hair removers, slow feeders, snuffle mats, motion sensors, drill brushes and shoe storage among product categories to investigate; **category inclusion is not proof of SKU demand**: https://www.shopify.com/blog/best-dropshipping-products .
