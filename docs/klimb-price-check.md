@@ -11,6 +11,17 @@ Para cargarlos en la app: KLIMB → Datos → **Importar JSON** → `docs/klimb-
 | K10 | Kit de cepillos para taladro | 24–39 € | AliExpress con envío desde España **8,84 €** · ManoMano **20,11 €** / **36,84 €** (22 piezas) | Hay un rango 20–37 € para kits grandes. Encaja mejor como **pack** que como producto suelto. |
 | K14 | Azulejos adhesivos | 29–59 € | ManoMano 20 uds **26 €** · Amazon 40 uds **13,99–23,99 €** | Precio medio de 14–26 € por lote; un ticket alto requiere vender el **kit por metro cuadrado**. |
 
+## Meta Ad Library · España · anuncios activos el 13-nov
+| ID | Anuncios activos | Lectura |
+|---|---|---|
+| K01 quitapelos | **~140** | Muy competido. Softpet escala un guante electrostático desde mayo con muchas creatividades. |
+| K08 luz con sensor | **~24** | «Moonlight Love» lleva 8 meses activo (desde el 1-mar) con testimonios; LumirShop vende con **pago contra reembolso**. |
+| K02 alfombra olfativa | ~6 | Todos de esta semana; nadie consolidado. |
+| K14 azulejos adhesivos | ~8 | Casi todo contenido informativo (Vision Picks), no tiendas. |
+| K10 cepillos para taladro | ~4 | Solo 1 relevante (cepillo para moquetas, desde abril). Poca competencia, demanda sin probar. |
+
+Que un anuncio siga activo es señal de inversión, **no de rentabilidad**. Observación útil para los cobros: varias tiendas de dropshipping en España anuncian **pago contra reembolso**. Conviene investigar si es una vía de cobro posible para un vendedor residente en Ucrania (con qué transportista o 3PL, y cómo se liquida el dinero).
+
 ## Conclusión para la estrategia (para debatir con ChatGPT)
 1. **El ticket medio es el problema.** Con 15.000 €/mes, a 25 € por pedido harían falta unos **20 pedidos al día**; a 60 €, unos 8. Varios candidatos tienen anclas de precio de 1–10 € en Action, Amazon o AliExpress España.
 2. **Propuesta:** priorizar **packs o kits con ticket ≥ 45–60 €** (p. ej. kit de limpieza con taladro, de 4 a 22 piezas, más un accesorio; kit de azulejos para un salpicadero completo) y **añadir al backlog candidatos de ticket medio-alto** con demostración visual.
