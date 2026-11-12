@@ -54,3 +54,19 @@ Each row is `status: idea`, `scores: null`, `economics: null`, `supplierVerified
 
 ## Next business action
 Confirm initial selling market and fulfillment model with Sebastián, then research **K01, K08, K10, K02, K14** deeply before expanding. Source and price every competitor/supplier; only then score and shortlist 1–2. Prioritize launching a landing for the first viable product, not building more app infrastructure.
+
+## Spain-first research protocol (provisional, 2026-11-13)
+**Market hypothesis: Spain for initial validation, EU later.** This is ChatGPT's provisional recommendation, not owner-confirmed. Shopify merchant documentation lists pet hair removers, slow feeders, snuffle mats, motion sensors, drill brushes and shoe storage among product categories to investigate; **category inclusion is not proof of SKU demand**: https://www.shopify.com/blog/best-dropshipping-products .
+
+### Initial research sequence (no stock)
+- **K01 pet hair remover**: Meta Ad Library ES search terms `quitapelos mascotas`, `rodillo quitapelos reutilizable`; TikTok Top Ads ES pets; compare 3 Spanish retail listings; identify two shipping-to-Spain supplier listings; verify cleaning performance and IP differentiation. Main risk: saturated low-cost substitutes.
+- **K10 drill brush kit**: Meta `cepillo taladro limpieza`, `kit cepillos limpieza taladro`; TikTok ES cleaning; price, bit compatibility, safety and bundling. Main risk: commodity competition.
+- **K02 dog snuffle mat**: Meta `alfombra olfativa perro`; TikTok ES pets; competitor price, washability, fabric safety and fulfillment. Main risk: product safety and differentiation.
+- **K08 sensor cabinet light**: Meta `luz sensor armario`, `luz led movimiento armario`; TikTok ES home; verify battery, EU CE/RoHS/WEEE obligations, returns and warranty. Main risk: compliance and failure rates.
+- **K14 adhesive wall tiles**: Meta `azulejos adhesivos cocina`; TikTok ES decor; test adhesion, real room use, dimensional weight, breakage and refund exposure. Main risk: bulky returns.
+
+Use https://www.facebook.com/ads/library/ (select Spain + All ads) and https://ads.tiktok.com/business/creativecenter/ (filter Spain and relevant industry). Save actual advertiser, creative URL/ID, first-seen date, hook, offer, landing, country, and date checked. **Presence or longevity of an ad is a competition signal, not proof of ROAS, profitability or demand.** TikTok Top Ads is curated/authorized, not an exhaustive ad archive.
+
+Supplier field remains `not verified` until actual product-level supplier URL, dispatch origin, delivery SLA, unit cost, MOQ, return policy and compliance documents are recorded. No product-specific Meta/TikTok ads or supplier quotes have yet been verified in this document. Do not score these as demand evidence.
+
+Validation stages: `idea → research → supplier_screened → landing_ready → organic_signal → paid_test_approved → validated / inconclusive / rejected`. No orders or deposits until supplier and legal checkout are actually operational. See [validation protocol](klimb-validation.md).
