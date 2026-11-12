@@ -11,17 +11,17 @@
       {id:'oracion',name:'Oración',start:440,duration:10},
       {id:'gym',name:'Entrenamiento · 45 min',start:455,duration:gym},
       {id:'lectura',name:'Lectura · 30 min',start:510,duration:30},
-      {id:'desayuno',name:'Desayuno sin prisas',start:550,duration:40,tab:'comidas'},
+      {id:'desayuno',name:'Desayuno',start:550,duration:40,tab:'comidas'},
       {id:'ducha',name:'Ducha y preparación',start:600,duration:25},
       {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:120,tab:'proyectos'},
-      {id:'klimb-build',name:'KLIMB · tienda, oferta y validación',start:780,duration:120,tab:'proyectos'},
+      {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:120,tab:'proyectos'},
       {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos'},
       {id:'descanso',name:'Desconexión',start:1320,duration:90},
       {id:'dormir',name:'Dormir',start:1410,duration:30,priority:20}
     ];
     if([1,3,5].includes(weekday))list.push({id:'ingles',name:'Preply · sesión objetivo (confirmar reserva)',start:900,duration:60,tab:'learning'});
     else list.push({id:'ingles',name:'Inglés · práctica y conversación',start:900,duration:60,tab:'learning'});
-    if(weekend){const build=list.find(x=>x.id==='klimb-build');build.duration=90;list.find(x=>x.id==='klimb-creative').duration=60}
+    // Sábado y domingo conservan la misma intensidad de trabajo y aprendizaje.
     const life=root.SebasLife;
     if(life){const meals=life.mealSchedule(options.busyEvents||[],now,options.mealDate===C.day(now)?options.mealTimes||{}:{});
       for(const [id,type,label] of [['almuerzo','lunch','Almuerzo'],['snackam','snackam','Snack de mañana'],['snackpm','snackpm','Snack de tarde'],['cena','dinner','Cena']]){
