@@ -24,7 +24,7 @@
     const products=base.products.map(p=>known.has(p.id)?{...p,...known.get(p.id)}:p);for(const [id,p] of known)if(!products.some(x=>x.id===id))products.push({...p,evidence:p.evidence||[],suppliers:p.suppliers||[]});
     for(const p of products){if(!STATUSES.includes(p.status))p.status='idea';p.evidence=Array.isArray(p.evidence)?p.evidence:[];p.suppliers=Array.isArray(p.suppliers)?p.suppliers:[]}
     return {version:1,market:{...base.market,...(state.market||{})},merchant:{...base.merchant,...(state.merchant||{})},products,experiments:Array.isArray(state.experiments)?state.experiments:[]}}
-  function dayNumber(day){return Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(START_DAY+'T12:00:00Z'))/86400000)+1}
+  function dayNumber(day){return Math.max(1,Math.round((Date.parse(day+'T12:00:00Z')-Date.parse(START_DAY+'T12:00:00Z'))/86400000)+1)}
   function daysLeft(day){return Math.max(0,Math.round((Date.parse(TARGET_DAY+'T12:00:00Z')-Date.parse(day+'T12:00:00Z'))/86400000))}
   function validUrl(u){try{const x=new URL(u);return x.protocol==='https:'||x.protocol==='http:'}catch{return false}}
   // Independent evidence: distinct type+host+claim, with a real URL. Category references never count as product demand.
@@ -67,4 +67,4 @@
     if(status==='rejected'&&!String(reason||'').trim())throw Error('Indica el motivo del descarte.');p.status=status;if(reason)p.notes=String(reason).slice(0,300);return s}
   const api={TARGET_DAY,TARGET_EUR,STATUSES,EVIDENCE_TYPES,seed,normalize,dayNumber,daysLeft,evidenceOf,addEvidence,economics,gaps,focusProducts,nextAction,summary,setStatus};
   root.SebasKlimb=api;if(typeof module!=='undefined')module.exports=api;
-})(typeof window!=='undefined'?window:globalThis);
+})(globalThis);

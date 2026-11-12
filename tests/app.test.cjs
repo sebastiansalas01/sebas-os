@@ -9,7 +9,7 @@ function boot(seed={}) {
  const element=id=>{if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',value:'',append(){},setAttribute(){}});return elements.get(id)};
  class FixedDate extends Date{constructor(...args){super(...(args.length?args:['2026-11-09T12:00:00+02:00']))}static now(){return new Date('2026-11-09T12:00:00+02:00').getTime()}}
  const ctx=vm.createContext({URL,URLSearchParams,AbortSignal,Intl,Date:FixedDate,Math,JSON,Number,String,Map,Set,Error,Promise,structuredClone,console,setTimeout(fn){fn()},setInterval(){},clearInterval(){},alert(){},navigator:{},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},document:{visibilityState:'visible',getElementById:element,querySelector:()=>element('header'),querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('new')},window:{}});
- for(const f of ['core.js','planner-core.js','life-core.js','ops-core.js','ops-ui.js','life-ui.js','recap-core.js','recap-ui.js','planner-ui.js','closing-core.js','closing-ui.js','results-core.js','results-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
+ for(const f of ['core.js','planner-core.js','life-core.js','ops-core.js','ops-ui.js','life-ui.js','recap-core.js','recap-ui.js','planner-ui.js','closing-core.js','closing-ui.js','results-core.js','results-ui.js','klimb-core.js','klimb-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
  return {ctx,storage,element,run:s=>vm.runInContext(s,ctx)};
 }
 test('all views render without runtime errors',()=>{
@@ -106,3 +106,12 @@ test('manual refresh opens an explicit ChatGPT request and cannot claim a new Sl
 
 test('return-to-app refresh is installed before a new device is paired',()=>{const app=boot({sebasExternalRecapEnabled:'true'}),events=[];// legacy recaps are opt-in since 8c2bc71
 app.ctx.document.addEventListener=(name,handler)=>events.push({name,handler});app.run('initRecapSync()');assert.equal(app.run('recapDevice'),null);assert.ok(events.some(x=>x.name==='visibilitychange'&&x.handler.toString().includes('syncRecaps')))});
+
+test('KLIMB command centre shows one next action, the payment decision and escapes stored evidence',()=>{
+ const app=boot();app.run("view('proyectos')");let html=app.element('app').innerHTML;
+ assert.match(html,/KLIMB · CENTRO DE MANDO/);assert.match(html,/¿Cómo vas a cobrar\?/);assert.match(html,/MERCADO PROVISIONAL: ESPAÑA/);assert.match(html,/Estudio de vídeo y sprint anterior/);
+ app.run("klimbSetPayment('intermediario')");html=app.element('app').innerHTML;assert.match(html,/Vía elegida: <strong>intermediario/);assert.match(html,/K01 · Rodillo/);
+ const evil={version:1,products:[{id:'K01',status:'research',evidence:[{type:'competitor_listing',url:'https://x.es/"><script>alert(1)</script>',note:'<img src=x onerror=alert(1)>',observedAt:'2026-11-13'}]}],merchant:{paymentRoute:'x'}};
+ const next=boot({sebasKlimb:JSON.stringify(evil)});next.run("klimbOpenProduct='K01';view('proyectos')");html=next.element('app').innerHTML;assert.ok(!html.includes('<script>alert'));assert.ok(!html.includes('<img src=x'));
+});
+test('home shows the KLIMB next step card linked to Projects',()=>{const app=boot();app.run("view('hoy')");assert.match(app.element('app').innerHTML,/klimb-next/)});
