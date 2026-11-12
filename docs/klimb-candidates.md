@@ -6,7 +6,7 @@ Created 2026-11-13. Target: EUR 15,000/month gross revenue run rate by **2026-12
 - Sources below establish that a **product type exists** or that Shopify reports activity in a **broad category**. They do **not** establish demand, profitability, market fit, supplier reliability, availability, or sales for a particular SKU in Sebastián's target country.
 - All EUR prices below are **hypothesized test retail-price ranges**, not observed prices or supplier quotations. Actual COGS, shipping, taxes, fees and contribution margin: **unknown**.
 - "Supplier" is explicitly unverified. An example retailer or manufacturer is **not** a dropshipping supplier. No manufacturer/supplier has been contacted.
-- Market/country, language, fulfillment jurisdiction and channel must be decided before any product gets a go/no-go verdict. Do not calculate scores from category-level evidence alone.
+- Initial market hypothesis: **Spain first** (Spanish-language DTC), with Germany and France as comparators; US deferred. Confirm SKU-specific unit economics, reliable Spain delivery, legal compliance and supplier quality before any go/no-go verdict. Do not calculate scores from category-level evidence alone.
 - Research references: Shopify 2026 dropshipping product taxonomy https://www.shopify.com/blog/best-dropshipping-products ; Shopify 2026 merchant category trends https://www.shopify.com/blog/trending-products . Sources may cover US merchants and may not generalize to Spain/EU.
 
 ## Candidate table
@@ -53,7 +53,7 @@ Created 2026-11-13. Target: EUR 15,000/month gross revenue run rate by **2026-12
 Each row is `status: idea`, `scores: null`, `economics: null`, `supplierVerified: false`, `evidence: [{type: 'category_reference'|'retail_example', url, observedAt: '2026-11-13', claimScope: 'category_or_example_only'}]`. **Never treat this initial source as independent evidence of product demand.** Price is `hypotheticalRetailRangeEUR`, not an observed price. Stable IDs K01–K20. Product-specific validation follows.
 
 ## Next business action
-Confirm initial selling market and fulfillment model with Sebastián, then research **K01, K08, K10, K02, K14** deeply before expanding. Source and price every competitor/supplier; only then score and shortlist 1–2. Prioritize launching a landing for the first viable product, not building more app infrastructure.
+Use Spain as the provisional selling market; verify Spain/EU fulfillment and consumer-rights compliance, then research **K01, K08, K10, K02, K14** deeply before expanding. Source and price every competitor/supplier; only then score and shortlist 1–2. Prioritize launching a landing for the first viable product, not building more app infrastructure.
 
 ## Spain-first research protocol (provisional, 2026-11-13)
 **Market hypothesis: Spain for initial validation, EU later.** This is ChatGPT's provisional recommendation, not owner-confirmed. Shopify merchant documentation lists pet hair removers, slow feeders, snuffle mats, motion sensors, drill brushes and shoe storage among product categories to investigate; **category inclusion is not proof of SKU demand**: https://www.shopify.com/blog/best-dropshipping-products .
@@ -70,3 +70,54 @@ Use https://www.facebook.com/ads/library/ (select Spain + All ads) and https://a
 Supplier field remains `not verified` until actual product-level supplier URL, dispatch origin, delivery SLA, unit cost, MOQ, return policy and compliance documents are recorded. No product-specific Meta/TikTok ads or supplier quotes have yet been verified in this document. Do not score these as demand evidence.
 
 Validation stages: `idea → research → supplier_screened → landing_ready → organic_signal → paid_test_approved → validated / inconclusive / rejected`. No orders or deposits until supplier and legal checkout are actually operational. See [validation protocol](klimb-validation.md).
+
+## CJ / BigBuy SKU sourcing check — 2026-11-13
+**Verification standard:** the URLs below are **public CJ product or catalog references**, not proof of EU inventory. CJ product pages require sign-in/warehouse selection to quote destination-specific shipping; visible `Inventory: --` is unknown, not zero, and `Shipping From` blank means unknown. Prices in USD are *displayed CJ product prices*, not landed Spain costs or guaranteed wholesale quotes. BigBuy public product pages were inaccessible to automated lookup (robots restriction); BigBuy official API requires credentials to retrieve SKU/stock/variations: https://www.bigbuy.eu/public/doc/Guia_API_BigBuy_EN.pdf . **No confirmed EU-stock SKU yet.**
+
+| Candidate | Supplier / exact listing | Supplier SKU | Observed listed price | Verified dispatch warehouse | Shipping to Spain | Status |
+|---|---|---|---|---|---|---|
+| K01 reusable pet hair remover | [CJ reusable 2-in-1](https://eur.cjdropshipping.com/product/2-1-reusable-pet-hair-remover-brush-lint-roller-portable-effective-self-cleaning-tool-for-cat-dog-fur-hair-dust-removal-brush-p-1368888013161107456.html) | `CJGY103503901AZ` | USD 1.47–17.64 (variant range) | **Unknown** | **Unknown** | Product listing verified; EU stock NOT verified |
+| K10 drill cleaning brush kit | [CJ supplier shop, car-cleaning kit including drill brush](https://shop.cjdropshipping.com/?shopId=1939966284991488002) | **Not located** | USD 13.82 shown for broader 25-piece car kit, **not a like-for-like SKU** | **Unknown** | **Unknown** | Similar item only; exact standalone kit not verified |
+| K02 dog snuffle mat | [CJ pet niche overview](https://www.cjdropshipping.com/blogs/dropshipping-niches/Best-Dropshipping-Pet-Products) | **Not located** | **Not available** | **Unknown** | **Unknown** | Category reference only, not product listing |
+| K08 motion-sensor cabinet light | [CJ magnetic sensor light](https://www.cjdropshipping.com/product/led-wood-grain-magnetic-wall-lamp-motion-sensor-usb-night-light-cabinet-closet-light-staircase-bedroom-table-bedside-lighting-p-1788125563387908096.html) | `CJYD203051401AZ` | USD 8.13 | **Unknown** | **Unknown** | Product listing verified; battery/electrical compliance pending |
+| K14 adhesive decorative tiles | [CJ marble tile wall stickers](https://www.cjdropshipping.com/product/modern-green-marble-stone-tile-peel-and-stick-wallpaper-removable-self-adhesive-wall-sticker-wallpaper-pvc-home-decoration-p-1963886488561803266.html) | `CJJT248951101AZ` | USD 28.93 (48pcs variant in visible result) | **United States in one public view; NOT EU** | **Unknown** | Product listing verified; observed US dispatch only; EU stock NOT verified |
+
+**BigBuy status for all five:** no public SKU/stock/cost could be verified. Their authenticated catalog/API or seller dashboard must be used. Do not mark as available in Valencia merely because BigBuy operates there.
+
+**Required follow-up in authenticated CJ/BigBuy:** for each exact variant, set ship-from `Spain/Poland/Germany/other EU`, ship-to Spanish postcode, quantity 1; capture SKU, real stock count, seller unit cost, postage, processing + delivery estimate, tax/VAT handling, returns address, supplier terms and screenshot/time. If no EU stock, ask CJ whether they can source or place the SKU in an EU warehouse *without pre-buying stock*. A product being **placeable** into an EU warehouse is a future 3PL option, not stockless fulfillment.
+
+**Provisional sourcing order:** K01 and K08 have the most concrete direct CJ SKUs to check first; K14 has a direct SKU but visible US-origin indication; K10 and K02 require exact-SKU sourcing. This order measures sourcing readiness only, not demand or likely profitability.
+
+## Strategic reprioritization — 2026-11-13 (ChatGPT review of Claude's Spain price check)
+Source: [Claude's price and ad reconnaissance](klimb-price-check.md) in PR #4. Its numbers are **point-in-time reconnaissance reported by Claude**, not independently audited SKU-level profitability or verified live ad counts. Counts depend on search term, country, category and query time. **No winner has been validated.**
+
+### Commercial thesis
+- Optimize for **bundled perceived value and contribution margin**, not a forced retail price. **EUR 45–60+ AOV is a test hypothesis**, not a minimum eligibility gate. At EUR 15,000 gross/month: EUR 25 AOV = 600 orders/month (~20/day); EUR 45 = 334/month (~11.1/day); EUR 60 = 250/month (~8.3/day). Revenue excludes refunds; contribution economics still need validation.
+- Prioritize offers that solve a complete problem (kit) over generic single items that compete with Action/Amazon/AliExpress on price. Price anchors reported in the check: K01 Amazon gel EUR 6.80, K08 Action EUR 4.99, K10 AliExpress ES EUR 8.84, K14 20-pack ManoMano EUR 26; compare like-for-like quantity and quality.
+- **K01 deprioritized**, not discarded: ~140 Meta ad search results reported, saturated low-price alternatives; only reconsider with differentiated material/demo, bundle and viable economics. **K08 deprioritized** for commoditization plus EU electrical compliance. Ad longevity is not proof of ROAS.
+- COD (contra reembolso) is a **payments/fulfillment research branch**, not a confirmed route: verify courier/3PL eligibility for seller entity, cash settlement bank/country, remittance timing, failed-delivery/returns fees, fraud, VAT and customer rights. Never enable COD without end-to-end confirmation and owner's approval.
+
+### New investigation order (business priority, not supplier listing readiness)
+1. **K10 — kit de limpieza con cepillos de taladro + extensión + accesorios** (hypothetical EUR 45–59). Verify complete kit, compatibility, safety and packaging. Low reported ad density is **not** proof of demand.
+2. **K14 — kit de renovación de salpicadero con azulejos adhesivos por superficie cubierta** (hypothetical EUR 49–79). Show exact coverage, substrate/adhesion, cost per square meter, returns and shipping.
+3. **K02 — kit de enriquecimiento canino: alfombra olfativa + juguete dispensador + guía** (hypothetical EUR 45–65). Safety, washable materials and value versus cheap alternatives.
+4. **K01 — quitapelos en kit premium**, conditional research only (hypothetical EUR 45–59; *low confidence*).
+5. **K08 — iluminación modular de armario (pack)**, conditional research only (hypothetical EUR 45–69; *low confidence*, compliance-heavy).
+
+### Five additional hypotheses (K21–K25, NOT validated or supplier-sourced)
+| ID | Concept / niche | Hypothetical bundled retail EUR | Demo angle | Main risks / source status |
+|---|---|---:|---|---|
+| K21 | Kit premium de limpieza de juntas y rincones (cepillos, extensión, accesorios) / hogar | 45–65 | Antes/después de juntas y superficies | Overlaps K10; confirm differentiation, surface damage, exact suppliers; **no evidence or EU stock verified** |
+| K22 | Kit de organización bajo fregadero (bandejas extraíbles + separadores) / hogar | 49–79 | Antes/después de armario caótico | Size fit, weight, shipping/returns; **no evidence or EU stock verified** |
+| K23 | Kit de limpieza interior de coche (cepillos + accesorios de detailing) / automóvil | 49–79 | Limpieza de asientos, ranuras y alfombrillas | Tool compatibility, safe materials, category competition; **no evidence or EU stock verified** |
+| K24 | Kit de jardinería vertical para balcón (bolsillos + fijación + riego manual) / hogar | 49–89 | Transformación de balcón pequeño | Seasonal, weather, mounting and bulky freight; **no evidence or EU stock verified** |
+| K25 | Kit de organización de maletero modular (organizador plegable + fijaciones) / automóvil | 45–75 | Maletero antes/después y uso práctico | Commodity competition, dimensions, shipping; **no evidence or EU stock verified** |
+
+**Do not import K21–K25 as validated, scored, sourced or ad-tested.** Import as `idea`, `evidence:[]`, `supplierVerified:false`, `economics:null`, `scores:null`. These are **offer concepts**; actual bundle compatibility, SKU-level availability, margins and claims remain to be checked.
+
+### Evidence and next steps
+1. For K10/K14/K02: compare 3 real independent Spanish sellers, actual bundle contents, price including delivery, returns and dated listings. Do not compare an individual brush with a full 22-piece kit as equivalent.
+2. Find at least 2 candidate suppliers and verify **EU dispatch for exact bundle components**, quantities, packaging, landed cost and Spain delivery SLA; a supplier product page alone is not proof of EU stock.
+3. Check Meta Ad Library Spain and TikTok Creative Center for the **bundle offer** and hooks, not just broad product category; record URLs/advertiser/date. Current counts are provisional notes from Claude.
+4. Calculate contribution after VAT, COGS, shipping, packaging, fees, refunds and estimated acquisition; determine allowable CPA and required conversion. Reject if contribution cannot support acquisition at plausible traffic costs.
+5. Build honest waitlist smoke test only after evidence and legal/privacy/measurement gates; no preorders, payments, paid ads or stock without Sebastián's approval.
