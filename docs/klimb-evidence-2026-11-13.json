@@ -20,7 +20,11 @@
      "note": "Rodillo de gel reutilizable en Amazon.es, oferta 6,80 € (antes 9,61 €). Visto vía Chollometro.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "Amazon.es (vía Chollometro)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -29,7 +33,11 @@
      "note": "Action ES: rodillo adhesivo (no reutilizable) a 0,99 €. Ancla de precio muy baja para la categoría.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -38,7 +46,11 @@
      "note": "eBay.es: rodillo autolimpiante ~32 € (precio alto, marca no indicada).",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "eBay.es (vendedor sin identificar)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "search_intent",
@@ -47,7 +59,11 @@
      "note": "Prensa ES: un quitapelos de Amazon (Ace2Ace) tiene más de 80.000 valoraciones. Indica demanda de categoría y competencia fuerte; no es demanda del SKU.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "ad_library",
@@ -56,7 +72,24 @@
      "note": "Meta Ad Library ES, 13-nov: ~140 anuncios activos para «quitapelos». Softpet (guante electrostático) tiene muchas creatividades activas desde el 5-may-2026; la competencia es fuerte y hay un anunciante que sigue invirtiendo. No prueba rentabilidad.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://eur.cjdropshipping.com/product/2-1-reusable-pet-hair-remover-brush-lint-roller-portable-effective-self-cleaning-tool-for-cat-dog-fur-hair-dust-removal-brush-p-1368888013161107456.html",
+     "seller": "CJdropshipping",
+     "sku": "CJGY103503901AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "price": null,
+     "note": "CJ: 1,47–17,64 USD según la variante. Almacén de salida, stock y coste entregado en España PENDIENTES (ChatGPT, 13-nov).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
     }
    ]
   },
@@ -71,7 +104,11 @@
      "note": "MediaMarkt ES (marketplace): alfombra olfativa TheKingPet 26,99 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "TheKingPet",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -80,7 +117,11 @@
      "note": "Action ES: alfombrilla de recompensa a 1,99 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "ad_library",
@@ -89,7 +130,11 @@
      "note": "Meta Ad Library ES, 13-nov: ~6 anuncios activos, todos recientes (8–11 nov: Mascotas Y Mas, Huella Sana, Nua animal). Poca competencia y sin anunciantes consolidados.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     }
    ]
   },
@@ -104,7 +149,11 @@
      "note": "Action ES: luz de armario con sensor, 30 cm, USB-C, 4,99 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -113,7 +162,11 @@
      "note": "ManoMano ES: pack de 2 luces con sensor 20 cm, 24,46 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "ManoMano (vendedor del pack de 2 luces)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "ad_library",
@@ -122,7 +175,24 @@
      "note": "Meta Ad Library ES, 13-nov: ~24 anuncios activos. «Moonlight Love» lleva activo desde el 1-mar-2026 (8 meses) con focos recargables y testimonios; LumirShop anuncia con pago contra reembolso. Hay mercado de dropshipping sostenido pese al ancla de 4,99 € de Action.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://www.cjdropshipping.com/product/led-wood-grain-magnetic-wall-lamp-motion-sensor-usb-night-light-cabinet-closet-light-staircase-bedroom-table-bedside-lighting-p-1788125563387908096.html",
+     "seller": "CJdropshipping",
+     "sku": "CJYD203051401AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "price": null,
+     "note": "CJ: 8,13 USD. Almacén de salida, stock y coste entregado en España PENDIENTES (ChatGPT, 13-nov).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
     }
    ]
   },
@@ -137,7 +207,11 @@
      "note": "AliExpress con envío desde España: kit de 3 cepillos a 8,84 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "AliExpress (envío desde España)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -146,7 +220,11 @@
      "note": "ManoMano ES: kit de 4 cepillos, 20,11 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "KZQ",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -155,7 +233,11 @@
      "note": "ManoMano ES: kit de 22 piezas con extensión, 36,84 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "ManoMano (kit de 22 piezas)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "ad_library",
@@ -164,7 +246,11 @@
      "note": "Meta Ad Library ES, 13-nov: ~4 resultados, solo 1 relevante (Carcarepassion, cepillo para moquetas con taladro, activo desde el 17-abr-2026). Muy poca competencia en anuncios; demanda pendiente de confirmar.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     }
    ]
   },
@@ -179,7 +265,11 @@
      "note": "ManoMano ES: 20 adhesivos 20×20 cm, 26,00 €.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "KZQ",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "competitor_listing",
@@ -188,7 +278,11 @@
      "note": "Xataka Home: 40 adhesivos 10×10 cm en Amazon a 13,99 € (otro lote a 23,99 €).",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "EasyLife (Amazon)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "search_intent",
@@ -197,7 +291,11 @@
      "note": "Prensa ES 2026: los azulejos adhesivos aparecen como tendencia de decoración sin obra. Señal de interés de categoría.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     },
     {
      "type": "ad_library",
@@ -206,7 +304,11 @@
      "note": "Meta Ad Library ES, 13-nov: ~8 anuncios, 7 de Vision Picks (contenido informativo «Precios y tipos 2026», desde el 21-sep), no son tiendas. Casi no hay competencia directa de tiendas.",
      "country": "ES",
      "observedAt": "2026-11-13",
-     "claimScope": "product"
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
     }
    ]
   }

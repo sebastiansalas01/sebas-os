@@ -127,3 +127,4 @@ nav .nav-emoji{display:block;font-size:23px;line-height:25px;font-weight:650;let
 .klimb-product-body{padding:0 0 14px}.klimb-evidence{padding-left:18px;font-size:.9rem}.klimb-evidence a{word-break:break-all}
 .klimb-evidence-form,.klimb-reject{display:grid;gap:6px;margin-top:10px}.klimb-evidence-form input,.klimb-evidence-form select,.klimb-reject input{width:100%}
 .klimb-notice{background:#eef6ff;border-radius:12px;padding:10px 14px}.klimb-legacy>summary{font-weight:600}
+.klimb-check{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:.92rem}.klimb-landing,.klimb-noads{display:grid;gap:6px;margin-top:12px}
