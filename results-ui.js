@@ -38,8 +38,10 @@ function klimbVideoCard(v){
 // Plan KLIMB 11–24 noviembre: objetivos accionables, sin formularios.
 const KLIMB_SPRINT_GOALS=[
  {id:'research',group:'commerce',title:'Investigar e-commerce y dropshipping',detail:'Elegir nichos, analizar anuncios, márgenes y problemas de las tiendas.',phase:'Investigación'},
- {id:'offer',group:'commerce',title:'Definir oferta para e-commerce',detail:'Cliente ideal, propuesta de valor, entregables y precio de prueba.',phase:'Oferta'},
- {id:'products',group:'commerce',title:'Seleccionar productos y referencias',detail:'Elegir productos y anuncios de referencia antes de producir.',phase:'Producto'},
+ {id:'offer',group:'commerce',title:'Definir propuesta de valor y oferta del producto',detail:'Problema, promesa, diferenciación, precio y margen estimado.',phase:'Oferta'},
+ {id:'products',group:'commerce',title:'Seleccionar 1–2 productos y referencias',detail:'Demanda, competidores, costes, proveedor y anuncios existentes.',phase:'Producto'},
+ {id:'landing',group:'commerce',title:'Crear landing o tienda mínima',detail:'Página clara con oferta, imágenes, CTA y medición básica; sin inventario previo.',phase:'Validación',requires:['research','offer','products']},
+ {id:'testplan',group:'commerce',title:'Preparar prueba de demanda',detail:'Definir hipótesis, presupuesto opcional, clics, registros y ventas; no lanzar anuncios sin aprobación.',phase:'Validación',requires:['landing']},
  {id:'expert1',group:'experts',title:'Vídeo 1 · Expertos online',detail:'Gancho, guion, producción y revisión.',phase:'Producción'},
  {id:'expert2',group:'experts',title:'Vídeo 2 · Expertos online',detail:'Mejorar realismo, ritmo y storytelling.',phase:'Producción'},
  {id:'expert3',group:'experts',title:'Vídeo 3 · Expertos online',detail:'Aplicar aprendizajes y documentar resultado.',phase:'Producción'},
