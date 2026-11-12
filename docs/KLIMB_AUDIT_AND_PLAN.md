@@ -7,7 +7,12 @@ Referencia: [`KLIMB_MISSION_CONTROL.md`](../KLIMB_MISSION_CONTROL.md) (fuente de
 
 > La app tiene que ser mi centro de mando: que me diga paso a paso dónde tengo que ir, que me investigue productos, que me dé insights. Absolutamente todo. Claude construye; Claude y ChatGPT la mejoran juntos.
 
-Objetivo de negocio: 15.000 €/mes de facturación e-commerce antes del 27-dic-2026 (aspiración, no previsión).
+Objetivo de negocio: 15.000 €/mes de facturación e-commerce antes del **31-dic-2026** (fecha confirmada por Sebastián el 12-nov; sustituye al 27-dic). Es una aspiración, no una previsión.
+
+## Reparto de roles (acordado para ir más rápido)
+- **Claude Code — construye**: escribe el código, los tests y abre los PR. También hace investigación de mercado con búsqueda web cuando se le pide.
+- **ChatGPT — dirige el negocio y revisa**: estrategia, investigación de productos y competidores, revisión de PR contra Mission Control y decisiones de negocio. Solo hace cambios de código pequeños y acotados, avisando antes.
+- **Sebastián — decide y ejecuta**: aprueba gastos, proveedores y publicaciones, y hace el trabajo diario que marca la app.
 
 ---
 
@@ -59,11 +64,11 @@ Research Engine ──► Commerce Builder ──► Creative Studio ──► G
 - `Product` → `{id, name, niche, status: idea|research|finalist|selected|testing|killed|winner, evidence:[{type, url, note, date}], scores:{demand, differentiation, margin, fulfillment, adFit}, economics:{price, cogs, shipping, fees, refundRate}}`.
 - `score(product)` → puntuación ponderada **solo con criterios que tienen evidencia**; los criterios sin evidencia se marcan como "falta evidencia" en lugar de inventar.
 - `unitEconomics(product)` → margen bruto, CPA máximo de equilibrio y pedidos/día necesarios para 15.000 €/mes.
-- `gates(product)` → reglas go/no-go explícitas (p. ej. margen bruto ≥ 60 %, ≥ 3 evidencias de demanda, proveedor validado).
-- `nextAction(state, now)` → **el paso exacto del día**, derivado de la fase + estado del pipeline. Ej.: día 3 con 6 candidatos → "Añade 2 candidatos más y registra 1 evidencia de demanda para cada uno (objetivo: 15)".
+- `gates(product)` → reglas go/no-go **configurables** (valores iniciales: margen bruto ≥ 60 %, ≥ 3 evidencias de demanda, proveedor validado). No son garantías: la decisión incluye CPA, logística, devoluciones y calidad del proveedor (revisión de ChatGPT).
+- `nextAction(state, now)` → **el paso exacto del día**, elegido por el **bloqueo real del negocio**, no solo por el número de día. Ej.: día 3 con 6 candidatos → "Añade 2 candidatos más y registra 1 evidencia de demanda para cada uno (objetivo: 15)". Día 10 sin producto validado → sigue en validación y **no** pasa a anuncios. La fecha solo sirve como alerta de retraso.
 - Toda métrica es `real` o `simulada` con etiqueta visible. Nunca datos inventados.
 
-**Agenda:** los bloques KLIMB reciben el foco del día ("KLIMB · investigar" muestra la tarea de `nextAction`). Las comidas se recolocan en huecos libres, sin solapes.
+**Agenda:** los bloques KLIMB reciben el foco del día ("KLIMB · investigar" muestra la tarea de `nextAction`). Se mantienen el despertar a las 07:00, la oración, 45 min de ejercicio, la lectura, el desayuno, el inglés y el trabajo intenso en KLIMB también en fin de semana. Ni las comidas ni los eventos confirmados del calendario pueden solaparse con bloques de trabajo.
 
 **Persistencia:** fase 1 en `localStorage` con exportar/importar JSON; fase 3 sincronización vía la Supabase existente (nueva tabla `klimb_state`, reutilizando el emparejamiento de dispositivos).
 
