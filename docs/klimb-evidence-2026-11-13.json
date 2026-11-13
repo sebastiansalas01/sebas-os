@@ -1,0 +1,434 @@
+{
+ "version": 1,
+ "market": {
+  "country": "ES",
+  "confirmed": false
+ },
+ "merchant": {
+  "paymentRoute": null,
+  "entity": null
+ },
+ "products": [
+  {
+   "id": "K01",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.chollometro.com/ofertas/rodillo-quitapelos-reutilizable-de-gel-para-mascotas-lavable-sin-recambios-adhesivos-elimina-pelos-de-perros-y-gatos-1944008",
+     "price": 6.8,
+     "note": "Rodillo de gel reutilizable en Amazon.es, oferta 6,80 € (antes 9,61 €). Visto vía Chollometro.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "Amazon.es (vía Chollometro)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3224224/rodillo-quitapelusas-para-la-ropa/",
+     "price": 0.99,
+     "note": "Action ES: rodillo adhesivo (no reutilizable) a 0,99 €. Ancla de precio muy baja para la categoría.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.ebay.es/itm/298317103488",
+     "price": 32.37,
+     "note": "eBay.es: rodillo autolimpiante ~32 € (precio alto, marca no indicada).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "eBay.es (vendedor sin identificar)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "search_intent",
+     "url": "https://www.cronista.com/espana/actualidad-es/este-rodillo-quitapelos-de-mascotas-es-mejor-que-un-aspirador-y-lo-puedes-conseguir-en-amazon",
+     "price": null,
+     "note": "Prensa ES: un quitapelos de Amazon (Ace2Ace) tiene más de 80.000 valoraciones. Indica demanda de categoría y competencia fuerte; no es demanda del SKU.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "ad_library",
+     "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=quitapelos&search_type=keyword_unordered&media_type=all",
+     "price": null,
+     "note": "Meta Ad Library ES, 13-nov: ~140 anuncios activos para «quitapelos». Softpet (guante electrostático) tiene muchas creatividades activas desde el 5-may-2026; la competencia es fuerte y hay un anunciante que sigue invirtiendo. No prueba rentabilidad.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://eur.cjdropshipping.com/product/2-1-reusable-pet-hair-remover-brush-lint-roller-portable-effective-self-cleaning-tool-for-cat-dog-fur-hair-dust-removal-brush-p-1368888013161107456.html",
+     "seller": "CJdropshipping",
+     "sku": "CJGY103503901AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "price": null,
+     "note": "CJ: 1,47–17,64 USD según la variante. Almacén de salida, stock y coste entregado en España PENDIENTES (ChatGPT, 13-nov).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
+    }
+   ]
+  },
+  {
+   "id": "K02",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.mediamarkt.es/eu/product/_alfombra-olfativa-de-tela-thekingpet-tkp-ao-01-para-perro-amarillorojo-170278683.html",
+     "price": 26.99,
+     "note": "MediaMarkt ES (marketplace): alfombra olfativa TheKingPet 26,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "TheKingPet",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3213935/alfombrilla-de-recompensa-beasty/",
+     "price": 1.99,
+     "note": "Action ES: alfombrilla de recompensa a 1,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "ad_library",
+     "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=alfombra%20olfativa&search_type=keyword_unordered&media_type=all",
+     "price": null,
+     "note": "Meta Ad Library ES, 13-nov: ~6 anuncios activos, todos recientes (8–11 nov: Mascotas Y Mas, Huella Sana, Nua animal). Poca competencia y sin anunciantes consolidados.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.tiendanimal.es/vendedores-marketplace/nobleza-espana/?page=2&start=24",
+     "price": 16.99,
+     "seller": "Nobleza España (Tiendanimal)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Alfombra olfativa, oferta 16,99 € (antes 19,99 €). Investigación de ChatGPT, docs/klimb-research-k02.md.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.miscota.es/perros/duvoplus_precio-mayor-a-menor",
+     "price": 36.29,
+     "seller": "Duvo Plus (Miscota)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Alfombra 35×35 cm, 36,29 €. Investigación de ChatGPT.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://cjdropshipping.com/product/pet-training-blanket-detachable-stitching-dog-sniffing-pad-p-08806DAB-2753-4A68-9315-23D189BA6B0E.html",
+     "price": null,
+     "seller": "CJdropshipping",
+     "sku": "CJJJCWGY00503",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "note": "Lead CJ: tapete olfativo de 5,42–10,44 USD; almacén e inventario sin verificar; no es un kit (ChatGPT).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
+    }
+   ]
+  },
+  {
+   "id": "K08",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.action.com/es-es/p/3221709/iluminacion-de-armario-con-sensor-de-movimiento/",
+     "price": 4.99,
+     "note": "Action ES: luz de armario con sensor, 30 cm, USB-C, 4,99 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "Action",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/2-luces-led-con-sensor-de-movimiento-para-interiores-20-cm-3-modos-barra-de-luz-nocturna-inalambrica-para-armario-cocina-escalera-pasillo-armario-clase-energetica-g-88587369",
+     "price": 24.46,
+     "note": "ManoMano ES: pack de 2 luces con sensor 20 cm, 24,46 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "ManoMano (vendedor del pack de 2 luces)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "ad_library",
+     "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=luz%20sensor%20armario&search_type=keyword_unordered&media_type=all",
+     "price": null,
+     "note": "Meta Ad Library ES, 13-nov: ~24 anuncios activos. «Moonlight Love» lleva activo desde el 1-mar-2026 (8 meses) con focos recargables y testimonios; LumirShop anuncia con pago contra reembolso. Hay mercado de dropshipping sostenido pese al ancla de 4,99 € de Action.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://www.cjdropshipping.com/product/led-wood-grain-magnetic-wall-lamp-motion-sensor-usb-night-light-cabinet-closet-light-staircase-bedroom-table-bedside-lighting-p-1788125563387908096.html",
+     "seller": "CJdropshipping",
+     "sku": "CJYD203051401AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "price": null,
+     "note": "CJ: 8,13 USD. Almacén de salida, stock y coste entregado en España PENDIENTES (ChatGPT, 13-nov).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
+    }
+   ]
+  },
+  {
+   "id": "K10",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.chollometro.com/ofertas/kit-de-3-cepillos-electricos-para-taladro-cepillo-de-limpieza-potente-para-alfombras-bano-superficies-banera-muebles-ducha-azulejos-2022942",
+     "price": 8.84,
+     "note": "AliExpress con envío desde España: kit de 3 cepillos a 8,84 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "AliExpress (envío desde España)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/kit-de-accesorios-de-4-piezas-con-cepillo-para-taladro-para-la-limpieza-electrica-de-banos-azulejos-piscinas-cocinas-automoviles-y-alfombras-kzq-216084851",
+     "price": 20.11,
+     "note": "ManoMano ES: kit de 4 cepillos, 20,11 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "KZQ",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/cepillo-de-taladro-electrico-para-taladro-kit-de-limpieza-de-cepillo-de-fregado-para-coche-para-alfombras-de-bano-de-coche-22-piezas-22-piezas-90921241",
+     "price": 36.84,
+     "note": "ManoMano ES: kit de 22 piezas con extensión, 36,84 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "ManoMano (kit de 22 piezas)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "ad_library",
+     "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=cepillo%20taladro%20limpieza&search_type=keyword_unordered&media_type=all",
+     "price": null,
+     "note": "Meta Ad Library ES, 13-nov: ~4 resultados, solo 1 relevante (Carcarepassion, cepillo para moquetas con taladro, activo desde el 17-abr-2026). Muy poca competencia en anuncios; demanda pendiente de confirmar.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/juego-de-5-cepillos-multiusos-para-taladro-limpieza-de-coches-azulejos-alfombras-baneras-cocinas-e-inodoros-ulisem-216958209",
+     "price": 21.76,
+     "seller": "ULISEM",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "ManoMano: 5 cepillos.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/juego-de-3-cepillos-para-taladro-juego-de-limpieza-para-superficies-de-bano-suelos-azulejos-de-banera-y-coches-5-cm-9-cm-10-cm-amarillo-94589552",
+     "price": 22.09,
+     "seller": "Vendedor K-A03408 (ManoMano)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "ManoMano: 3 cepillos, envío gratis según ficha.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.compradiccion.com/herramientas/cepillo-taladro-vendido-amazon-ahora-rebajado-barato-que-nunca",
+     "price": 13.9,
+     "seller": "Amazon.es (más vendido)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Cepillo suelto a 13,90 € (antes 15 €); envío 3,99 € por debajo de 29 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    }
+   ]
+  },
+  {
+   "id": "K14",
+   "status": "research",
+   "evidence": [
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/20-pegatinas-adhesivas-para-salpicadero-de-cocina-20-x-20-cm-de-marmol-dorado-para-pared-xu-para-azulejos-de-cocina-y-bano-de-pvc-20-unidades-kzq-91869651",
+     "price": 26.0,
+     "note": "ManoMano ES: 20 adhesivos 20×20 cm, 26,00 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "KZQ",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.xatakahome.com/a-fondo/10-opciones-baratas-para-decoracion-tus-paredes-no-quieres-hacer-obra-virtud-azulejos-vinilicos",
+     "price": 13.99,
+     "note": "Xataka Home: 40 adhesivos 10×10 cm en Amazon a 13,99 € (otro lote a 23,99 €).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "EasyLife (Amazon)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "search_intent",
+     "url": "https://www.diezminutos.es/hogar-decoracion/a70045895/reformar-cocina-sin-obras-azulejos-adhesivos/",
+     "price": null,
+     "note": "Prensa ES 2026: los azulejos adhesivos aparecen como tendencia de decoración sin obra. Señal de interés de categoría.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "ad_library",
+     "url": "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=ES&q=azulejos%20adhesivos&search_type=keyword_unordered&media_type=all",
+     "price": null,
+     "note": "Meta Ad Library ES, 13-nov: ~8 anuncios, 7 de Vision Picks (contenido informativo «Precios y tipos 2026», desde el 21-sep), no son tiendas. Casi no hay competencia directa de tiendas.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product",
+     "seller": "",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.leroymerlin.es/productos/panorama-azulejos-adhesivos-pack-de-24-baldosas-de-20x20-cm-modelo-hidraulico-azul-vinilos-para-cocina-bano-paredes-91649908.html",
+     "price": 21.99,
+     "seller": "Home and Living (Leroy Merlin)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "24 vinilos 20×20 cm (~0,96 m²). Investigación de ChatGPT, docs/klimb-research-k14.md.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.leroymerlin.es/productos/juego-de-20-baldosas-autoadhesivas-de-vinilo-para-suelo-de-bano-y-salpicadero-de-cocina-azul-y-blanco-20-cm-74499479.html",
+     "price": 31.79,
+     "seller": "JIANU (Leroy Merlin)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "20 baldosas 20×20 cm (~0,80 m²). Investigación de ChatGPT.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://www.cjdropshipping.com/product/modern-green-marble-stone-tile-peel-and-stick-wallpaper-removable-self-adhesive-wall-sticker-wallpaper-pvc-home-decoration-p-1963886488561803266.html",
+     "price": null,
+     "seller": "CJdropshipping",
+     "sku": "CJJT248951101AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "note": "Lead CJ: 28,93 USD la variante de 48 piezas; una vista previa indicaba origen EE. UU. Almacén UE NO confirmado (ChatGPT).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
+    }
+   ]
+  }
+ ],
+ "experiments": []
+}

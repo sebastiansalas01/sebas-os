@@ -117,3 +117,14 @@ nav button:before{content:none!important}.nav-symbol{display:inline-block;vertic
 @media(prefers-reduced-motion:reduce){.sprint-goal,.sprint-progress span{transition:none}}
 
 nav .nav-emoji{display:block;font-size:23px;line-height:25px;font-weight:650;letter-spacing:-1px}nav button{min-height:52px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}nav button:active{transform:scale(.96)}
+
+/* KLIMB command centre */
+.klimb-next h2{font-size:1.25rem;line-height:1.25;margin:.4rem 0}.klimb-next .klimb-how,.klimb-next .klimb-done{font-size:.92rem}
+.klimb-choices{display:grid;gap:8px;margin-top:10px}.klimb-choices button{text-align:left}
+.klimb-product{border-top:1px solid var(--line,#e9e9eb)}.klimb-product:first-of-type{border-top:0}
+.klimb-product-head{display:flex;justify-content:space-between;gap:12px;width:100%;background:none;border:0;padding:12px 0;text-align:left;color:inherit;font:inherit}
+.klimb-product-head small{display:block;opacity:.7;margin-top:2px}.klimb-product.is-rejected{opacity:.55}
+.klimb-product-body{padding:0 0 14px}.klimb-evidence{padding-left:18px;font-size:.9rem}.klimb-evidence a{word-break:break-all}
+.klimb-evidence-form,.klimb-reject{display:grid;gap:6px;margin-top:10px}.klimb-evidence-form input,.klimb-evidence-form select,.klimb-reject input{width:100%}
+.klimb-notice{background:#eef6ff;border-radius:12px;padding:10px 14px}.klimb-legacy>summary{font-weight:600}
+.klimb-check{display:flex;gap:8px;align-items:center;margin:6px 0;font-size:.92rem}.klimb-landing,.klimb-noads{display:grid;gap:6px;margin-top:12px}
