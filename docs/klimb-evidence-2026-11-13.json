@@ -135,6 +135,45 @@
      "sku": "",
      "warehouse": null,
      "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.tiendanimal.es/vendedores-marketplace/nobleza-espana/?page=2&start=24",
+     "price": 16.99,
+     "seller": "Nobleza España (Tiendanimal)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Alfombra olfativa, oferta 16,99 € (antes 19,99 €). Investigación de ChatGPT, docs/klimb-research-k02.md.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.miscota.es/perros/duvoplus_precio-mayor-a-menor",
+     "price": 36.29,
+     "seller": "Duvo Plus (Miscota)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Alfombra 35×35 cm, 36,29 €. Investigación de ChatGPT.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://cjdropshipping.com/product/pet-training-blanket-detachable-stitching-dog-sniffing-pad-p-08806DAB-2753-4A68-9315-23D189BA6B0E.html",
+     "price": null,
+     "seller": "CJdropshipping",
+     "sku": "CJJJCWGY00503",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "note": "Lead CJ: tapete olfativo de 5,42–10,44 USD; almacén e inventario sin verificar; no es un kit (ChatGPT).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
     }
    ]
   },
@@ -251,6 +290,45 @@
      "sku": "",
      "warehouse": null,
      "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/juego-de-5-cepillos-multiusos-para-taladro-limpieza-de-coches-azulejos-alfombras-baneras-cocinas-e-inodoros-ulisem-216958209",
+     "price": 21.76,
+     "seller": "ULISEM",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "ManoMano: 5 cepillos.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.manomano.es/p/juego-de-3-cepillos-para-taladro-juego-de-limpieza-para-superficies-de-bano-suelos-azulejos-de-banera-y-coches-5-cm-9-cm-10-cm-amarillo-94589552",
+     "price": 22.09,
+     "seller": "Vendedor K-A03408 (ManoMano)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "ManoMano: 3 cepillos, envío gratis según ficha.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.compradiccion.com/herramientas/cepillo-taladro-vendido-amazon-ahora-rebajado-barato-que-nunca",
+     "price": 13.9,
+     "seller": "Amazon.es (más vendido)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "Cepillo suelto a 13,90 € (antes 15 €); envío 3,99 € por debajo de 29 €.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
     }
    ]
   },
@@ -309,6 +387,45 @@
      "sku": "",
      "warehouse": null,
      "warehouseVerified": false
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.leroymerlin.es/productos/panorama-azulejos-adhesivos-pack-de-24-baldosas-de-20x20-cm-modelo-hidraulico-azul-vinilos-para-cocina-bano-paredes-91649908.html",
+     "price": 21.99,
+     "seller": "Home and Living (Leroy Merlin)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "24 vinilos 20×20 cm (~0,96 m²). Investigación de ChatGPT, docs/klimb-research-k14.md.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "competitor_listing",
+     "url": "https://www.leroymerlin.es/productos/juego-de-20-baldosas-autoadhesivas-de-vinilo-para-suelo-de-bano-y-salpicadero-de-cocina-azul-y-blanco-20-cm-74499479.html",
+     "price": 31.79,
+     "seller": "JIANU (Leroy Merlin)",
+     "sku": "",
+     "warehouse": null,
+     "warehouseVerified": false,
+     "note": "20 baldosas 20×20 cm (~0,80 m²). Investigación de ChatGPT.",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "product"
+    },
+    {
+     "type": "supplier_listing",
+     "url": "https://www.cjdropshipping.com/product/modern-green-marble-stone-tile-peel-and-stick-wallpaper-removable-self-adhesive-wall-sticker-wallpaper-pvc-home-decoration-p-1963886488561803266.html",
+     "price": null,
+     "seller": "CJdropshipping",
+     "sku": "CJJT248951101AZ",
+     "warehouse": "unknown",
+     "warehouseVerified": false,
+     "note": "Lead CJ: 28,93 USD la variante de 48 piezas; una vista previa indicaba origen EE. UU. Almacén UE NO confirmado (ChatGPT).",
+     "country": "ES",
+     "observedAt": "2026-11-13",
+     "claimScope": "listing_only"
     }
    ]
   }
