@@ -1,0 +1,1 @@
+Exercise photographs from https://github.com/yuhonas/free-exercise-db (public-domain dataset, Unlicense). Start and end positions downloaded with their original exercise IDs. Technique and warm-up reference: https://www.mayoclinic.org/healthy-lifestyle/fitness/in-depth/weight-training/art-20045842.
