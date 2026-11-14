@@ -3,11 +3,11 @@ const assert=require('node:assert/strict');
 const vm=require('node:vm');
 const fs=require('node:fs');
 const path=require('node:path');
-function boot(seed={}) {
+function boot(seed={},now='2026-11-09T12:00:00+02:00') {
  const storage=new Map(Object.entries(seed));
  const elements=new Map();
  const element=id=>{if(!elements.has(id))elements.set(id,{innerHTML:'',textContent:'',value:'',append(){},setAttribute(){}});return elements.get(id)};
- class FixedDate extends Date{constructor(...args){super(...(args.length?args:['2026-11-09T12:00:00+02:00']))}static now(){return new Date('2026-11-09T12:00:00+02:00').getTime()}}
+ class FixedDate extends Date{constructor(...args){super(...(args.length?args:[now]))}static now(){return new Date(now).getTime()}}
  const ctx=vm.createContext({URL,URLSearchParams,AbortSignal,Intl,Date:FixedDate,Math,JSON,Number,String,Map,Set,Error,Promise,structuredClone,console,setTimeout(fn){fn()},setInterval(){},clearInterval(){},alert(){},navigator:{},localStorage:{getItem:k=>storage.get(k)??null,setItem:(k,v)=>storage.set(k,v)},document:{visibilityState:'visible',getElementById:element,querySelector:()=>element('header'),querySelectorAll:()=>[],addEventListener(){},createElement:()=>element('new')},window:{}});
  for(const f of ['core.js','planner-core.js','life-core.js','ops-core.js','ops-ui.js','life-ui.js','recap-core.js','recap-ui.js','planner-ui.js','closing-core.js','closing-ui.js','results-core.js','results-ui.js','app.js'])vm.runInContext(fs.readFileSync(path.join(__dirname,'..',f),'utf8'),ctx);
  return {ctx,storage,element,run:s=>vm.runInContext(s,ctx)};
@@ -104,5 +104,14 @@ test('manual refresh opens an explicit ChatGPT request and cannot claim a new Sl
 
 test('return-to-app refresh is installed before a new device is paired',()=>{const app=boot(),events=[];app.ctx.document.addEventListener=(name,handler)=>events.push({name,handler});app.run('initRecapSync()');assert.equal(app.run('recapDevice'),null);assert.ok(events.some(x=>x.name==='visibilitychange'&&x.handler.toString().includes('syncRecaps')))});
 
-test('gym priority opens real photos, starts cardio, and preserves old records',()=>{const app=boot({sebasos:JSON.stringify({workouts:[{name:'Previous',sets:2,reps:10,weight:5,day:'2026-11-08'}]})});assert.equal(app.run('trainingPlace()'),'gym');assert.equal(app.run('data.gymMinutes'),45);assert.equal(app.run('data.workouts.length'),1);assert.match(app.element('app').innerHTML,/PRIORIDAD · GIMNASIO/);app.run("chooseGymRoutine('empuje');view('gym')");assert.match(app.element('app').innerHTML,/Machine_Bench_Press-0.webp/);assert.match(app.element('app').innerHTML,/Machine_Bench_Press-1.webp/);app.run('startWorkout()');assert.equal(app.run('currentGymPhase(trainingPlan()).kind'),'warmup');assert.equal(app.run('trainingPlan().sets'),2)});
-test('Saturday launch is chest with recovery Sunday and no repeated muscle on Monday',()=>{const app=boot();assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-14T10:00:00+02:00'))"),'empuje');assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-15T10:00:00+02:00'))"),'recuperacion');assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-16T10:00:00+02:00'))"),'tiron')});
+test('gym priority opens real photos, starts cardio, and preserves old records',()=>{const app=boot({sebasos:JSON.stringify({workouts:[{name:'Previous',sets:2,reps:10,weight:5,day:'2026-11-08'}]})});assert.equal(app.run('trainingPlace()'),'gym');assert.equal(app.run('data.gymMinutes'),45);assert.equal(app.run('data.workouts.length'),1);assert.match(app.element('app').innerHTML,/GIMNASIO · 4–5 DÍAS/);app.run("chooseGymRoutine('empuje');view('gym')");assert.match(app.element('app').innerHTML,/Machine_Bench_Press-0.webp/);assert.match(app.element('app').innerHTML,/Machine_Bench_Press-1.webp/);app.run('startWorkout()');assert.equal(app.run('currentGymPhase(trainingPlan()).kind'),'warmup');assert.equal(app.run('trainingPlan().sets'),2)});
+test('Saturday launch is chest with recovery Sunday and no repeated muscle on Monday',()=>{const app=boot();assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-14T10:00:00+02:00'))"),'empuje');assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-15T10:00:00+02:00'))"),'recuperacion');assert.equal(app.run("SebasPlanner.gymGroup(Date.parse('2026-11-16T10:00:00+02:00'))"),'torso')});
+
+test('post-gym day reports completion without invented duration and persists the breakfast anchor',()=>{
+ const app=boot({},'2026-11-14T11:40:00+02:00');assert.equal(app.run("trackData('gym').done"),true);assert.equal(app.run("trackData('gym').seconds"),0);assert.equal(app.run('dashboardCommand().current.id'),'desayuno');
+ const rows=app.run('SebasPlanner.routine(Date.now(),plannerOptions())');assert.deepEqual(Array.from(rows.slice(0,3),x=>x.id),['desayuno','lectura','klimb']);assert.equal(rows.find(x=>x.id==='klimb').duration,120);
+ const anchor=app.run('data.postGymNov14.anchor');const again=boot(Object.fromEntries(app.storage),'2026-11-14T11:45:00+02:00');assert.equal(again.run('data.postGymNov14.anchor'),anchor);
+ app.run('postGymBreakfastDone()');assert.equal(app.run('dashboardCommand().current.id'),'lectura');assert.equal(app.run('data.postGymNov14.breakfastDone'),true);
+ const tomorrow=boot(Object.fromEntries(app.storage),'2026-11-15T11:40:00+02:00');assert.equal(tomorrow.run("trackData('gym').done"),false);
+});
+test('priorities place KLIMB then gym ahead of English and closing',()=>{const app=boot();const html=app.run('priorityDashboard()');assert.ok(html.indexOf('project-result')<html.indexOf('gym-result'));assert.ok(html.indexOf('gym-result')<html.indexOf('english-result'));app.run("view('gym')");assert.match(app.element('app').innerHTML,/CUATRO DÍAS/)});

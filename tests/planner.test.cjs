@@ -38,9 +38,9 @@ test('after the last slot the next activity belongs to tomorrow',()=>{
  const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:30');
 });
 test('gym has a weekly split and selectable muscle groups',()=>{
- assert.equal(P.gymGroup(at('07:00')),'tiron');
- assert.equal(P.gymGroup(Date.parse('2026-11-10T07:00:00+02:00')),'recuperacion');
- const plan=P.workout(45,{mode:'gym',group:'core'});assert.equal(plan.name,'Core / abs');assert.ok(plan.exercises.every(e=>e.reps&&e.hint));
+ assert.equal(P.gymGroup(at('07:00')),'torso');
+ assert.equal(P.gymGroup(Date.parse('2026-11-10T07:00:00+02:00')),'pierna');
+ const plan=P.workout(45,{mode:'gym',group:'core'});assert.equal(plan.name,'Opcional · brazos y abdomen');assert.ok(plan.exercises.every(e=>e.reps&&e.hint));
 });
 test('gym duration changes exercise count and supplies sets, repetitions and rest',()=>{
  assert.deepEqual([30,45,60].map(minutes=>P.workout(minutes,{mode:'gym',group:'pierna'}).exercises.length),[4,5,5]);
@@ -63,3 +63,5 @@ test('Tuesday calendar mentorship replaces practice without moving it to another
 });
 test('KLIMB has only one scheduled block per day and uses one project name',()=>{for(let n=0;n<7;n++){const rows=P.routine(at('12:00')+n*86400000).filter(x=>x.id==='klimb');assert.equal(rows.length,n===2?0:1);if(!rows.length)continue;assert.equal(rows[0].name,'KLIMB');if([1,4].includes(n))assert.equal(rows[0].start,1110)}});
 
+test('post-gym two-hour focus moves around real events without overlap',()=>{const now=Date.parse('2026-11-14T11:40:00+02:00');const event={calendarId:'personal',id:'mentor',name:'Mentoría',start:'2026-11-14T13:00:00+02:00',end:'2026-11-14T14:00:00+02:00'};const options={postGym:{day:'2026-11-14',anchor:700}};const rows=P.agenda([event],now,options);const focus=rows.find(x=>x.id==='klimb');assert.equal(focus.start,840);assert.equal(focus.duration,120);assert.equal(focus.end-focus.start,120);assert.ok(rows.some(x=>x.kind==='event'));for(const row of rows.filter(x=>x.kind!=='event'))assert.ok(!(row.start<840&&row.end>780));assert.ok(!P.routine(now+86400000,options).some(x=>x.name==='KLIMB · dos horas de enfoque'))});
+test('four strength days separate upper and lower groups, Saturday is optional',()=>{const monday=Date.parse('2026-11-16T10:00:00+02:00');assert.deepEqual(Array.from({length:7},(_,n)=>P.gymGroup(monday+n*86400000)),['torso','pierna','recuperacion','torso','pierna','core','recuperacion'])});
