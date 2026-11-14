@@ -4,15 +4,15 @@
   function time(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(Math.floor(((n%60)+60)%60)).padStart(2,'0')}
   function parseTime(v,fallback){if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v||''))return fallback;const [h,m]=v.split(':').map(Number);return h*60+m}
   function founderRoutine(now,options){
-    const weekday=C.weekday(now),weekend=[0,6].includes(weekday),gym=45;
+    const weekday=C.weekday(now),weekend=[0,6].includes(weekday),gym=60;
     // Fixed 07:00 wake-up in Europe/Kyiv. Mentorship events are taken from the connected calendar, never invented.
     const list=[
       {id:'despertar',name:'Despertar y prepararte',start:420,duration:20},
       {id:'oracion',name:'Oración',start:440,duration:10},
       {id:'gym',name:gymGroup(now)==='recuperacion'?'Recuperación · movilidad opcional':gymGroup(now)==='core'?'Gimnasio opcional · brazos y abdomen':'Gimnasio · '+GYM_GROUPS[gymGroup(now)].name,start:455,duration:gym},
-      {id:'lectura',name:'Lectura · 30 min',start:510,duration:30},
-      {id:'desayuno',name:'Desayuno',start:550,duration:40,tab:'comidas'},
-      {id:'ducha',name:'Ducha y preparación',start:600,duration:25},
+      {id:'lectura',name:'Lectura · 30 min',start:525,duration:30},
+      {id:'desayuno',name:'Desayuno',start:565,duration:40,tab:'comidas'},
+      {id:'ducha',name:'Ducha y preparación',start:615,duration:25},
       {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:120,tab:'proyectos'},
       {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:120,tab:'proyectos'},
       {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos'},
@@ -108,7 +108,7 @@
     recuperacion:{name:'Recuperación y movilidad',detail:'Ritmo suave · sin buscar fatiga',exercises:[['Bicicleta estática suave','3–5 min','Mantén un ritmo cómodo.'],['Movilidad de hombros','8–10','Utiliza un recorrido sin dolor.'],['Bird dog','6–8 por lado','Trabaja despacio y con control.'],['Caminata suave','3–5 min','Elige un ritmo que te permita conversar.'],['Movilidad de cadera','8–10 por lado','Usa apoyo si lo necesitas.'],['Respiración tranquila','1–2 min','Baja el ritmo antes de terminar.']]}
   };
   function gymGroup(now=Date.now()){const day=C.day(now);if(day==='2026-11-14')return 'empuje';return ['recuperacion','torso','pierna','recuperacion','torso','pierna','core'][C.weekday(now)]}
-  function workout(minutes=40,options={}){minutes=[30,40,45,60].includes(minutes)?minutes:40;if(options.mode==='gym'){const group=GYM_GROUPS[options.group]?options.group:gymGroup(options.now);const definition=GYM_GROUPS[group],count=minutes===30?4:minutes<=45?5:6,sets=['empuje','tiron','pierna','torso','core'].includes(group)?2:minutes===30?2:3;return {mode:'gym',group,name:definition.name,detail:definition.detail,minutes,sets,rounds:sets,restSeconds:75,total:minutes*60,exercises:definition.exercises.slice(0,count).map(([name,reps,hint],i)=>({id:group+'-'+i,name,reps,hint}))}}const count=minutes===30?5:minutes===40?6:minutes===45?7:10;const rounds=minutes===30?4:5;return {minutes,rounds,work:40,rest:20,warmup:300,cooldown:300,exercises:EXERCISES.slice(0,count),total:minutes*60}}
+  function workout(minutes=60,options={}){minutes=60;if(options.mode==='gym'){const group=GYM_GROUPS[options.group]?options.group:gymGroup(options.now);const definition=GYM_GROUPS[group],count=minutes===30?4:minutes<=45?5:6,sets=['empuje','tiron','pierna','torso','core'].includes(group)?2:minutes===30?2:3;return {mode:'gym',group,name:definition.name,detail:definition.detail,minutes,sets,rounds:sets,restSeconds:75,total:minutes*60,exercises:definition.exercises.slice(0,count).map(([name,reps,hint],i)=>({id:group+'-'+i,name,reps,hint}))}}const count=minutes===30?5:minutes===40?6:minutes===45?7:10;const rounds=minutes===30?4:5;return {minutes,rounds,work:40,rest:20,warmup:300,cooldown:300,exercises:EXERCISES.slice(0,count),total:minutes*60}}
   function phase(plan,elapsed){elapsed=Math.max(0,Math.floor(elapsed));if(elapsed>=plan.total)return {kind:'done',name:'Sesión terminada',left:0,index:plan.exercises.length-1};if(elapsed<plan.warmup)return {kind:'warmup',name:'Calentamiento suave',left:plan.warmup-elapsed,index:0};const training=plan.exercises.length*plan.rounds*60;const workElapsed=elapsed-plan.warmup;if(workElapsed>=training)return {kind:'cooldown',name:'Vuelta a la calma',left:plan.total-elapsed,index:plan.exercises.length-1};const unit=Math.floor(workElapsed/60),index=unit%plan.exercises.length,round=Math.floor(unit/plan.exercises.length)+1,part=workElapsed%60;return {kind:part<plan.work?'work':'rest',name:part<plan.work?plan.exercises[index].name:'Pausa · siguiente ejercicio',left:part<plan.work?plan.work-part:60-part,index,round}}
   const api={minute,time,parseTime,routine,agenda,command,workout,phase,gymGroup,GYM_GROUPS};root.SebasPlanner=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);

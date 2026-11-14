@@ -21,13 +21,13 @@ test('completed habits are not suggested and an active timer takes priority',()=
  assert.notEqual(P.command([],{gym:true},null,at('07:15')).current.id,'gym');
  assert.equal(P.command([],{}, {id:'lectura',start:at('07:00')},at('07:15')).current.id,'lectura');
 });
-test('workout length adapts exercise count and rounds without inventing video provenance',()=>{
- assert.deepEqual([30,45,60].map(n=>P.workout(n).exercises.length),[5,7,10]);
- for(const n of [30,40,45,60]){const p=P.workout(n);assert.equal(p.warmup+p.cooldown+p.exercises.length*p.rounds*(p.work+p.rest),n*60)}
+test('home workout is always sixty minutes without inventing video provenance',()=>{
+ assert.deepEqual([30,45,60].map(n=>P.workout(n).exercises.length),[10,10,10]);
+ for(const n of [30,40,45,60]){const p=P.workout(n);assert.equal(p.warmup+p.cooldown+p.exercises.length*p.rounds*(p.work+p.rest),3600)}
 });
 test('guided workout moves through warmup, work, rest, rounds and cooldown',()=>{
  const p=P.workout(30);
- assert.equal(P.phase(p,0).kind,'warmup');assert.equal(P.phase(p,300).kind,'work');assert.equal(P.phase(p,340).kind,'rest');assert.equal(P.phase(p,360).index,1);assert.equal(P.phase(p,600).round,2);assert.equal(P.phase(p,1500).kind,'cooldown');assert.equal(P.phase(p,1800).kind,'done');
+ assert.equal(P.phase(p,0).kind,'warmup');assert.equal(P.phase(p,300).kind,'work');assert.equal(P.phase(p,340).kind,'rest');assert.equal(P.phase(p,360).index,1);assert.equal(P.phase(p,900).round,2);assert.equal(P.phase(p,3300).kind,'cooldown');assert.equal(P.phase(p,3600).kind,'done');
 });
 test('weekends reserve KLIMB and schedules use Kyiv across daylight saving time',()=>{
  assert.ok(P.routine(Date.parse('2026-11-06T23:00:00Z')).some(i=>i.id==='klimb'));
@@ -42,10 +42,7 @@ test('gym has a weekly split and selectable muscle groups',()=>{
  assert.equal(P.gymGroup(Date.parse('2026-11-10T07:00:00+02:00')),'pierna');
  const plan=P.workout(45,{mode:'gym',group:'core'});assert.equal(plan.name,'Opcional · brazos y abdomen');assert.ok(plan.exercises.every(e=>e.reps&&e.hint));
 });
-test('gym duration changes exercise count and supplies sets, repetitions and rest',()=>{
- assert.deepEqual([30,45,60].map(minutes=>P.workout(minutes,{mode:'gym',group:'pierna'}).exercises.length),[4,5,5]);
- const plan=P.workout(60,{mode:'gym',group:'tiron'});assert.equal(plan.sets,2);assert.equal(plan.restSeconds,75);assert.ok(plan.exercises[0].name.includes('Jalón'));
-});
+test('gym uses 60 minutes for every old duration preference and supplies series and rests',()=>{for(const minutes of [30,40,45,60]){const plan=P.workout(minutes,{mode:'gym',group:'pierna'});assert.equal(plan.minutes,60);assert.equal(plan.total,3600);assert.equal(plan.exercises.length,5);assert.equal(plan.sets,2);assert.equal(plan.restSeconds,75)}assert.equal(P.workout(30,{mode:'home'}).minutes,60)});
 
 
 test('bedtime begins at exactly 23:30 even with a running timer or a late call',()=>{assert.notEqual(P.command([],{},null,at('23:29')).current.id,'dormir');assert.equal(P.command([],{},null,at('23:30')).current.id,'dormir');const event={calendarId:'c',id:'late',name:'Call',start:'2026-11-09T23:00:00+02:00',end:'2026-11-10T00:00:00+02:00'};assert.equal(P.command([event],{}, {id:'klimb',start:at('23:00')},at('23:30')).current.id,'dormir');});
@@ -65,3 +62,5 @@ test('KLIMB has only one scheduled block per day and uses one project name',()=>
 
 test('post-gym two-hour focus moves around real events without overlap',()=>{const now=Date.parse('2026-11-14T11:40:00+02:00');const event={calendarId:'personal',id:'mentor',name:'Mentoría',start:'2026-11-14T13:00:00+02:00',end:'2026-11-14T14:00:00+02:00'};const options={postGym:{day:'2026-11-14',anchor:700}};const rows=P.agenda([event],now,options);const focus=rows.find(x=>x.id==='klimb');assert.equal(focus.start,840);assert.equal(focus.duration,120);assert.equal(focus.end-focus.start,120);assert.ok(rows.some(x=>x.kind==='event'));for(const row of rows.filter(x=>x.kind!=='event'))assert.ok(!(row.start<840&&row.end>780));assert.ok(!P.routine(now+86400000,options).some(x=>x.name==='KLIMB · dos horas de enfoque'))});
 test('four strength days separate upper and lower groups, Saturday is optional',()=>{const monday=Date.parse('2026-11-16T10:00:00+02:00');assert.deepEqual(Array.from({length:7},(_,n)=>P.gymGroup(monday+n*86400000)),['torso','pierna','recuperacion','torso','pierna','core','recuperacion'])});
+
+test('future morning reserves sixty minutes for gym without overlapping reading or breakfast',()=>{const rows=P.routine(Date.parse('2026-11-16T10:00:00+02:00'));assert.equal(rows.find(x=>x.id==='gym').duration,60);for(const [a,b] of [['gym','lectura'],['lectura','desayuno'],['desayuno','ducha']])assert.ok(rows.find(x=>x.id===a).end<=rows.find(x=>x.id===b).start)});
