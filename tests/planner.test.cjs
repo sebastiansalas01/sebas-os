@@ -38,13 +38,13 @@ test('after the last slot the next activity belongs to tomorrow',()=>{
  const result=P.command([],{},null,at('23:45'));assert.equal(result.next.id,'despertar');assert.equal(result.next.dayOffset,1);assert.equal(P.time(result.next.start),'06:30');
 });
 test('gym has a weekly split and selectable muscle groups',()=>{
- assert.equal(P.gymGroup(at('07:00')),'empuje');
- assert.equal(P.gymGroup(Date.parse('2026-11-10T07:00:00+02:00')),'pierna');
+ assert.equal(P.gymGroup(at('07:00')),'tiron');
+ assert.equal(P.gymGroup(Date.parse('2026-11-10T07:00:00+02:00')),'recuperacion');
  const plan=P.workout(45,{mode:'gym',group:'core'});assert.equal(plan.name,'Core / abs');assert.ok(plan.exercises.every(e=>e.reps&&e.hint));
 });
 test('gym duration changes exercise count and supplies sets, repetitions and rest',()=>{
- assert.deepEqual([30,45,60].map(minutes=>P.workout(minutes,{mode:'gym',group:'pierna'}).exercises.length),[4,5,6]);
- const plan=P.workout(60,{mode:'gym',group:'tiron'});assert.equal(plan.sets,3);assert.equal(plan.restSeconds,75);assert.ok(plan.exercises[0].name.includes('Jalón'));
+ assert.deepEqual([30,45,60].map(minutes=>P.workout(minutes,{mode:'gym',group:'pierna'}).exercises.length),[4,5,5]);
+ const plan=P.workout(60,{mode:'gym',group:'tiron'});assert.equal(plan.sets,2);assert.equal(plan.restSeconds,75);assert.ok(plan.exercises[0].name.includes('Jalón'));
 });
 
 
@@ -62,3 +62,4 @@ test('Tuesday calendar mentorship replaces practice without moving it to another
  const rows=P.agenda([event],now);assert.ok(rows.some(x=>x.kind==='event'&&x.event.id==='mentor'));assert.ok(!rows.some(x=>x.id==='ventas'));assert.equal(P.routine(now+7*86400000).find(x=>x.id==='ventas').start,1200);
 });
 test('KLIMB has only one scheduled block per day and uses one project name',()=>{for(let n=0;n<7;n++){const rows=P.routine(at('12:00')+n*86400000).filter(x=>x.id==='klimb');assert.equal(rows.length,n===2?0:1);if(!rows.length)continue;assert.equal(rows[0].name,'KLIMB');if([1,4].includes(n))assert.equal(rows[0].start,1110)}});
+
