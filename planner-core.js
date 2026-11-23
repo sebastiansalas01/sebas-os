@@ -3,6 +3,21 @@
   function minute(ts=Date.now()){const p=new Intl.DateTimeFormat('en',{timeZone:'Europe/Kyiv',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date(ts));return Number(p.find(x=>x.type==='hour').value)*60+Number(p.find(x=>x.type==='minute').value)}
   function time(n){return String(Math.floor(n/60)).padStart(2,'0')+':'+String(Math.floor(((n%60)+60)%60)).padStart(2,'0')}
   function parseTime(v,fallback){if(!/^([01]\d|2[0-3]):[0-5]\d$/.test(v||''))return fallback;const [h,m]=v.split(':').map(Number);return h*60+m}
+  function eventIntervals(events,now){const day=C.day(now);return (events||[]).filter(e=>!e.allDay&&e.status!=='cancelled'&&C.onDay(e,day)).map(e=>({start:C.day(Date.parse(e.start))<day?0:minute(Date.parse(e.start)),end:C.day(Date.parse(e.end)-1)>day?1440:C.day(Date.parse(e.end))>day?1440:minute(Date.parse(e.end))})).filter(e=>Number.isFinite(e.start)&&e.end>e.start)}
+  // Reserve meals and appointments first; place complete habits in remaining gaps.
+  function fitRoutine(rows,now=Date.now(),events=[]){
+    const occupied=eventIntervals(events,now),result=[],unscheduled=[];
+    const pinned=x=>['desayuno','almuerzo','cena','snackam','snackpm','ingles','descanso','dormir'].includes(x.id);
+    const ordered=[...rows.filter(pinned).sort((a,b)=>a.start-b.start),...rows.filter(x=>!pinned(x)).sort((a,b)=>a.start-b.start)];
+    let cursor=0;
+    for(const row of ordered){const duration=row.duration??row.end-row.start;if(!(duration>0))continue;
+      let start=Math.max(row.start,pinned(row)?0:cursor);const limit=['descanso','dormir'].includes(row.id)?1440:1320;
+      for(const busy of occupied.slice().sort((a,b)=>a.start-b.start)){if(busy.end<=start)continue;if(busy.start>=start+duration)break;start=busy.end}
+      if(start+duration>limit){unscheduled.push({...row,duration});continue}
+      const placed={...row,start,end:start+duration,duration,adjusted:!!row.adjusted||start!==row.start};result.push(placed);occupied.push(placed);if(!pinned(row))cursor=placed.end;
+    }
+    result.sort((a,b)=>a.start-b.start);result.unscheduled=unscheduled;return result;
+  }
   function founderRoutine(now,options){
     const weekday=C.weekday(now),weekend=[0,6].includes(weekday),gym=60;
     // Fixed 07:00 wake-up in Europe/Kyiv. Mentorship events are taken from the connected calendar, never invented.
@@ -13,14 +28,14 @@
       {id:'lectura',name:'Lectura · 30 min',start:525,duration:30},
       {id:'desayuno',name:'Desayuno',start:565,duration:40,tab:'comidas'},
       {id:'ducha',name:'Ducha y preparación',start:615,duration:25},
-      {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:120,tab:'proyectos'},
-      {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:120,tab:'proyectos'},
+      {id:'klimb',name:'KLIMB · investigar productos y mercado',start:640,duration:90,tab:'proyectos'},
+      {id:'klimb-build',name:'KLIMB · landing, tienda y oferta',start:780,duration:90,tab:'proyectos'},
       {id:'klimb-creative',name:'KLIMB · anuncios y vídeos IA',start:960,duration:90,tab:'proyectos'},
       {id:'descanso',name:'Desconexión',start:1320,duration:90},
       {id:'dormir',name:'Dormir',start:1410,duration:30,priority:20}
     ];
-    if([1,3,5].includes(weekday))list.push({id:'ingles',name:'Preply · sesión objetivo (confirmar reserva)',start:900,duration:60,tab:'learning'});
-    else list.push({id:'ingles',name:'Inglés · práctica y conversación',start:900,duration:60,tab:'learning'});
+    if(!options.calendarEnglish&&[1,3,5].includes(weekday))list.push({id:'ingles',name:'Preply · sesión objetivo (confirmar reserva)',start:900,duration:60,tab:'learning'});
+    else if(!options.calendarEnglish)list.push({id:'ingles',name:'Inglés · práctica y conversación',start:900,duration:60,tab:'learning'});
     // Sábado y domingo conservan la misma intensidad de trabajo y aprendizaje.
     const life=root.SebasLife;
     if(life){const meals=life.mealSchedule(options.busyEvents||[],now,options.mealDate===C.day(now)?options.mealTimes||{}:{});
@@ -28,7 +43,7 @@
         const slot=meals[type];if(slot)list.push({id,name:label,start:slot.start,duration:slot.end-slot.start,tab:'comidas',priority:2});
       }
     }
-    return list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})).sort((a,b)=>a.start-b.start);
+    return fitRoutine(list.map(x=>({...x,end:x.start+x.duration,kind:'routine'})),now,options.busyEvents||[]);
   }
   function postGymRoutine(now,options){
     const day=C.day(now),request=options.postGym;
@@ -110,6 +125,6 @@
   function gymGroup(now=Date.now()){const day=C.day(now);if(day==='2026-11-14')return 'empuje';return ['recuperacion','torso','pierna','recuperacion','torso','pierna','core'][C.weekday(now)]}
   function workout(minutes=60,options={}){minutes=60;if(options.mode==='gym'){const group=GYM_GROUPS[options.group]?options.group:gymGroup(options.now);const definition=GYM_GROUPS[group],count=minutes===30?4:minutes<=45?5:6,sets=['empuje','tiron','pierna','torso','core'].includes(group)?2:minutes===30?2:3;return {mode:'gym',group,name:definition.name,detail:definition.detail,minutes,sets,rounds:sets,restSeconds:75,total:minutes*60,exercises:definition.exercises.slice(0,count).map(([name,reps,hint],i)=>({id:group+'-'+i,name,reps,hint}))}}const count=minutes===30?5:minutes===40?6:minutes===45?7:10;const rounds=minutes===30?4:5;return {minutes,rounds,work:40,rest:20,warmup:300,cooldown:300,exercises:EXERCISES.slice(0,count),total:minutes*60}}
   function phase(plan,elapsed){elapsed=Math.max(0,Math.floor(elapsed));if(elapsed>=plan.total)return {kind:'done',name:'Sesión terminada',left:0,index:plan.exercises.length-1};if(elapsed<plan.warmup)return {kind:'warmup',name:'Calentamiento suave',left:plan.warmup-elapsed,index:0};const training=plan.exercises.length*plan.rounds*60;const workElapsed=elapsed-plan.warmup;if(workElapsed>=training)return {kind:'cooldown',name:'Vuelta a la calma',left:plan.total-elapsed,index:plan.exercises.length-1};const unit=Math.floor(workElapsed/60),index=unit%plan.exercises.length,round=Math.floor(unit/plan.exercises.length)+1,part=workElapsed%60;return {kind:part<plan.work?'work':'rest',name:part<plan.work?plan.exercises[index].name:'Pausa · siguiente ejercicio',left:part<plan.work?plan.work-part:60-part,index,round}}
-  const api={minute,time,parseTime,routine,agenda,command,workout,phase,gymGroup,GYM_GROUPS};root.SebasPlanner=api;if(typeof module!=='undefined')module.exports=api;
+  const api={minute,time,parseTime,fitRoutine,eventIntervals,routine,agenda,command,workout,phase,gymGroup,GYM_GROUPS};root.SebasPlanner=api;if(typeof module!=='undefined')module.exports=api;
 })(globalThis);
 
